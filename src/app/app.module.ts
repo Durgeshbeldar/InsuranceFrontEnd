@@ -21,7 +21,7 @@ import { CustomerModule } from './customer/customer.module';
     ReactiveFormsModule,
     AdminModule,
     HttpClientModule,
-    CustomerModule
+    CustomerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

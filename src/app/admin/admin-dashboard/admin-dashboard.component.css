@@ -1,0 +1,35 @@
+/* Parent Container for the Dashboard Layout */
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Full viewport height */
+    overflow: hidden; /* Prevent overflow outside the container */
+  }
+  
+  /* Sidebar - Fixed Position */
+  app-admin-sidebar {
+    position: fixed;
+    left: 0;
+    height: calc(100vh - 80px); /* Full height minus header */
+    overflow-y: auto;
+    z-index: 1000;
+  }
+  
+  /* Header - Fixed Position */
+  app-admin-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1001; /* Above the sidebar */
+  }
+  
+
+  .main-content {
+    margin-left: 310px; /* Offset to align with the sidebar */
+    margin-top: 80px; /* Offset to align below the header */
+    padding: 10px;
+    height: calc(100vh - 80px); /* Full height minus header */
+    overflow-y: auto; /* Enable vertical scrolling */
+    box-sizing: border-box;
+  }
+  

@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./admin-dashboard.component.css']
 })
 export class AdminDashboardComponent {
+  isSidebarCollapsed = false; // State to track sidebar visibility
 
+  toggleSidebar() {
+    this.isSidebarCollapsed = !this.isSidebarCollapsed; // Toggle sidebar
+  }
 }
