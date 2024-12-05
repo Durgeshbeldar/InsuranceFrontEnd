@@ -1,0 +1,79 @@
+<app-header></app-header>
+
+<div class="login-container">
+  <div class="login-card">
+    <!-- Logo -->
+    <div class="logo">
+      <i class="fas fa-yin-yang"></i>
+      <span>Ds Insurance</span>
+    </div>
+       <!-- Popup for Login Error -->
+    <div *ngIf="loginError" class="popup-container">
+      "Incorrect credentials", "Login attempt failed"
+      <div class="progress-bar"></div>
+    </div>
+    <!-- Social Login Buttons -->
+    <div class="social-login">
+      <button class="google-login">
+        <i class="fab fa-google"></i> Google
+      </button>
+      <button class="facebook-login">
+        <i class="fab fa-facebook-f"></i> Facebook
+      </button>
+    </div>
+
+    <div class="divider">
+      <span></span>
+      <span>or sign in with</span>
+      <span></span>
+    </div>
+
+    <!-- Login Form -->
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+      <!-- Username -->
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" formControlName="userName" class="form-control"
+          [ngClass]="{ 'is-invalid': isFieldInvalid('userName') }" placeholder="Enter your username" />
+        <div class="error-message" *ngIf="isFieldInvalid('userName')">
+          Username is required
+        </div>
+      </div>
+
+      <!-- Password -->
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" formControlName="password" class="form-control"
+          [ngClass]="{ 'is-invalid': isFieldInvalid('password') }" placeholder="Enter your password" />
+        <div class="error-message" *ngIf="isFieldInvalid('password')">
+          Password is required
+        </div>
+      </div>
+      <!-- "I am not a robot" Checkbox & Remember Me and Forgot Password -->
+       <!-- "I am not a robot" Checkbox -->
+       <app-custom-captcha (captchaVerifiedEvent)="onCaptchaVerified($event)">
+      </app-custom-captcha>
+      <div class="error-message" *ngIf="captchaError">
+        Please verify you are not a robot
+      </div>
+      <div class="form-options">
+        <label class="remember-me">
+          <input type="checkbox" />
+          Remember this Device
+        </label>
+        <a class="forgot-password" href="#">Forgot Password?</a>
+      </div>
+
+      <!-- Login Button -->
+      <button type="submit" class="login-button" [disabled]="loginForm.invalid">
+        Sign In
+      </button>
+    </form>
+
+    <!-- Sign-Up Link -->
+    <p class="signup-link">
+      New to DsInsurance?<a href="#">Create an account</a>
+    </p>
+
+  </div>
+</div>

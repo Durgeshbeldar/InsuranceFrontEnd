@@ -1,0 +1,44 @@
+.captcha-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 20px 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  .captcha-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+  }
+  
+  .checkbox {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    border: 2px solid #ccc;
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+  }
+  
+  .checkbox:hover {
+    border-color: #3498db;
+  }
+  
+  .captcha-text {
+    font-size: 0.9rem;
+    color: #333;
+  }
+  
+  .error-message {
+    margin-top: 5px;
+    font-size: 0.8rem;
+    color: #e74c3c;
+  }
+  

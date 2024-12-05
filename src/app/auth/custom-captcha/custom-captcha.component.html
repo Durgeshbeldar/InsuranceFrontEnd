@@ -1,0 +1,27 @@
+<div class="captcha-container">
+    <div class="captcha-box" (click)="onCaptchaClick()">
+      <div class="checkbox">
+        <!-- Spinner -->
+        <mat-progress-spinner
+          *ngIf="isVerifying"
+          diameter="24"
+          mode="indeterminate"
+          color="primary"
+        ></mat-progress-spinner>
+  
+        <!-- Green Checkmark -->
+        <mat-icon
+          *ngIf="captchaVerified"
+          class="verified-icon"
+          color="primary"
+        >
+          check_circle
+        </mat-icon>
+      </div>
+      <div class="captcha-text">I'm not a robot</div>
+    </div>
+    <div class="error-message" *ngIf="!captchaVerified && captchaClicked">
+      Please verify you are not a robot
+    </div>
+  </div>
+  

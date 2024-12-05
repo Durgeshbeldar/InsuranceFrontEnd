@@ -1,0 +1,80 @@
+/* Header Styles */
+.header {
+    width: 100%;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #071234;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 0 20px;
+    height: 80px;
+    box-sizing: border-box;
+  }
+  
+  /* Header Brand */
+  .header-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #14d344;
+  
+    .brand-logo {
+      font-size: 1.5rem;
+      color: #00a1fd;
+    }
+  }
+  
+  /* Header Menu */
+  .header-menu {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 0;
+    margin: 0;
+  
+    .menu-item {
+      margin: 0;
+      border-radius: 8px;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  
+      a {
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        padding: 10px 15px;
+        color: #ffffff;
+        font-size: 1rem;
+        font-weight: 500;
+  
+        .icon {
+          font-size: 1.2rem;
+          margin-right: 10px;
+          color: #ff0a1a;
+        }
+      }
+  
+      &.active {
+        background-color: #e3f2fd;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  
+        a {
+          color: #2d9cdb;
+          font-weight: 600;
+        }
+      }
+  
+      &:hover {
+        background-color: #f7faff;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        a {
+          color: #000000; /* Change text color to black */
+        }
+      }
+    }
+  }
+  
+  

@@ -1,0 +1,314 @@
+/* Overall Container */
+/* Overall Container */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 80px); /* Account for header height */
+  padding: 20px;
+  background: #f0f4f8;
+  box-sizing: border-box;
+}
+
+/* Login Card */
+.login-card {
+  background: #ffffff;
+  width: 400px;
+  padding: 30px 50px;
+  border-radius: 12px;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+  
+  /* Logo */
+  .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .logo i {
+    color: #2d9cdb;
+    margin-right: 8px;
+  }
+  
+  /* Social Login Buttons */
+  .social-login {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .social-login button {
+    flex: 1;
+    margin: 0 5px;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .google-login {
+    background: #092757;
+    color: #fff;
+  }
+  
+  .facebook-login {
+    background: #4f73c2;
+    color: #fff;
+  }
+  
+  .google-login:hover,
+  .facebook-login:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Divider */
+  .divider {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+    color: #999;
+    font-size: 0.9rem;
+  }
+  
+  .divider span:first-child,
+  .divider span:last-child {
+    flex: 1;
+    height: 1px;
+    background: #ddd;
+  }
+  
+  .divider span {
+    padding: 0 10px;
+  }
+  
+  /* Form Styling */
+  .form-group {
+    margin-bottom: 15px;
+    text-align: left;
+  }
+  
+  label {
+    font-size: 0.9rem;
+    color: #333;
+    margin-bottom: 5px;
+    display: inline-block;
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  
+  .form-control.is-invalid {
+    border-color: #be2d1d;
+    border-width: 2px;
+    box-shadow: 0px 4px 8px rgba(215, 69, 52, 0.2);
+  }
+  
+  .error-message {
+    font-size: 0.8rem;
+    color: #e74c3c;
+    margin-top: 5px;
+  }
+  
+  /* Form Options */
+  .form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+  }
+  
+  .remember-me {
+    font-size: 0.9rem;
+    color: #333;
+  }
+  
+  .forgot-password {
+    font-size: 0.9rem;
+    color: #2d9cdb;
+    text-decoration: none;
+  }
+  
+  .forgot-password:hover {
+    text-decoration: underline;
+  }
+  
+  /* Login Button */
+  .login-button {
+    background: #071072;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  }
+  
+  .login-button:hover {
+    background: #031724;
+    transform: translateY(-2px);
+    box-shadow: 0px 4px 10px rgba(41, 128, 185, 0.4);
+  }
+  
+  .login-button:disabled {
+    background: #1c4763;
+    cursor: not-allowed;
+  }
+  
+  /* Sign-Up Link */
+  .signup-link {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: #7f808d;
+  }
+  
+  .signup-link a {
+    color: #162169;
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 5px;
+  }
+  
+  .signup-link a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .error-message {
+    margin-top: 5px;
+    font-size: 0.8rem;
+    color: #e74c3c;
+  }
+  
+  
+  /* Invalid Popup  */
+  .popup {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #e74d3c34;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    animation: fadeInOut 3s ease-in-out;
+    z-index: 1000;
+  }
+  
+  /* Popup Animation */
+  .popup-container {
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #9d2315; /* Red background */
+    color: #ffffff; /* White text */
+    padding: 20px 40px;
+    border-radius: 10px;
+    box-shadow: 2px 4px 15px rgba(0, 0, 0, 0.3);
+    font-size: 1rem;
+    text-align: center;
+    z-index: 1000;
+    animation: fadeInOut 3s ease-in-out, vibrate 0.2s ease-in-out 2; /* Combined animations */
+  }
+  
+  .popup-container .progress-bar {
+    margin-top: 10px;
+    width: 100%;
+    height: 4px;
+    background: #ffe4e4; /* Light red background for progress */
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .popup-container .progress-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #fff; /* White progress bar */
+    animation: shrink 3s linear forwards; /* Shrink animation */
+  }
+  
+  /* Keyframes for Fade and Vibration */
+  @keyframes fadeInOut {
+    0% {
+      opacity: 0;
+      transform: translate(-50%, -60%);
+    }
+    10%,
+    90% {
+      opacity: 1;
+      transform: translate(-50%, -50%);
+    }
+    100% {
+      opacity: 0;
+      transform: translate(-50%, -40%);
+    }
+  }
+  
+  @keyframes vibrate {
+    0% {
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+    25% {
+      transform: translate(-48%, -50%) rotate(-2deg);
+    }
+    50% {
+      transform: translate(-50%, -50%) rotate(2deg);
+    }
+    75% {
+      transform: translate(-52%, -50%) rotate(-2deg);
+    }
+    100% {
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+  }
+  
+  /* Keyframes for Progress Bar Shrink */
+  @keyframes shrink {
+    from {
+      width: 100%;
+    }
+    to {
+      width: 0%;
+    }
+  }
+  
+  
