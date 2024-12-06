@@ -1,0 +1,59 @@
+<div class="form-container">
+    <!-- State Management -->
+    <form [formGroup]="stateForm" (ngSubmit)="addState()">
+        <div class="form-header">
+            <span class="form-header-icon">🏙️</span>
+            ADD STATE
+        </div>
+
+        <div class="form-group">
+            <label for="stateName">State Name</label>
+            <input type="text" id="stateName" formControlName="name" placeholder="Enter State Name" />
+            <div class="error-message" *ngIf="stateForm.get('name')?.touched && stateForm.get('name')?.invalid">
+                State Name is required.
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button class="submit-button" type="submit" [disabled]="stateForm.invalid">Add State</button>
+            <button class="cancel-button" type="button" (click)="onCancel()">Cancel</button>
+        </div>
+    </form>
+</div>
+
+<div class="form-container">
+    <!-- City Management -->
+    <form [formGroup]="cityForm" (ngSubmit)="addCity()">
+        <div class="form-header">
+            <span class="form-header-icon">📍</span>
+            ADD CITY
+        </div>
+
+        <div class="form-group">
+            <label for="stateId">Select State</label>
+            <div class="custom-dropdown">
+                <select id="stateId" formControlName="stateId">
+                    <option value="" disabled selected>Select State</option>
+                    <option [value]="state.stateId" *ngFor="let state of states">{{ state.name }}</option>
+                </select>
+                <mat-icon class="dropdown-icon">expand_more</mat-icon>
+            </div>
+            <div class="error-message" *ngIf="cityForm.get('stateId')?.touched && cityForm.get('stateId')?.invalid">
+                Please select a state.
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="cityName">City Name</label>
+            <input type="text" id="cityName" formControlName="name" placeholder="Enter City Name" />
+            <div class="error-message" *ngIf="cityForm.get('name')?.touched && cityForm.get('name')?.invalid">
+                City Name is required.
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button class="submit-button" type="submit" [disabled]="cityForm.invalid">Add City</button>
+            <button class="cancel-button" type="button" (click)="onCancelCity()">Cancel</button>
+        </div>
+    </form>
+</div>

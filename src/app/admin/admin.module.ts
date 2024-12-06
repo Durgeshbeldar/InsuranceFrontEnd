@@ -12,6 +12,10 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input'; // For Input Fields
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
+import { RouterModule } from '@angular/router';
+import { AddEmployeeComponent } from './add-employee/add-employee.component';
+import { AddAgentComponent } from './add-agent/add-agent.component';
+import { ManageLocationComponent } from './manage-location/manage-location.component';
 @NgModule({
   declarations: [
     AdminSidebarComponent,
@@ -19,6 +23,9 @@ import { MatButtonModule } from '@angular/material/button';
     AdminHeaderComponent,
     CardsComponent,
     AddCustomerComponent,
+    AddEmployeeComponent,
+    AddAgentComponent,
+    ManageLocationComponent,
 
   ],
   imports: [
@@ -30,6 +37,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatInputModule,
     MatNativeDateModule,
     MatButtonModule,
+    RouterModule
     
   ]
 })

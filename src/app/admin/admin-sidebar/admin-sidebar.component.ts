@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-admin-sidebar',
   templateUrl: './admin-sidebar.component.html',
@@ -7,7 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AdminSidebarComponent {
   activeMenu = 'Dashboard';
+ constructor(private router: Router){}
 
+//  navigateToAddCustomer(){
+//   this.router.navigateByUrl("add-customer");
+//  }
   setActiveMenu(menu: string) {
     this.activeMenu = menu;
   }

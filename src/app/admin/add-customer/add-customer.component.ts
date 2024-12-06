@@ -9,7 +9,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class AddCustomerComponent {
 
-  isUserAdded = true;
+  isUserAdded = false;
   constructor(private userService: UserService) {
     this.loadRoles();
   }
@@ -63,11 +63,9 @@ export class AddCustomerComponent {
 
       this.userService.addUser(formData).subscribe({
         next: (response: any) => {
-          this.userName = this.userForm.get('userName')?.value;
-          localStorage.setItem(this.userName, response.id);
           this.isUserAdded = true;
           this.userId = response.id;
-          alert("User Added Successfully");
+          alert("User Id Created Successfully");
         },
         error: (error: any) => console.error('Error adding user', error)  // Error handling
       });

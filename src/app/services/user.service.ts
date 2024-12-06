@@ -7,6 +7,8 @@ export class UserService {
   userUrl = 'https://localhost:7191/api/User';
   roleUrl = 'https://localhost:7191/api/Role';
   customerUrl = 'https://localhost:7191/api/Customer';
+  employeeUrl = 'https://localhost:7191/api/Employee';
+  agentUrl = 'https://localhost:7191/api/Agent';
   constructor(private http: HttpClient) { }
 
   getRoles(){
@@ -23,4 +25,11 @@ export class UserService {
     return this.http.post(this.customerUrl, customer);
   }
 
+  addEmployee(employee:any){
+    return this.http.post(this.employeeUrl, employee);
+  }
+
+  addAgent(agent:any){
+    return this.http.post(this.agentUrl, agent);
+  }
 }
