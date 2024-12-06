@@ -1,72 +1,113 @@
 /* Header Styles */
 .header {
-    width: 100%;
-    height: 80px;
+  width: 100%;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #071234; /* Same background color */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Maintain the same shadow */
+  padding: 0 20px;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+/* Header Brand */
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #14d344;
+
+  .brand-logo {
+    font-size: 2rem;
+    color: #00a1fd;
+  }
+}
+
+/* Right-Side Section */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Search Bar */
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #ffffff;
+  border-radius: 50px;
+  padding: 5px 15px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+
+  mat-icon {
+    margin-top: 5px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #000000;
+  }
+
+  input {
+    border: none !important;
+    outline: none !important;
+    font-size: 0.9rem !important;
+    color: #333333 !important;
+    width: 200px !important;
+    background: transparent !important;
+  }
+}
+
+/* Right-Side Icons */
+.header-icons {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  .menu-item {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    background: #071234;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    padding: 0 20px;
-    box-sizing: border-box;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000;
+    gap: 8px;
+    font-size: 0.9rem;
+    color: white;
+    cursor: pointer;
+
+    mat-icon {
+      font-size: 1.5rem;
+      color: #ffffff;
+    }
+
+    &:hover {
+      color: #cfd8dc; /* Subtle hover effect */
+    }
   }
-  
-  /* Header Brand */
-  .header-brand {
+
+  .icon-btn {
+    margin-right: 20px;
+    background: #92e2ff;
+    height: 45px;
+    width: 45px;
     display: flex;
+    border-radius: 50%;
     align-items: center;
-    gap: 10px;
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #14d344;
-  
-    .brand-logo {
-      font-size: 2rem;
-      color: #00a1fd;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+
+    &:hover {
+      background: #f1f1f1;
+      transform: scale(1.1);
+    }
+
+    mat-icon {
+      font-size: 1.3rem;
+      color: #071234;
     }
   }
-  
-  /* Right-Side Icons */
-  .header-icons {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-  
-    .icon-btn {
-      background: #ffffff;
-      border-radius: 50%;
-      padding: 10px;
-      cursor: pointer;
-      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-      transition: background 0.3s ease, transform 0.2s ease;
-  
-      &:hover {
-        background: #f1f1f1;
-        transform: scale(1.1);
-      }
-  
-      mat-icon {
-        font-size: 1.5rem;
-        color: #071234;
-      }
-    }
-  
-    .profile-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      overflow: hidden;
-      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-    }
-  }
-  
+}

@@ -3,7 +3,7 @@
   width: 310px; /* Perfect width for alignment */
   height: calc(100vh - 30px); /* Adjust height for top/bottom gap */
   margin: 15px 15px; /* Gap around the sidebar */
-  background: #ffffff; /* Clean white background */
+  background: #fffffff0; /* Clean white background */
   box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15); /* Subtle shadow */
   border-radius: 4px; /* Rounded corners */
   overflow-y: auto; /* Enable scrolling for vertical overflow */
@@ -92,7 +92,7 @@
 }
 
 .menu-item:hover {
-  background-color: #f0f4fa; /* Subtle hover effect */
+  background-color: #c0d6f8; /* Subtle hover effect */
   transform: translateX(2px); /* Slight animation on hover */
 }
 
@@ -104,7 +104,7 @@
 .sidebar-section-title {
   font-size: 0.85rem;
   font-weight: bold;
-  color: #7a7d84;
+  color: #000000;
   margin: 20px 0 10px;
   text-transform: uppercase;
   letter-spacing: 0.05rem;
