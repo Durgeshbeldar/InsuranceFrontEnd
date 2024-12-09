@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl,FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
+import { LocationService } from'src/app/services/location.service';
 @Component({
   selector: 'app-add-customer',
   templateUrl: './add-customer.component.html',
@@ -11,10 +12,38 @@ export class AddCustomerComponent {
 
   isUserAdded = false;
   roleId = "1a429dfe-6d8f-4b48-e3be-08dd14519426";
-  constructor(private userService: UserService) {
+  states:any;
+  cities: any;
+
+  constructor(private userService: UserService, private locationService: LocationService) {
 
   }
+  getAgent(){
+    const agentId = localStorage.getItem('userId');
+    console.log(agentId);
+  }
+  ngOnInit(): void {
+    this.loadStates();
+  }
+  
+  loadStates() {
+    this.locationService.getStates().subscribe({
+      next: (response: any) => {
+        this.states = response.data;
+        
+      },
+      error: (err) => console.error('Error loading states:', err)
+    });
+  }
 
+  addressForm = new FormGroup({
+    houseNo: new FormControl('', Validators.required),
+    street: new FormControl('', Validators.required),
+    town: new FormControl('', Validators.required),
+    stateId: new FormControl('', Validators.required),
+    cityId: new FormControl('', Validators.required),
+    pincode: new FormControl('', [Validators.required, Validators.pattern(/^\d{6}$/)]) // 6-digit pincode validation
+  });
   // User Details Form
   userForm = new FormGroup({
     userName: new FormControl('', Validators.required),
@@ -39,18 +68,27 @@ export class AddCustomerComponent {
     ])
   });
 
-  // Load roles for dropdown
- 
-
+  onStateChange(event:Event) {
+    this.addressForm.get('cityId')?.reset(); // Clear previous city selection
+    const stateId = (event.target as HTMLSelectElement).value; // Get selected state ID
+    this.locationService.getCitiesByStateId(stateId).subscribe({
+      next: (response: any) => {
+        this.cities = response;
+      },
+      error: (err) => console.error('Error loading cities:', err)
+    });
+  }
+  
   userName: any;
   userId: any;
   // On Submit Handlers
   addUser() {
     if (this.userForm.valid) {
-      
+    
       const formData = {
         ...this.userForm.value,
         roleId : this.roleId,
+       
       }
       this.userService.addUser(formData).subscribe({
         next: (response: any) => {
@@ -68,13 +106,15 @@ export class AddCustomerComponent {
    // Add Customer Details
   addCustomerDetails() {
     if (this.customerForm.valid && this.userId != null) {
+      const agentUserId = localStorage.getItem('userId');
       const formData = {
         customerId : this.userId,
         firstName: this.customerForm.get('firstName')?.value,
         lastName: this.customerForm.get('lastName')?.value,
         dateOfBirth: this.customerForm.get('dateOfBirth')?.value,
         phoneNumber: this.customerForm.get('phoneNumber')?.value,
-        gender: this.customerForm.get('gender')?.value ? 'Male' : 'Female'
+        gender: this.customerForm.get('gender')?.value ? 'Male' : 'Female',
+        agentId :agentUserId
       };
       console.log('Payload being sent:', formData);
 
@@ -92,6 +132,28 @@ export class AddCustomerComponent {
     }
   }
 
+  addAddress() {
+    console.log("My Payload", this.addressForm.value);
+    if (this.addressForm.invalid) {
+      this.addressForm.markAllAsTouched(); // Mark all fields as touched to show validation errors
+      return;
+    }
+
+    const addressData = this.addressForm.value;
+
+    // Call API to add the address
+    this.locationService.addAddress(addressData).subscribe({
+      next: (response: any) => {
+        alert('Address added successfully!');
+        this.addressForm.reset(); // Reset the form
+        this.cities = []; // Clear cities
+      },
+      error: (err) => {
+        console.error('Error adding address:', err);
+        alert('Failed to add address. Please try again.');
+      }
+    });
+  }
   // On Cancel Handler
   onCancel() {
     if (this.userId != null) {
@@ -111,5 +173,9 @@ export class AddCustomerComponent {
       this.userForm.reset();
       this.customerForm.reset();
     }
+  }
+  onCancel3() {
+    this.addressForm.reset();
+    this.cities = []; // Reset cities list
   }
 }

@@ -11,6 +11,9 @@ export class UserService {
   agentUrl = 'https://localhost:7191/api/Agent';
   constructor(private http: HttpClient) { }
 
+  getCustomers(){
+    return this.http.get(this.customerUrl);
+  }
   getRoles(){
     return this.http.get(this.roleUrl);
   }

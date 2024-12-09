@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input'; // For Input Fields
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ShowCustomersComponent } from './show-customers/show-customers.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     AgentDashboardComponent,
     AgentHeaderComponent,
     AgentSidebarComponent,
-    AddCustomerComponent
+    AddCustomerComponent,
+    ShowCustomersComponent
   ],
   imports: [
     CommonModule,
@@ -35,7 +37,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   exports: [
     AgentDashboardComponent,
     AgentHeaderComponent,
-    AgentSidebarComponent
+    AgentSidebarComponent,
+    ShowCustomersComponent
   ]
 })
 export class AgentModule { }

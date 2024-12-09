@@ -1,4 +1,5 @@
 <div class="form-container">
+    
     <form [formGroup]="userForm" (ngSubmit)="addUser()">
         <div class="form-header">
             <span class="form-header-icon">👤</span>
@@ -128,7 +129,9 @@
               <span class="gender-text">{{ customerForm.get('gender')?.value ? 'Male' : 'Female' }}</span>
             </div>
         </div>
-          
+        
+
+     
         <!-- Submit and Cancel Buttons -->
         <div class="form-actions">
             <button class="submit-button" type="submit" [disabled]="customerForm.invalid">Add Customer Details</button>
@@ -137,3 +140,91 @@
     </form>
 </div>
 
+
+<!-- Add Address  -->
+
+<div class="form-container">
+    <form [formGroup]="addressForm" (ngSubmit)="addAddress()">
+        <div class="form-header">
+            <span class="form-header-icon">🏠</span>
+            ADD ADDRESS
+        </div>
+
+        <!-- Form Grid (2 columns) -->
+        <div class="form-grid">
+            <!-- State Dropdown -->
+            <div class="form-group">
+                <label for="state">Select State</label>
+                <div class="custom-dropdown">
+                    <select id="state" formControlName="stateId" (change)="onStateChange($event)">
+                        <option value="" disabled selected>Select State</option>
+                        <option [value]="state.stateId" *ngFor="let state of states">{{ state.name }}</option>
+                    </select>
+                    <mat-icon class="dropdown-icon">expand_more</mat-icon>
+                </div>
+                <div class="error-message" *ngIf="addressForm.get('stateId')?.touched && addressForm.get('stateId')?.invalid">
+                    State is required.
+                </div>
+            </div>
+
+            <!-- City Dropdown -->
+            <div class="form-group">
+                <label for="city">Select City</label>
+                <div class="custom-dropdown">
+                    <select id="city" formControlName="cityId">
+                        <option value="" disabled selected>Select City</option>
+                        <option [value]="city.cityId" *ngFor="let city of cities">{{ city.name }}</option>
+                    </select>
+                    <mat-icon class="dropdown-icon">expand_more</mat-icon>
+                </div>
+                <div class="error-message" *ngIf="addressForm.get('cityId')?.touched && addressForm.get('cityId')?.invalid">
+                    City is required.
+                </div>
+            </div>
+
+            <!-- House Number -->
+            <div class="form-group">
+                <label for="houseNo">House Number</label>
+                <input type="text" id="houseNo" formControlName="houseNo" placeholder="Enter House Number" />
+                <div class="error-message" *ngIf="addressForm.get('houseNo')?.touched && addressForm.get('houseNo')?.invalid">
+                    House number is required.
+                </div>
+            </div>
+
+            <!-- Street -->
+            <div class="form-group">
+                <label for="street">Street</label>
+                <input type="text" id="street" formControlName="street" placeholder="Enter Street" />
+                <div class="error-message" *ngIf="addressForm.get('street')?.touched && addressForm.get('street')?.invalid">
+                    Street is required.
+                </div>
+            </div>
+
+            <!-- Town -->
+            <div class="form-group">
+                <label for="town">Town</label>
+                <input type="text" id="town" formControlName="town" placeholder="Enter Town" />
+                <div class="error-message" *ngIf="addressForm.get('town')?.touched && addressForm.get('town')?.invalid">
+                    Town is required.
+                </div>
+            </div>
+
+            <!-- Pincode -->
+            <div class="form-group">
+                <label for="pincode">Pincode</label>
+                <input type="number" id="pincode" formControlName="pincode" placeholder="Enter Pincode" />
+                <div class="error-message" *ngIf="addressForm.get('pincode')?.touched && addressForm.get('pincode')?.invalid">
+                    Valid 6-digit pincode is required.
+                </div>
+            </div>
+        </div>
+
+        <!-- Submit and Cancel Buttons -->
+        <div class="form-actions">
+            <button class="submit-button" type="submit" [disabled]="addressForm.invalid">Submit</button>
+            <button class="cancel-button" type="button" (click)="onCancel()">Cancel</button>
+        </div>
+    </form>
+</div>
+
+  

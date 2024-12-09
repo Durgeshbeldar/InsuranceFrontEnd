@@ -18,6 +18,7 @@ import { AddSchemeComponent } from './admin/manage-schemes/add-scheme/add-scheme
 import { UpdateSchemeComponent } from './admin/manage-schemes/update-scheme/update-scheme.component';
 import { AgentDashboardComponent } from './agent/agent-dashboard/agent-dashboard.component';
 import { AddCustomerComponent as AgentAddCustomerComponent } from './agent/add-customer/add-customer.component';
+import { ShowCustomersComponent } from './agent/show-customers/show-customers.component';
 const routes: Routes = [
   {
     path: "",
@@ -97,7 +98,11 @@ const routes: Routes = [
     children:[
       {
         path: "add-customerbyagent",
-        component: AdminAddCustomerComponent
+        component: AgentAddCustomerComponent
+      },
+      {
+        path:'show-customers',
+        component: ShowCustomersComponent
       }
     ]
   },

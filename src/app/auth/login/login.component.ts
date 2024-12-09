@@ -50,7 +50,7 @@ export class LoginComponent {
         const data = response;
         this.myToken = data.headers.get('Jwt');
         localStorage.setItem('token', this.myToken);
-        this.userId = data.userId;
+        this.userId = response.body.userId;
         console.log(this.userId)
         localStorage.setItem('userId', this.userId);
         this.role = response.body;
