@@ -1,0 +1,80 @@
+<div class="form-container">
+    <!-- Plan Selection Dropdown -->
+    <div  class="form-container">
+        <form [formGroup]="updateForm" (ngSubmit)="onPlanSelect()">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Select Insurance Plan</label>
+                    <div class="custom-dropdown">
+                        <select value="Select Plan" formControlName="planId">
+                            <option value="" disabled selected>Select Plan</option>
+                            <option [value]="plan.planId" *ngFor="let plan of plans">{{ plan.planName }}</option>
+                        </select>
+                        <mat-icon class="dropdown-icon">expand_more</mat-icon>
+                    </div>
+                    <div class="error-message"
+                        *ngIf="updateForm.get('planId')?.touched && updateForm.get('planId')?.invalid">
+                        Plan Selection is required.
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="submit-button" [disabled]="updateForm.invalid">
+                        <i class="fa fa-edit"></i> Edit
+                    </button>
+                    <button type="button" class="cancel-button" (click)="onCancel2()" *ngIf="cancelEnabled">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+
+
+
+
+   
+
+
+
+    <!-- Update Form (Shown after a plan is selected) -->
+    <!-- Update Plan Form (Visible after a plan is selected) -->
+    <div *ngIf="isPlanFetched" class="form-container">
+        <form [formGroup]="updatePlanForm" (ngSubmit)="updatePlan()">
+            <div class="form-header">
+                <span class="form-header-icon">🛡️</span>
+                UPDATE INSURANCE PLAN
+            </div>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="planName">Plan Name</label>
+                    <input type="text" id="planName" formControlName="planName" placeholder="Plan Name" />
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <input type="text" id="description" formControlName="description" placeholder="Enter Description" />
+                </div>
+
+                <div class="form-group">
+                    <label for="planImage">Upload New Plan Image</label>
+                    <div class="upload-container">
+                        <input type="file" id="planImage" (change)="onFileSelect($event)" hidden />
+                        <button type="button" class="upload-button" (click)="triggerFileInput()">
+                            <i class="cloud-icon fas fa-cloud-upload-alt"></i>
+                            <span>Upload Image</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="submit-button" [disabled]="updatePlanForm.invalid">
+                    Update Plan
+                </button>
+                <button type="button" class="cancel-button" (click)="onCancel()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>

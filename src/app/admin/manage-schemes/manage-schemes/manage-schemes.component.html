@@ -1,0 +1,30 @@
+<!-- Manage Insurance Schemes -->
+<div class="profile-card-container">
+    <!-- Profile Card -->
+    <div class="profile-card">
+      <!-- Profile Info -->
+      <div class="profile-info">
+        <img src="../../../../assets/images/profile-pic.png" alt="Image" class="profile-pic" />
+        <div class="profile-details">
+          <h3 class="profile-name">Insurance Scheme Master</h3>
+        </div>
+      </div>
+  
+      <!-- Navigation Menu -->
+      <div class="profile-nav">
+        <button class="nav-button" routerLink="show-schemes" routerLinkActive="active"> 
+            <i class="fas fa-list"></i>Get Insurance Schemes
+        </button>
+        <button class="nav-button" routerLink='add-scheme' routerLinkActive="active"> 
+            <i class="fas fa-plus-circle"></i> Add Scheme
+        </button>
+        <button class="nav-button" routerLink='update-scheme' routerLinkActive="active"> 
+            <i class="fas fa-edit"></i>Update Scheme
+        </button>
+        <button class="nav-button"> 
+            <i class="fas fa-trash-alt"></i>Delete Scheme
+        </button>
+      </div>
+    </div>
+  </div>
+  <router-outlet></router-outlet>

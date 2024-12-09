@@ -4,14 +4,14 @@ import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-customer-registration',
-  templateUrl: './customer-registration.component.html',
-  styleUrls: ['./customer-registration.component.css']
+  selector: 'app-agent-registration',
+  templateUrl: './agent-registration.component.html',
+  styleUrls: ['./agent-registration.component.css']
 })
-export class CustomerRegistrationComponent {
+export class AgentRegistrationComponent {
   isCaptchaVerified = false; // Tracks captcha status
   captchaError = false; // 
-  roleId = "1a429dfe-6d8f-4b48-e3be-08dd14519426";
+  roleId = "449c5bab-3e3e-45cb-4391-08dd15cd23c0";
   registrationForm = new FormGroup({
     userName: new FormControl('', Validators.required),
     email: new FormControl('', [Validators.required, Validators.email]),

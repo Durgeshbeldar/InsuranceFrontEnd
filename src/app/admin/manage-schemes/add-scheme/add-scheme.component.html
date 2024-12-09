@@ -1,0 +1,166 @@
+<!-- Add Insurance Scheme Code  -->
+<div class="form-container">
+    <form [formGroup]="schemeForm" (ngSubmit)="addScheme()">
+        <div class="form-header">
+            <span class="form-header-icon">📄</span>
+            ADD INSURANCE SCHEME
+        </div>
+
+        <div class="form-grid">
+            <!-- Scheme Name -->
+            <div class="form-group">
+                <label for="schemeName">Scheme Name</label>
+                <input type="text" id="schemeName" formControlName="schemeName" placeholder="Scheme Name" />
+                <div class="error-message"
+                    *ngIf="schemeForm.get('schemeName')?.touched && schemeForm.get('schemeName')?.invalid">
+                    Scheme Name is required.
+                </div>
+            </div>
+
+            <!-- Description -->
+            <div class="form-group">
+                <label for="text">Description</label>
+                <input id="description" formControlName="description" placeholder="Enter scheme description">
+            </div>
+
+            <!-- Min Amount -->
+            <div class="form-group">
+                <label for="minAmount">Minimum Amount</label>
+                <input type="number" id="minAmount" formControlName="minAmount" placeholder="Minimum Amount" />
+                <div class="error-message"
+                    *ngIf="schemeForm.get('minAmount')?.touched && schemeForm.get('minAmount')?.invalid">
+                    Minimum Amount is required.
+                </div>
+            </div>
+
+            <!-- Max Amount -->
+            <div class="form-group">
+                <label for="maxAmount">Maximum Amount</label>
+                <input type="number" id="maxAmount" formControlName="maxAmount" placeholder="Maximum Amount" />
+                <div class="error-message"
+                    *ngIf="schemeForm.get('maxAmount')?.touched && schemeForm.get('maxAmount')?.errors">
+                    <span *ngIf="schemeForm.get('maxAmount')?.errors?.['minMaxError']">
+                        {{ schemeForm.get('maxAmount')?.errors?.['minMaxError'] }}
+                    </span>
+                    <span *ngIf="schemeForm.get('maxAmount')?.errors?.['required']">
+                        Maximum Amount is required.
+                    </span>
+                    <span *ngIf="schemeForm.get('maxAmount')?.errors?.['min']">
+                        Maximum Amount must be greater than 0.
+                    </span>
+                </div>
+            </div>
+
+            <!-- Min Policy Term -->
+            <div class="form-group">
+                <label for="minPolicyTerm">Min Policy Term</label>
+                <input type="text" id="minPolicyTerm" formControlName="minPolicyTerm"
+                    placeholder="Enter term (e.g., 6 Months)" />
+                <div class="error-message"
+                    *ngIf="schemeForm.get('minPolicyTerm')?.touched && schemeForm.get('minPolicyTerm')?.invalid">
+                    Min Policy Term is required.
+                </div>
+            </div>
+
+            <!-- Max Policy Term -->
+            <div class="form-group">
+                <label for="maxPolicyTerm">Max Policy Term</label>
+                <input type="text" id="maxPolicyTerm" formControlName="maxPolicyTerm"
+                    placeholder="Enter term (e.g., 1 Year)" />
+                <div class="error-message"
+                    *ngIf="schemeForm.get('maxPolicyTerm')?.touched && schemeForm.get('maxPolicyTerm')?.errors">
+                    <span *ngIf="schemeForm.get('maxPolicyTerm')?.errors?.['minMaxError']">
+                        {{ schemeForm.get('maxPolicyTerm')?.errors?.['minMaxError'] }}
+                    </span>
+                    <span *ngIf="schemeForm.get('maxPolicyTerm')?.errors?.['required']">
+                        Max Policy Term is required.
+                    </span>
+                </div>
+            </div>
+
+            <!-- Min Age -->
+            <div class="form-group">
+                <label for="minAge">Minimum Age</label>
+                <input type="number" id="minAge" formControlName="minAge" placeholder="Minimum Age" />
+                <div class="error-message"
+                    *ngIf="schemeForm.get('minAge')?.touched && schemeForm.get('minAge')?.invalid">
+                    Minimum Age is required.
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="maxAge">Maximum Age</label>
+                <input type="number" id="maxAge" formControlName="maxAge" placeholder="Maximum Age" />
+                <div class="error-message"
+                    *ngIf="schemeForm.get('maxAge')?.touched && schemeForm.get('maxAge')?.errors">
+                    <span *ngIf="schemeForm.get('maxAge')?.errors?.['minMaxError']">
+                        {{ schemeForm.get('maxAge')?.errors?.['minMaxError'] }}
+                    </span>
+                    <span *ngIf="schemeForm.get('maxAge')?.errors?.['required']">
+                        Maximum Age is required.
+                    </span>
+                    <span *ngIf="schemeForm.get('maxAge')?.errors?.['min']">
+                        Maximum Age must be greater than 0.
+                    </span>
+                </div>
+            </div>
+
+            <!-- Profit Ratio -->
+            <div class="form-group">
+                <label for="profitRatio">Profit Ratio (%)</label>
+                <input type="number" id="profitRatio" formControlName="profitRatio" placeholder="Profit Ratio" />
+                <div class="error-message"
+                    *ngIf="schemeForm.get('profitRatio')?.touched && schemeForm.get('profitRatio')?.invalid">
+                    Profit Ratio is required.
+                </div>
+            </div>
+
+            <!-- Settlement Ratio -->
+            <div class="form-group">
+                <label for="settlementRatio">Settlement Ratio (%)</label>
+                <input type="number" id="settlementRatio" formControlName="settlementRatio"
+                    placeholder="Settlement Ratio" />
+                <div class="error-message"
+                    *ngIf="schemeForm.get('settlementRatio')?.touched && schemeForm.get('settlementRatio')?.invalid">
+                    Settlement Ratio is required.
+                </div>
+            </div>
+
+            <!-- Registration Commission -->
+            <div class="form-group">
+                <label for="registrationCommission">Registration Commission (%)</label>
+                <input type="number" id="registrationCommission" formControlName="registrationCommission"
+                    placeholder="Registration Commission" />
+                <!-- Error message for Registration Commission -->
+                <div class="error-message"
+                    *ngIf="schemeForm.get('registrationCommission')?.touched && schemeForm.get('registrationCommission')?.invalid">
+                    <span *ngIf="schemeForm.get('registrationCommission')?.errors?.['required']">Registration Commission
+                        is required.</span>
+                    <span *ngIf="schemeForm.get('registrationCommission')?.errors?.['min']">Registration Commission must
+                        be greater than 0.</span>
+                </div>
+            </div>
+
+            <!-- Installment Commission -->
+            <div class="form-group">
+                <label for="installmentCommission">Installment Commission (%)</label>
+                <input type="number" id="installmentCommission" formControlName="installmentCommission"
+                    placeholder="Installment Commission" />
+                <!-- Error message for Installment Commission -->
+                <div class="error-message"
+                    *ngIf="schemeForm.get('installmentCommission')?.touched && schemeForm.get('installmentCommission')?.invalid">
+                    <span *ngIf="schemeForm.get('installmentCommission')?.errors?.['required']">Installment Commission
+                        is required.</span>
+                    <span *ngIf="schemeForm.get('installmentCommission')?.errors?.['min']">Installment Commission must
+                        be greater than 0.</span>
+                </div>
+            </div>
+            <!-- Submit and Cancel Buttons -->
+            <div class="form-actions">
+                <button style="height: 100%;" class="submit-button" type="submit">Add Insurance
+                    Scheme</button>
+                <button class="cancel-button" type="button" (click)="onCancel()" routerLink="/admin-dashboard">Cancel</button>
+            </div>
+        </div>
+    </form>
+</div>

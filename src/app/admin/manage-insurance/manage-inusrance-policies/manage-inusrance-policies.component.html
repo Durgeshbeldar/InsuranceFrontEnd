@@ -1,0 +1,33 @@
+
+<!-- Manage Insurance Plans -->
+<div class="profile-card-container">
+    <!-- Profile Card -->
+    <div class="profile-card">
+      <!-- Profile Info -->
+      <div class="profile-info">
+        <img src="../../../../assets/images/profile-pic.png" alt="Picture" class="profile-pic" />
+        <div class="profile-details">
+          <h3 class="profile-name">Insurance Plan Master</h3>
+        </div>
+      </div>
+  
+      <!-- Navigation Menu -->
+      <div class="profile-nav">
+        <button class="nav-button" routerLink="show-plans" routerLinkActive="active"> 
+            <i class="fas fa-list"></i>Get Insurance Plans
+        </button>
+        <button class="nav-button" routerLink='add-plan' routerLinkActive="active"> 
+            <i class="fas fa-plus-circle"></i> Add Plans
+        </button>
+        <button class="nav-button" routerLink='update-plan' routerLinkActive="active"> 
+            <i class="fas fa-edit"></i>Update Plan
+        </button>
+        <button class="nav-button"> 
+            <i class="fas fa-trash-alt"></i>Delete Plan
+        </button>
+      </div>
+    </div>
+  </div>
+<router-outlet></router-outlet>
+
+  

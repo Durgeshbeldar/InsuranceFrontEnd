@@ -16,6 +16,9 @@ import { RouterModule } from '@angular/router';
 import { AddEmployeeComponent } from './add-employee/add-employee.component';
 import { AddAgentComponent } from './add-agent/add-agent.component';
 import { ManageLocationComponent } from './manage-location/manage-location.component';
+import { ManageInsuranceModule } from './manage-insurance/manage-insurance.module';
+
+
 @NgModule({
   declarations: [
     AdminSidebarComponent,
@@ -37,7 +40,8 @@ import { ManageLocationComponent } from './manage-location/manage-location.compo
     MatInputModule,
     MatNativeDateModule,
     MatButtonModule,
-    RouterModule
+    RouterModule,
+    ManageInsuranceModule,
     
   ]
 })

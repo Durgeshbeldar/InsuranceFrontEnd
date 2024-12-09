@@ -35,6 +35,7 @@ export class LoginComponent {
   }
 
 
+  userId: any;
 
   // Handle Login
   onLogin() {
@@ -44,11 +45,14 @@ export class LoginComponent {
     }
 
     this.authService.signIn(this.loginForm.value).subscribe({
-      next: (response) => {
+      next: (response :any ) => {
         // Get token and role from response
         const data = response;
         this.myToken = data.headers.get('Jwt');
         localStorage.setItem('token', this.myToken);
+        this.userId = data.userId;
+        console.log(this.userId)
+        localStorage.setItem('userId', this.userId);
         this.role = response.body;
         // Navigate based on role
         if (this.role.roleName === 'Admin') {
@@ -56,6 +60,8 @@ export class LoginComponent {
           this.router.navigateByUrl('/admin-dashboard');
         } else if(this.role.roleName === 'Customer') {
           this.router.navigateByUrl('/customer-dashboard');
+        }else if(this.role.roleName === 'Agent'){
+          this.router.navigateByUrl('/agent-dashboard');
         }
         else {
           alert("Login failed");

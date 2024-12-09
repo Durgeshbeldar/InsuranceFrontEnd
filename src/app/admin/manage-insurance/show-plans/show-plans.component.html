@@ -1,0 +1,55 @@
+<div class="plans-container">
+    <!-- Header Section -->
+    <div class="header-section">
+      <h2>INSURANCE PLANS</h2>
+    </div>
+  
+    <!-- Plans Table -->
+    <div class="table-wrapper">
+      <table class="plans-table">
+        <thead>
+          <tr>
+            <th>Sr No.</th>
+            <th>Plan Name</th>
+            <th>Description</th>
+            <th>Active Since</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let plan of paginatedPlans; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>
+              <div class="plan-details">
+                <img [src]="plan.planImage" alt="Plan Image" class="plan-icon" />
+                <span class="plan-name">{{ plan.planName }}</span>
+              </div>
+            </td>
+            <td>{{ plan.description }}</td>
+            <td>{{ plan.createdAt | date: 'dd-MM-yyyy' }}</td>
+            <td>
+              <span class="status-badge active">Active</span>
+            </td>
+            <td>
+              <button class="delete-button" (click)="deletePlan(plan.planId)">
+                <i class="fas fa-trash-alt"></i> Delete
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <!-- Pagination -->
+    <div class="pagination-container">
+      <button class="pagination-button" [disabled]="currentPage === 1" (click)="goToPreviousPage()">
+        Previous
+      </button>
+      <span>Page {{ currentPage }} of {{ totalPages }}</span>
+      <button class="pagination-button" [disabled]="currentPage === totalPages" (click)="goToNextPage()">
+        Next
+      </button>
+    </div>
+  </div>
+  

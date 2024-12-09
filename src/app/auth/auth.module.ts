@@ -12,6 +12,7 @@ import { CustomCaptchaComponent } from './custom-captcha/custom-captcha.componen
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CustomerRegistrationComponent } from './customer-registration/customer-registration.component';
 import { RouterModule } from '@angular/router';
+import { AgentRegistrationComponent } from './agent-registration/agent-registration.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { RouterModule } from '@angular/router';
     HeaderComponent,
     CustomCaptchaComponent,
     CustomerRegistrationComponent,
+    AgentRegistrationComponent,
   ],
   imports: [
     CommonModule,

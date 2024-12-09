@@ -51,7 +51,9 @@ export class ManageLocationComponent {
           this.loadStates(); // Reload states for updated dropdown
         },
         error: (err) => {
+          alert("You Can't Add State Because Entered State Name is Already Exists OR Some Error is Occurred")
           console.error('Error adding state:', err);
+          this.stateForm.reset();
         }
       });
     }
@@ -69,7 +71,9 @@ export class ManageLocationComponent {
           this.cityForm.reset();
         },
         error: (err) => {
+          alert("You Can't Add City Because Entered City Name is Already Exists OR Some Error is Occurred")
           console.error('Error adding city:', err);
+          this.cityForm.reset();
         }
       });
     }
