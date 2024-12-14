@@ -99,12 +99,16 @@
     outline: none;
   }
   
-  /* Dropdown Styling */
-  select option {
+   /* Dropdown Styling */
+   select option {
     padding: 10px !important;
+    background-color: rgb(0, 0, 0) !important;
     font-size: 1rem !important;
     font-weight: 700 !important;
-    color: #272727 !important;
+    color: #ffffff !important;
+  }
+  select option:hover{
+    cursor: pointer !important;
   }
   
   option[selected] {
@@ -335,4 +339,4 @@
       opacity: 1;
     }
   }
-  
+ 

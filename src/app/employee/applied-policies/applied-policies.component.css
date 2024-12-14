@@ -1,0 +1,347 @@
+/* Container Styles */
+.customers-container {
+    background: #0a1128;
+    border-radius: 12px;
+    width: 90%;
+    margin: 50px auto;
+    padding: 20px;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Header */
+  .header-section {
+    background: #ffffff;
+    padding: 5px 20px;
+    border-radius: 12px;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .header-section h2 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #060924;
+  }
+  
+  /* Table Wrapper */
+  .table-wrapper {
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .customers-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.9rem;
+  }
+  
+  .customers-table thead tr {
+    background: #f8f9fa;
+    color: #38393a;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+  
+  .customers-table th,
+  .customers-table td {
+    padding: 12px;
+    border-bottom: 1px solid #eaeaea;
+  }
+  
+  .customers-table tbody tr:hover {
+    background: rgba(0, 0, 0, 0.03);
+    transition: background 0.3s ease-in-out;
+  }
+  
+  /* KYC Status */
+  .kyc-status {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .status-icon {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .green {
+    color: #27ae60;
+  }
+  
+  .red {
+    color: #e74c3c;
+  }
+  
+  .status-icon:hover {
+    transform: scale(1.2);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Sale Button */
+  .sale-button {
+    background: #121d4c;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .sale-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 4px 10px rgba(64, 135, 210, 0.4);
+  }
+  
+  /* Details Button */
+  .details-toggle {
+    background: #e0e0e0;
+    color: #333;
+    border: none;
+    border-radius: 50%;
+    padding: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .details-toggle:hover {
+    transform: scale(1.2);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Customer Details Section */
+  .customer-details {
+    margin-top: 20px;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .customer-details h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #1f2937;
+  }
+  
+  .customer-details ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .customer-details li {
+    font-size: 1rem;
+    color: #6b7280;
+    margin-bottom: 8px;
+  }
+  
+  /* Pagination */
+  .pagination-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .pagination-button {
+    background: #4084cc;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .pagination-button:disabled {
+    background: #d6d6d6;
+    cursor: not-allowed;
+  }
+  
+  .pagination-button:hover:not(:disabled) {
+    transform: scale(1.05);
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .policies-container {
+    background: #071234;
+    border-radius: 12px;
+    width: 90%;
+    margin: 30px auto;
+    padding: 20px;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+  }
+  
+  .header-section h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .table-wrapper {
+    overflow-x: auto;
+  }
+  
+  .policies-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.9rem;
+  }
+  
+  .policies-table thead tr {
+    background: #f1f1f1;
+    color: #444;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+  
+  .policies-table th,
+  .policies-table td {
+    padding: 12px;
+    border-bottom: 1px solid #eaeaea;
+    overflow-x: auto !important;
+  }
+  
+  .policies-table tbody tr:hover {
+    background: rgba(0, 0, 0, 0.05);
+  }
+  
+  .kyc-status .status-icon {
+    font-size: 1.2rem;
+  }
+  
+  .green {
+    color: #27ae60;
+  }
+  
+  .red {
+    color: #e74c3c;
+  }
+  
+  .approve-button {
+    background: #042952;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 0.85rem;
+  }
+  
+  .approve-button:hover {
+    background: #0056b3;
+  }
+  
+  .details-toggle {
+    background: #f1f1f1;
+    color: #333;
+    border: none;
+    border-radius: 50%;
+    padding: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .details-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .policy-details {
+    margin-top: 20px;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .policy-details h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .policy-details ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .policy-details li {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 8px;
+  }
+  
+  .pagination-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .pagination-button {
+    background: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  
+  .pagination-button:disabled {
+    background: #ccc;
+  }
+  
+  .pagination-button:hover:not(:disabled) {
+    background: #0056b3;
+  }
+  
+  .status-pill {
+    padding: 5px 10px;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+  }
+  
+  .approved {
+    background-color: #27ae60;
+    color: #fff;
+  }
+  
+  .pending {
+    background-color: #7c0c00;
+    color: #fff;
+  }
+  .policies-table th,
+.policies-table td {
+  padding: 10px 15px; /* Add some padding for a clean layout */
+  text-align: left; /* Align text to the left */
+  white-space: nowrap; /* Prevent text from wrapping to the next line */
+  overflow: hidden; /* Hide overflow content */
+  text-overflow: ellipsis; /* Add ellipsis for truncated text */
+  vertical-align: middle; /* Ensure content is vertically aligned in the middle */
+}

@@ -9,9 +9,23 @@ import { InsuranceService } from 'src/app/services/insurance.service';
 export class AddSchemeComponent {
   constructor(private insuranceService: InsuranceService) {
     this.setupCustomValidators();
+    this.loadPlans();
+    
+  }
+  plans : any;
+  loadPlans(){
+    this.insuranceService.getPlans().subscribe({
+      next: (response: any) => {
+        this.plans = response.data;
+      },
+      error: (err: any) => {
+        console.error('Error fetching plans:', err);
+      }
+    });
   }
   schemeForm = new FormGroup({
     schemeName: new FormControl('', Validators.required),
+    planId : new FormControl('', Validators.required),
     description: new FormControl(''), // Optional field
     minAmount: new FormControl('', Validators.required),
     maxAmount: new FormControl('', Validators.required),

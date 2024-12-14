@@ -10,6 +10,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { CustomerModule } from './customer/customer.module';
 import { ManageSchemesModule } from './admin/manage-schemes/manage-schemes.module';
 import { AgentModule } from './agent/agent.module';
+import { MatSliderModule } from '@angular/material/slider';
+import { EmployeeModule } from './employee/employee.module';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -27,7 +34,14 @@ import { AgentModule } from './agent/agent.module';
     HttpClientModule,
     CustomerModule,
     ManageSchemesModule,
-    AgentModule
+    AgentModule,
+    MatSliderModule,
+    EmployeeModule,
+     MatPaginatorModule,
+    MatTableModule,
+    MatSortModule,
+    MatInputModule,
+    MatFormFieldModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

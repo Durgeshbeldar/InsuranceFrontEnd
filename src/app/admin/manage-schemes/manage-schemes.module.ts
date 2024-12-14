@@ -6,11 +6,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { UpdateSchemeComponent } from './update-scheme/update-scheme.component';
 import { MatIconModule } from '@angular/material/icon';
+import { ShowSchemesComponent } from './show-schemes/show-schemes.component';
 @NgModule({
   declarations: [
     ManageSchemesComponent,
     AddSchemeComponent,
     UpdateSchemeComponent,
+    ShowSchemesComponent,
 
  
   ],

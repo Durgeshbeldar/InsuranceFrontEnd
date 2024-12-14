@@ -89,7 +89,10 @@ export class AddInsurancePlanComponent {
               this.fileName = '';
               this.previewUrl = null;
             },
-            error: (err) => console.error('Error adding plan:', err)
+            error: (err) => {
+              alert("Some error is occured or plan name is already exists!");
+              console.error('Error adding plan:', err)
+            }
           });
         },
         error: (err) => console.error('Error uploading image:', err)

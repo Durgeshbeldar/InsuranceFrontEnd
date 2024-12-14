@@ -13,15 +13,17 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ShowCustomersComponent } from './show-customers/show-customers.component';
-
-
+import { SalePolicyComponent } from './sale-policy/sale-policy.component';
+import { FormsModule } from '@angular/forms';
+import { MatSliderModule } from '@angular/material/slider';
 @NgModule({
   declarations: [
     AgentDashboardComponent,
     AgentHeaderComponent,
     AgentSidebarComponent,
     AddCustomerComponent,
-    ShowCustomersComponent
+    ShowCustomersComponent,
+    SalePolicyComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +34,9 @@ import { ShowCustomersComponent } from './show-customers/show-customers.componen
     MatInputModule,
     MatNativeDateModule,
     MatButtonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule,
+    MatSliderModule
   ],
   exports: [
     AgentDashboardComponent,

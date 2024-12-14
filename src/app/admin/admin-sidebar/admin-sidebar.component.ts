@@ -15,4 +15,12 @@ export class AdminSidebarComponent {
   setActiveMenu(menu: string) {
     this.activeMenu = menu;
   }
+  logout() {
+    // Step 1: Remove token and user data
+    localStorage.removeItem('token'); 
+    localStorage.removeItem('userId'); 
+    
+    // Step 2: Navigate to Login Page
+    this.router.navigateByUrl("");
+  }
 }

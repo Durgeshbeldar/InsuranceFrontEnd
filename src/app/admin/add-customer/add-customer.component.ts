@@ -10,7 +10,7 @@ import { UserService } from 'src/app/services/user.service';
 export class AddCustomerComponent {
 
   isUserAdded = false;
-  roleId = "1a429dfe-6d8f-4b48-e3be-08dd14519426";
+  roleId = "43bdb71b-24b3-49d0-47d5-08dd191da96b";
   constructor(private userService: UserService) {
 
   }

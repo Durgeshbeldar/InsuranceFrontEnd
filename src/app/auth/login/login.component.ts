@@ -25,7 +25,7 @@ export class LoginComponent {
   onCaptchaVerified(verified: boolean) {
     this.isCaptchaVerified = verified;
     if (verified) {
-      this.captchaError = false; // Clear error when verified
+      this.captchaError = false; 
     }
   }
   // Check if a field is invalid
@@ -63,7 +63,10 @@ export class LoginComponent {
         }else if(this.role.roleName === 'Agent'){
           this.router.navigateByUrl('/agent-dashboard');
         }
-        else {
+        else if(this.role.roleName === "Employee"){
+          this.router.navigateByUrl('/employee-dashboard');
+        }
+        else  {
           alert("Login failed");
           this.router.navigateByUrl("");
         }

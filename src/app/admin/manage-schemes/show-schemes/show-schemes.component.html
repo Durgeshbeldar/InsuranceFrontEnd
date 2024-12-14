@@ -1,0 +1,83 @@
+<div class="customers-container">
+    <!-- Header Section -->
+    <div class="header-section">
+      <h2>Insurance Schemes</h2>
+    </div>
+  
+    <!-- Schemes Table -->
+    <div class="table-wrapper">
+      <table class="customers-table">
+        <thead>
+          <tr>
+            <th>Sr No.</th>
+            <th>Scheme Name</th>
+            <th>Plan Name</th>
+            <th>Profit Ratio</th>
+            <th>Created At</th>
+            <th>Status</th>
+            <th>Action</th>
+            <th>Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let scheme of paginatedSchemes; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ scheme.schemeName }}</td>
+            <td>{{ scheme.insurancePlan?.planName }}</td>
+            <td>{{ scheme.profitRatio }}%</td>
+            <td>{{ scheme.insurancePlan?.createdAt | date: 'dd-MM-yyyy' }}</td>
+            <td>
+                <span class="kyc-status">
+                  <i 
+                    class="status-icon fas"
+                    [ngClass]="scheme.isActive ? 'fa-check-circle green' : 'fa-times-circle red'"
+                  ></i>
+                </span>
+              </td>
+            <td>
+              <button class="sale-button">
+                <i class="fas fa-trash-alt"></i> Delete
+              </button>
+            </td>
+            <td>
+              <button class="details-toggle" (click)="toggleViewDetails(scheme)">
+                <i class="fas fa-eye"></i>
+              </button>
+            </td>
+          </tr>
+  
+          <!-- Detailed View Section -->
+          <tr *ngIf="scheme" class="details-row">
+            <td colspan="7">
+              <div class="customer-details">
+                <h3>Scheme Details</h3>
+                <ul>
+                  <li><strong>Scheme Name:</strong> {{ scheme.schemeName }}</li>
+                  <li><strong>Plan Name:</strong> {{ scheme.insurancePlan?.planName }}</li>
+                  <li><strong>Description:</strong> {{ scheme.description }}</li>
+                  <li><strong>Min Amount:</strong> ₹{{ scheme.minAmount }}</li>
+                  <li><strong>Max Amount:</strong> ₹{{ scheme.maxAmount }}</li>
+                  <li><strong>Min Policy Term:</strong> {{ scheme.minPolicyTerm }} years</li>
+                  <li><strong>Max Policy Term:</strong> {{ scheme.maxPolicyTerm }} years</li>
+                  <li><strong>Min Age:</strong> {{ scheme.minAge }} years</li>
+                  <li><strong>Max Age:</strong> {{ scheme.maxAge }} years</li>
+                  <li><strong>Profit Ratio:</strong> {{ scheme.profitRatio }}%</li>
+                  <li><strong>Settlement Ratio:</strong> {{ scheme.settlementRatio }}%</li>
+                  <li><strong>Registration Commission:</strong> {{ scheme.registrationCommission }}%</li>
+                  <li><strong>Installment Commission:</strong> {{ scheme.installmentCommission }}%</li>
+                </ul>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <!-- Pagination -->
+    <div class="pagination-container">
+      <button class="pagination-button" [disabled]="currentPage === 1" (click)="goToPreviousPage()">Previous</button>
+      <span>Page {{ currentPage }} of {{ totalPages }}</span>
+      <button class="pagination-button" [disabled]="currentPage === totalPages" (click)="goToNextPage()">Next</button>
+    </div>
+  </div>
+  

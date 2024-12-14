@@ -1,0 +1,132 @@
+/* Sidebar Container */
+.sidebar {
+    width: 310px; /* Perfect width for alignment */
+    height: calc(100vh - 30px); /* Adjust height for top/bottom gap */
+    margin: 15px 15px; /* Gap around the sidebar */
+    background: #fffffff0; /* Clean white background */
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15); /* Subtle shadow */
+    border-radius: 4px; /* Rounded corners */
+    overflow-y: auto; /* Enable scrolling for vertical overflow */
+    overflow-x: hidden; /* Prevent horizontal overflow */
+    position: fixed;
+    top: 80px; /* Position below the header */
+    left: 0;
+    padding: 20px;
+    box-sizing: border-box;
+    z-index: 1000; /* Ensure it stays on top */
+  }
+  
+  /* Sidebar Logo (Brand) */
+  .sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+  }
+  
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .brand-logo {
+    font-size: 2rem;
+    color: #00a1fd;
+  }
+  
+  .brand-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    background: linear-gradient(90deg, #00a1fd, #14d344);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+  }
+  
+  /* Sidebar Menu */
+  .sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .menu-item {
+    display: flex;
+    align-items: center; /* Align icons and text vertically */
+    padding: 12px 18px; /* Spacing inside each item */
+    margin: 8px 0; /* Space between items */
+    border-radius: 8px; /* Rounded corners for the hover effect */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .menu-item a {
+    text-decoration: none;
+    display: flex;
+    align-items: center; /* Icon and label alignment */
+    color: #3a3b3f;
+    font-size: 0.9rem;
+    font-weight: 600;
+    flex-grow: 1; /* Ensure proper alignment */
+  }
+  
+  .menu-item .icon {
+    font-size: 1.3rem; /* Larger icons for better visibility */
+    margin-right: 15px; /* Space between icon and text */
+    color: #3b82f6; /* Default icon color */
+    transition: color 0.3s ease;
+  }
+  
+  .menu-item.active {
+    background-color: #c0e5ff; /* Highlight active item */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .menu-item.active .icon {
+    color: #2563eb; /* Active icon color */
+  }
+  
+  .menu-item.active a {
+    color: #2563eb; /* Active text color */
+  }
+  
+  .menu-item:hover {
+    background-color: #c0d6f8; /* Subtle hover effect */
+    transform: translateX(2px); /* Slight animation on hover */
+  }
+  
+  .menu-item:hover .icon {
+    color: #1e3a8a; /* Hover icon color */
+  }
+  
+  /* Section Title */
+  .sidebar-section-title {
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #000000;
+    margin: 20px 0 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+  }
+  
+  /* Custom Scrollbar Styling */
+  .sidebar::-webkit-scrollbar {
+    width: 8px; /* Width of the scrollbar */
+    background: transparent; /* Make scrollbar track transparent */
+  }
+  
+  .sidebar::-webkit-scrollbar-thumb {
+    background: #fefefe; /* Thumb color */
+    border: 4px solid #0c2648; /* Add padding inside the sidebar */
+  }
+  
+  .sidebar::-webkit-scrollbar-thumb:hover {
+    background: #a0a0a0; /* Darker color on hover */
+  }
+  
+  .sidebar::-webkit-scrollbar-track {
+    background: #f9f9f9; /* Scrollbar track color */
+    border-radius: 5px; /* Match the thumb radius */
+  }
+  

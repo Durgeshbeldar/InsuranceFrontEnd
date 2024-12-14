@@ -7,10 +7,28 @@ import { Injectable } from '@angular/core';
 export class InsuranceService {
   schemeUrl = 'https://localhost:7191/api/InsuranceScheme';
   planUrl = 'https://localhost:7191/api/InsurancePlan';
+  policyUrl = 'https://localhost:7191/api/PolicyAccount';
+  schemeByPlanUrl = 'https://localhost:7191/Plan/'
+  policyStatusUrl = 'https://localhost:7191/Status';
   constructor(private http: HttpClient) { }
   
+
+  // Get Policies 
+  getPolicyAccounts(){
+    return this.http.get(this.policyUrl);
+  }
+
+  changePolicyAccountStatus(statusData: any){
+     return this.http.put(this.policyStatusUrl, statusData);
+  }
   addScheme(schemeData: any){
     return this.http.post(this.schemeUrl, schemeData);
+  }
+  getSchemesByPlanId(planId:any){
+    return this.http.get(`${this.schemeByPlanUrl}${planId}`);
+  }
+  createPolicyAccount(data:any){
+    return this.http.post(this.policyUrl, data);
   }
   addPlan(planData:any){
     return this.http.post(this.planUrl, planData);

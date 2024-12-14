@@ -19,6 +19,13 @@ import { UpdateSchemeComponent } from './admin/manage-schemes/update-scheme/upda
 import { AgentDashboardComponent } from './agent/agent-dashboard/agent-dashboard.component';
 import { AddCustomerComponent as AgentAddCustomerComponent } from './agent/add-customer/add-customer.component';
 import { ShowCustomersComponent } from './agent/show-customers/show-customers.component';
+import { ShowSchemesComponent } from './admin/manage-schemes/show-schemes/show-schemes.component';
+import { SalePolicyComponent } from './agent/sale-policy/sale-policy.component';
+import { EmployeeDashboardComponent } from './employee/employee-dashboard/employee-dashboard.component';
+import { AppliedPoliciesComponent } from './employee/applied-policies/applied-policies.component';
+import { VerifiedAccountsComponent } from './employee/verified-accounts/verified-accounts.component';
+import { CustomerListComponent } from './employee/customer-list/customer-list.component';
+import { VerifiedCustomersComponent } from './employee/verified-customers/verified-customers.component';
 const routes: Routes = [
   {
     path: "",
@@ -73,6 +80,10 @@ const routes: Routes = [
           {
             path :'update-scheme',
             component: UpdateSchemeComponent
+          },
+          {
+            path:'show-schemes',
+            component: ShowSchemesComponent
           }
         ]
       }
@@ -103,9 +114,37 @@ const routes: Routes = [
       {
         path:'show-customers',
         component: ShowCustomersComponent
+      },
+      {
+        path:'sale-policy',
+        component: SalePolicyComponent
       }
     ]
   },
+
+  // Employee Module Paths
+  {
+    path: "employee-dashboard",
+    component: EmployeeDashboardComponent,
+    children:[
+      {
+        path: "applied-policies",
+        component: AppliedPoliciesComponent
+      },
+      {
+        path: "verified-accounts",
+        component : VerifiedAccountsComponent
+      },
+      {
+        path : 'customer-list',
+        component: CustomerListComponent
+      },
+      {
+        path: 'verified-customers',
+        component: VerifiedCustomersComponent
+      }
+    ]
+  }
 ];
 
 @NgModule({

@@ -11,7 +11,7 @@ import { UserService } from 'src/app/services/user.service';
 export class AgentRegistrationComponent {
   isCaptchaVerified = false; // Tracks captcha status
   captchaError = false; // 
-  roleId = "449c5bab-3e3e-45cb-4391-08dd15cd23c0";
+  roleId = "0034233c-1575-4bb5-47d6-08dd191da96b";
   registrationForm = new FormGroup({
     userName: new FormControl('', Validators.required),
     email: new FormControl('', [Validators.required, Validators.email]),

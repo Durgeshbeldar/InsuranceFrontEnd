@@ -11,7 +11,7 @@ import { LocationService } from'src/app/services/location.service';
 export class AddCustomerComponent {
 
   isUserAdded = false;
-  roleId = "1a429dfe-6d8f-4b48-e3be-08dd14519426";
+  roleId = "43bdb71b-24b3-49d0-47d5-08dd191da96b";
   states:any;
   cities: any;
 
@@ -114,7 +114,7 @@ export class AddCustomerComponent {
         dateOfBirth: this.customerForm.get('dateOfBirth')?.value,
         phoneNumber: this.customerForm.get('phoneNumber')?.value,
         gender: this.customerForm.get('gender')?.value ? 'Male' : 'Female',
-        agentId :agentUserId
+        // agentId :agentUserId
       };
       console.log('Payload being sent:', formData);
 
@@ -133,7 +133,7 @@ export class AddCustomerComponent {
   }
 
   addAddress() {
-    console.log("My Payload", this.addressForm.value);
+    console.log("Address Payload", this.addressForm.value);
     if (this.addressForm.invalid) {
       this.addressForm.markAllAsTouched(); // Mark all fields as touched to show validation errors
       return;

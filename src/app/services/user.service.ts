@@ -14,6 +14,10 @@ export class UserService {
   getCustomers(){
     return this.http.get(this.customerUrl);
   }
+
+  changeKycStatus(kycData: any){
+   return this.http.put(this.customerUrl + '/Kyc' , kycData );
+  }
   getRoles(){
     return this.http.get(this.roleUrl);
   }

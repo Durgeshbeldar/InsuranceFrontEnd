@@ -1,29 +1,28 @@
-<div class="header">
-    <!-- Header Brand -->
-    <div class="header-brand">
+<div class="header-container">
+  <div class="header-top">
+    <div class="header-brand" >
       <span class="brand-logo">🛡️</span>
-      <span class="brand-name">Ds Insurance LTD</span>
+      <span class="brand-name" routerLink="customer-dashboard" routerLink="active">Ds Insurance LTD</span>
     </div>
-  
-    <!-- Navigation Menu -->
-    <ul class="header-menu">
-      <li class="menu-item active">
-        <a href="#">
-          <span class="icon">🏠</span>
-          <span class="label">Login Page</span>
-        </a>
-      </li>
-      <li class="menu-item">
-        <a href="#">
-          <span class="label">Become an Agent</span>
-        </a>
-      </li>
-      <li class="menu-item">
-        <a href="#">
-          <span class="icon">👤</span>
-          <span class="label">Register</span>
-        </a>
-      </li>
-    </ul>
+    <div class="menu-items">
+      <a href="#" class="menu-link active">Personal</a>
+      <a href="#" class="menu-link">Priority</a>
+      <a href="#" class="menu-link">About Us</a>
+      <a href="#" class="menu-link">Support</a>
+    </div>
+    <div class="header-right">
+      <a  class="icon-link"><i class="fas fa-bell"></i><span class="notification-badge">3</span></a>
+      <button class="login-button"><mat-icon>logout</mat-icon>
+        <span>Log Out</span></button>
+    </div>
   </div>
-  
+
+  <div class="header-bottom">
+    <a href="#" class="bottom-link">Explore Products</a>
+    <a href="#" class="bottom-link">Upload Kyc Documents</a>
+    <a href="#" class="bottom-link">Pay Insurance Premium</a>
+   
+    <a class="bottom-link">Purchased Insurance Policies</a>
+    <a class="bottom-link highlight">Buy New Insurance Policy</a>
+  </div>
+</div>
