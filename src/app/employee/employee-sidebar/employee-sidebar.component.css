@@ -76,6 +76,7 @@
     margin-right: 15px; /* Space between icon and text */
     color: #3b82f6; /* Default icon color */
     transition: color 0.3s ease;
+    margin-bottom: 6px !important;
   }
   
   .menu-item.active {

@@ -1,0 +1,103 @@
+/* Documents Container */
+.documents-container {
+    background: #50649d;
+    border-radius: 12px;
+    padding: 20px 30px;
+    width: 90%;
+    margin: 20px auto;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Header */
+  .documents-container .header {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #071234;
+    text-align: center;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+  
+  /* Table Wrapper */
+  .table-wrapper {
+    overflow-x: auto;
+    border-radius: 8px;
+    background: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Table */
+  .documents-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.95rem;
+  }
+  
+  .documents-table thead {
+    background: #071234;
+    color: #ffffff;
+  }
+  
+  .documents-table th,
+  .documents-table td {
+    padding: 15px;
+    border-bottom: 1px solid #dddddd;
+    text-align: center;
+  }
+  
+  .documents-table tbody tr:hover {
+    background: rgba(0, 0, 0, 0.05);
+    transition: background 0.3s ease;
+  }
+  
+  /* Status Icon */
+  .status-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    font-size: 0.9rem;
+    font-weight: bold;
+  }
+  
+  .verified {
+    color: #00a043;
+  }
+  
+  .not-verified {
+    color: #a31f11;
+  }
+  
+  /* Buttons */
+  .view-button,
+  .verify-button,
+  .reject-button {
+    background: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .view-button {
+    background: #100a30;
+  }
+  
+  
+  .view-button:hover
+{
+    transform: translateY(-2px);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .view-button:focus,
+  .verify-button:focus,
+  .reject-button:focus {
+    outline: none;
+  }
+  

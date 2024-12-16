@@ -21,13 +21,23 @@ export class SalePolicyComponent {
   ngOnInit(): void {
     this.loadCustomers();
     this.loadPlans();
+
+    this.policyForm.get('premiumAmount')?.valueChanges.subscribe(() => {
+      this.calculateSumAssured();
+      this.onPremiumTypeChange();
+    });
+  
+    this.policyForm.get('policyTerm')?.valueChanges.subscribe(() => {
+      this.calculateSumAssured();
+      this.onPremiumTypeChange();
+    });
   }
 
   policyForm = new FormGroup({
     customerId: new FormControl('', Validators.required),
     planId: new FormControl('', Validators.required),
     schemeId: new FormControl('', Validators.required),
-    sumAssured: new FormControl('', [Validators.required, Validators.min(1)]),
+    sumAssured: new FormControl({value : '', disabled:true}),
     premiumType: new FormControl('', Validators.required),
     policyTerm: new FormControl('', [Validators.required, Validators.min(1)]),
     premiumAmount: new FormControl('', [Validators.required, Validators.min(1)]),
@@ -82,6 +92,35 @@ export class SalePolicyComponent {
     this.policyForm.get('premiumAmount')?.valueChanges.subscribe(() => this.onPremiumTypeChange());
   }
 
+  onPremiumAmountChange(){
+    let premiumAmount = this.policyForm.get('premiumAmount')?.value;
+    let policyTerm = this.policyForm.get('policyTerm')?.value;
+    if(premiumAmount && policyTerm){
+      this.calculateSumAssured();
+    }    
+  }
+
+  
+  calculateSumAssured() {
+    if (!this.selectedScheme) return;
+    let profitRatio:any;
+    let premiumAmount: any;
+    let policyTermMonths: any;
+    profitRatio = this.selectedScheme.profitRatio; 
+    premiumAmount = this.policyForm.get('premiumAmount')?.value;
+    policyTermMonths = this.policyForm.get('policyTerm')?.value;
+  
+    if (premiumAmount && policyTermMonths) {
+      const policyTermYears = policyTermMonths / 12;
+      const sumAssured = premiumAmount * Math.pow(1 + profitRatio / 100, policyTermYears); 
+  
+      // Update the form control for Sum Assured
+      this.policyForm.patchValue({ sumAssured: sumAssured.toFixed() }); 
+      console.log("Sum Assured Amount is ", sumAssured)
+    }else{
+      this.policyForm.patchValue({ sumAssured: '' });
+    }
+  }
   // Custom Validator for Policy Term
   validatePolicyTerm(selectedScheme: any) {
     return (control: AbstractControl) => {
@@ -138,7 +177,7 @@ export class SalePolicyComponent {
 
     const installmentAmount = premiumAmount / numberOfInstallments;
     this.policyForm.patchValue({ installmentAmount: installmentAmount.toFixed() });
-  
+    
   }
   
 
@@ -166,11 +205,17 @@ export class SalePolicyComponent {
     console.log(payload); // Debugging
 
     this.insuranceService.createPolicyAccount(payload).subscribe({
-      next: () => alert('Policy Account Created Successfully!'),
+      next: (response : any) => {
+        alert('Policy Account Created Successfully!');
+      },
       error: (err) => console.error('Error:', err),
     });
   }
 
+ 
+
+
+ 
   // Cancel Form
   onCancel() {
     this.policyForm.reset();

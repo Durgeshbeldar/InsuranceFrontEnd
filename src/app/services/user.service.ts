@@ -11,32 +11,40 @@ export class UserService {
   agentUrl = 'https://localhost:7191/api/Agent';
   constructor(private http: HttpClient) { }
 
-  getCustomers(){
+  getCustomers() {
     return this.http.get(this.customerUrl);
   }
-
-  changeKycStatus(kycData: any){
-   return this.http.put(this.customerUrl + '/Kyc' , kycData );
+  getAgentById(agentId: any) {
+    return this.http.get(`${this.agentUrl}/${agentId}`);
   }
-  getRoles(){
+  updateAgent(agent: any) {
+    return this.http.put(this.agentUrl, agent);
+  }
+  getUserById(id:any){
+    return this.http.get(`${this.userUrl}/${id}`);
+  }
+  changeKycStatus(kycData: any) {
+    return this.http.put(this.customerUrl + '/Kyc', kycData);
+  }
+  getRoles() {
     return this.http.get(this.roleUrl);
   }
-  addUser(userData:any){
+  addUser(userData: any) {
     return this.http.post(this.userUrl, userData);
   }
-  hardDeleteUser(id:any){
+  hardDeleteUser(id: any) {
     return this.http.delete(`${this.userUrl}/User/${id}`);
   }
 
-  addCustomer(customer:any){
+  addCustomer(customer: any) {
     return this.http.post(this.customerUrl, customer);
   }
 
-  addEmployee(employee:any){
+  addEmployee(employee: any) {
     return this.http.post(this.employeeUrl, employee);
   }
 
-  addAgent(agent:any){
+  addAgent(agent: any) {
     return this.http.post(this.agentUrl, agent);
   }
 }

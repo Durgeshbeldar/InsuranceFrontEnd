@@ -37,7 +37,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     AgentModule,
     MatSliderModule,
     EmployeeModule,
-     MatPaginatorModule,
+    MatPaginatorModule,
     MatTableModule,
     MatSortModule,
     MatInputModule,

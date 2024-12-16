@@ -12,7 +12,7 @@
   .header-section {
     background: #ffffff;
     padding: 5px 20px;
-    border-radius: 12px;
+    border-radius: 4px;
     font-size: 1rem;
     margin-bottom: 20px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
@@ -28,7 +28,7 @@
   .table-wrapper {
     background: #ffffff;
     padding: 15px;
-    border-radius: 12px;
+    border-radius: 4px;
     box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
   }
   
@@ -345,3 +345,212 @@
   text-overflow: ellipsis; /* Add ellipsis for truncated text */
   vertical-align: middle; /* Ensure content is vertically aligned in the middle */
 }
+
+/* Modal Css  */
+
+/* Modal Background */
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+  overflow: hidden; /* Prevent scrolling */
+}
+
+/* Modal Content */
+.modal-content {
+  background: #ffffff;
+  width: 90%;
+  max-width: 800px;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.4s ease-in-out;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Close Button */
+.close-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 1.5rem;
+  color: #333;
+  cursor: pointer;
+}
+
+/* Document Slider */
+.document-slider {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin: 20px 0;
+}
+
+.document-frame {
+  width: 100%;
+  max-height: 400px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.document-frame img {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 8px;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+.nav-arrow {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: #555;
+  cursor: pointer;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.nav-arrow:hover {
+  transform: scale(1.2);
+  color: #000;
+}
+
+.left-arrow {
+  margin-right: 10px;
+}
+
+.right-arrow {
+  margin-left: 10px;
+}
+
+/* Document Info Section */
+.document-info {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.document-info h3 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.document-status {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.verified {
+  color: #28a745;
+}
+
+.not-verified {
+  color: #dc3545;
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+  width: 100%;
+}
+
+.verify-button,
+.reject-button {
+  flex: 1;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.verify-button {
+  background: #01801f;
+  color: #fff;
+}
+
+.verify-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 4px 10px rgba(40, 167, 69, 0.3);
+}
+
+.reject-button {
+  background: #89010f;
+  color: #fff;
+}
+
+.reject-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 4px 10px rgba(220, 53, 69, 0.3);
+}
+
+/* Fade In Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Styled Button */
+.view-documents-button {
+  background: linear-gradient(90deg, #000000, #005a6c); /* Gradient color */
+  color: #ffffff; /* Text color */
+  font-size: 1rem; /* Font size */
+  font-weight: bold; /* Bold text */
+  padding: 10px 20px; /* Padding for the button */
+  border: none; /* Remove border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover animations */
+}
+
+/* Hover Effect */
+.view-documents-button:hover {
+  transform: translateY(-3px); /* Slight lift on hover */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+}
+
+/* Focus Effect */
+.view-documents-button:focus {
+  outline: none; /* Remove focus outline */
+  box-shadow: 0 0 0 3px rgba(2, 36, 72, 0.5); /* Blue focus ring */
+}
+
+/* Disabled State */
+.view-documents-button:disabled {
+  background: #d6d6d6; /* Gray background for disabled state */
+  color: #a1a1a1; /* Light gray text for disabled state */
+  cursor: not-allowed; /* Disabled cursor */
+  box-shadow: none; /* No shadow for disabled state */
+}
+

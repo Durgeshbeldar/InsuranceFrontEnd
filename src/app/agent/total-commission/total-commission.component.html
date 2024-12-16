@@ -1,0 +1,63 @@
+<div class="commission-container">
+    <!-- Top Cards -->
+    <div class="cards-wrapper">
+        <!-- Wallet Balance Card -->
+        <div class="info-card" (click)="showWalletBalance()">
+            <img src="../../../assets/wallet.gif" alt="Wallet Icon" class="card-icon" />
+            <div class="card-content">
+                <h3>Wallet Balance</h3>
+                <p>₹{{ walletBalance }}</p>
+            </div>
+        </div>
+
+        <!-- Total Money Earned Card -->
+        <div class="info-card" (click)="showTotalCommission()">
+            <img src="../../../assets/money.gif" alt="Money Icon" class="card-icon" />
+            <div class="card-content">
+                <h3>Total Earnings</h3>
+                <p>₹{{ totalCommission }}</p>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="horizontal-info-card" *ngIf="isCardVisible">
+        <div class="horizontal-card-content">
+            <!-- Square Image -->
+            <div class="bottom-card-image">
+                <img src="../../../assets/mainmoney.gif" alt="Money Icon" />
+            </div>
+
+            <!-- Card Title and Amount -->
+            <p>{{ selectedCardTitle }}</p>
+            <span class="count-value">₹{{ animatedValue }}</span>
+        </div>
+    </div>
+</div>
+<div *ngIf="isCardVisible">
+    <!-- Amount Input Field -->
+     <form [formGroup]="withdrawForm" (ngSubmit)="withdrawRequest()">
+    <div class="amount-input-container">
+        <label for="amount" class="amount-label">Enter Amount</label>
+        <div class="input-wrapper">
+            <span class="input-icon">₹</span>
+            <input type="number" id="amount" class="amount-input" 
+            placeholder="Enter amount"
+            formControlName="withdrawAmount" 
+            >
+        </div>
+        <div class="error-message" *ngIf="withdrawForm.get('withdrawAmount')?.touched && withdrawForm.get('withdrawAmount')?.invalid">
+            <span *ngIf="withdrawForm.get('withdrawAmount')?.errors?.['required']">Amount is required.</span>
+            <span *ngIf="withdrawForm.get('withdrawAmount')?.errors?.['min']">Amount must be at least ₹500.</span>
+            <span *ngIf="withdrawForm.get('withdrawAmount')?.errors?.['max']">Amount cannot be more than ₹{{ walletBalance }}.</span>
+            <span *ngIf="withdrawForm.get('withdrawAmount')?.errors?.['']"></span>
+        </div>
+    </div>
+
+    <div class="withdraw-button-container">
+        <button class="withdraw-money-button" (click)="withdrawRequest()">
+            Withdraw Money
+        </button>
+    </div>
+    </form>
+</div>

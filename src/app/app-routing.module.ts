@@ -4,7 +4,6 @@ import { LoginComponent } from './auth/login/login.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 import { CustomerDashboardComponent } from './customer/customer-dashboard/customer-dashboard.component';
 import { CustomerRegistrationComponent } from './auth/customer-registration/customer-registration.component';
-import { AddCustomerComponent  as AdminAddCustomerComponent} from './admin/add-customer/add-customer.component';
 import { AddEmployeeComponent } from './admin/add-employee/add-employee.component';
 import { AddAgentComponent } from './admin/add-agent/add-agent.component';
 import { ManageLocationComponent } from './admin/manage-location/manage-location.component';
@@ -26,6 +25,11 @@ import { AppliedPoliciesComponent } from './employee/applied-policies/applied-po
 import { VerifiedAccountsComponent } from './employee/verified-accounts/verified-accounts.component';
 import { CustomerListComponent } from './employee/customer-list/customer-list.component';
 import { VerifiedCustomersComponent } from './employee/verified-customers/verified-customers.component';
+import { CustomerInstallmentComponent } from './agent/customer-installment/customer-installment.component';
+import { KycComponent } from './customer/kyc/kyc.component';
+import { MyDocumentsComponent } from './customer/my-documents/my-documents.component';
+import { TotalCommissionComponent } from './agent/total-commission/total-commission.component';
+import { AgentTransactionComponent } from './agent/agent-transaction/agent-transaction.component';
 const routes: Routes = [
   {
     path: "",
@@ -35,10 +39,7 @@ const routes: Routes = [
     path:"admin-dashboard",
     component:AdminDashboardComponent,
     children:[
-      {
-        path:"add-customer",
-        component:AdminAddCustomerComponent
-      },
+      
       {
         path: "add-employee",
         component: AddEmployeeComponent
@@ -93,6 +94,16 @@ const routes: Routes = [
   {
     path: "customer-dashboard",
     component:CustomerDashboardComponent,
+    children:[
+      {
+        path:"upload-kyc",
+        component: KycComponent
+      },
+      {
+        path: "my-docs",
+        component: MyDocumentsComponent
+      }
+    ]
   },
   {
     path:"user-registration",
@@ -118,6 +129,18 @@ const routes: Routes = [
       {
         path:'sale-policy',
         component: SalePolicyComponent
+      },
+      {
+        path: 'manage-customer-installments',
+        component : CustomerInstallmentComponent
+      },
+      {
+        path: 'show-balance',
+        component: TotalCommissionComponent
+      },
+      {
+        path: 'agent-transaction',
+        component: AgentTransactionComponent
       }
     ]
   },

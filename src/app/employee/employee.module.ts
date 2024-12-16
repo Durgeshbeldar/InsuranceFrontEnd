@@ -15,6 +15,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { VerifiedAccountsComponent } from './verified-accounts/verified-accounts.component';
 import { CustomerListComponent } from './customer-list/customer-list.component';
 import { VerifiedCustomersComponent } from './verified-customers/verified-customers.component';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatButtonModule} from '@angular/material/button';
 @NgModule({
   declarations: [
     EmployeeHeaderComponent,
@@ -34,6 +36,9 @@ import { VerifiedCustomersComponent } from './verified-customers/verified-custom
     MatTableModule,
     MatSortModule,
     MatInputModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatDividerModule,
   ]
 })
 export class EmployeeModule { }

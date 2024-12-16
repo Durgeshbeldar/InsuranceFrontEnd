@@ -1,0 +1,50 @@
+<div class="kyc-upload-container">
+    <h2>KYC Document Upload</h2>
+    <p class="kyc-description">Upload your Aadhar Card, PAN Card, and Selfie Image for verification.</p>
+  
+    <!-- Document Upload Fields -->
+    <div class="form-grid">
+      <!-- Aadhar Card -->
+      <div class="form-group">
+        <label for="aadharCard">Aadhar Card</label>
+        <input type="file" id="aadharCard" (change)="onFileSelect($event, 'Aadhar Card')" accept="image/*" />
+        <button mat-raised-button color="primary" (click)="uploadDocument('Aadhar Card')" [disabled]="!selectedFiles['Aadhar Card']">Upload</button>
+        <span *ngIf="uploadedDocuments['Aadhar Card']" class="success-text">
+          Uploaded! <button mat-button color="accent" (click)="viewDocument(uploadedDocuments['Aadhar Card'])">View</button>
+        </span>
+      </div>
+  
+      <!-- PAN Card -->
+      <div class="form-group">
+        <label for="panCard">PAN Card</label>
+        <input type="file" id="panCard" (change)="onFileSelect($event, 'PAN Card')" accept="image/*" />
+        <button mat-raised-button color="primary" (click)="uploadDocument('PAN Card')" [disabled]="!selectedFiles['PAN Card']">Upload</button>
+        <span *ngIf="uploadedDocuments['PAN Card']" class="success-text">
+          Uploaded! <button mat-button color="accent" (click)="viewDocument(uploadedDocuments['PAN Card'])">View</button>
+        </span>
+      </div>
+  
+      <!-- Selfie Image -->
+      <div class="form-group">
+        <label for="selfie">Selfie Image</label>
+        <input type="file" id="selfie" (change)="onFileSelect($event, 'Selfie Image')" accept="image/*" />
+        <button mat-raised-button color="primary" (click)="uploadDocument('Selfie Image')" [disabled]="!selectedFiles['Selfie Image']">Upload</button>
+        <span *ngIf="uploadedDocuments['Selfie Image']" class="success-text">
+          Uploaded! <button mat-button color="accent" (click)="viewDocument(uploadedDocuments['Selfie Image'])">View</button>
+        </span>
+      </div>
+    </div>
+  
+    <!-- Submit All Documents -->
+    <button mat-raised-button color="primary" class="submit-btn" (click)="submitDocuments()" [disabled]="!allDocumentsUploaded()">Submit Documents</button>
+  
+    <!-- View Document Modal -->
+    <div *ngIf="selectedDocumentPath" class="modal" (click)="closeModal()">
+      <div class="modal-content" (click)="$event.stopPropagation()">
+        <h3>Uploaded Document</h3>
+        <img [src]="selectedDocumentPath" alt="Uploaded Document" />
+        <button mat-raised-button color="warn" (click)="closeModal()">Close</button>
+      </div>
+    </div>
+  </div>
+  

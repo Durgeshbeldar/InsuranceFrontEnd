@@ -1,98 +1,148 @@
 <div class="policies-container">
-    <!-- Header Section -->
-    <div class="header-section">
-      <h2>Applied Policies</h2>
+  <!-- Header Section -->
+  <div class="header-section">
+    <h2>Applied Policy Account List</h2>
+  </div>
+
+  <!-- Policies Table -->
+  <div class="table-wrapper">
+    <table class="policies-table">
+      <thead>
+        <tr>
+          <th>Sr No.</th>
+          <th>Policy No</th>
+          <th>Customer Name</th>
+          <th>KYC Status</th>
+          <th>Agent Name</th>
+          <th>Scheme Name</th>
+          <th>Sum Assured</th>
+          <th>Premium Type</th>
+          <th>Policy Term</th>
+          <th>Premium Amount</th>
+          <th>Installment Amount</th>
+          <th>Applied Date</th>
+          <th>Est. Maturity Date</th>
+          <th>Status</th>
+          <th>Action</th>
+          <th>Details</th>
+          <th>Documents</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let policy of paginatedPolicies; let i = index">
+          <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+          <td>{{ policy.policyNo | slice:0:7 }}</td>
+          <td>{{ policy.customer?.firstName }} {{ policy.customer?.lastName }}</td>
+          <td>
+            <span class="kyc-status">
+              <i class="status-icon fas"
+                [ngClass]="policy.customer?.kycVerified ? 'fa-check-circle green' : 'fa-times-circle red'">
+              </i>
+            </span>
+          </td>
+          <td>{{ policy.agent ? policy.agent.firstName + ' ' + policy.agent.lastName : 'Not Applicable' }}</td>
+          <td>{{ policy.insuranceScheme?.schemeName }}</td>
+          <td>₹{{ policy.sumAssured }}</td>
+          <td>{{ policy.premiumType }}</td>
+          <td>{{ policy.policyTerm }} months</td>
+          <td>₹{{ policy.premiumAmount }}</td>
+          <td>{{ policy.installmentAmount ? '₹' + policy.installmentAmount : 'Not Applicable' }}</td>
+          <td>{{ policy.appliedDate | date: 'dd-MM-yyyy' }}</td>
+          <td>{{ policy.maturityDate | date: 'dd-MM-yyyy' }}</td>
+          <td>
+            <span class="status-pill" [ngClass]="policy.isApproved ? 'approved' : 'pending'">
+              {{ policy.status }}
+            </span>
+          </td>
+          <td>
+            <button class="approve-button" *ngIf="!policy.isApproved" (click)="approvePolicy(policy)">
+              Approve
+            </button>
+          </td>
+          <td>
+            <button class="details-toggle" (click)="togglePolicyDetails(policy)">
+              <i class="fas fa-eye"></i>
+            </button>
+          </td>
+          <td>
+            <button 
+            class="view-documents-button"
+            (click)="viewDocuments(policy)">
+            View Documents
+          </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination -->
+  <div class="pagination-container">
+    <button class="pagination-button" [disabled]="currentPage === 1" (click)="goToPreviousPage()">Previous</button>
+    <span>Page {{ currentPage }} of {{ totalPages }}</span>
+    <button class="pagination-button" [disabled]="currentPage === totalPages" (click)="goToNextPage()">Next</button>
+  </div>
+
+  <!-- Detailed View -->
+  <div *ngIf="selectedPolicy" class="policy-details">
+    <h3>Policy Details</h3>
+    <ul>
+      <li><strong>Policy No:</strong> {{ selectedPolicy.policyNo | slice:0:7 }}</li>
+      <li><strong>Customer Name:</strong> {{ selectedPolicy.customer?.firstName }} {{ selectedPolicy.customer?.lastName
+        }}</li>
+      <li><strong>Agent Name:</strong> {{ selectedPolicy.agent ? selectedPolicy.agent.firstName + ' ' +
+        selectedPolicy.agent.lastName : 'Not Applicable' }}</li>
+      <li><strong>Scheme Name:</strong> {{ selectedPolicy.insuranceScheme?.schemeName }}</li>
+      <li><strong>Sum Assured:</strong> ₹{{ selectedPolicy.sumAssured }}</li>
+      <li><strong>Premium Type:</strong> {{ selectedPolicy.premiumType }}</li>
+      <li><strong>Policy Term:</strong> {{ selectedPolicy.policyTerm }} months</li>
+      <li><strong>Premium Amount:</strong> ₹{{ selectedPolicy.premiumAmount }}</li>
+      <li><strong>Installment Amount:</strong> {{ selectedPolicy.installmentAmount ? '₹' +
+        selectedPolicy.installmentAmount : 'Not Applicable' }}</li>
+      <li><strong>Applied Date:</strong> {{ selectedPolicy.appliedDate | date: 'dd-MM-yyyy' }}</li>
+      <li><strong>Estimated Maturity Date:</strong> {{ selectedPolicy.maturityDate | date: 'dd-MM-yyyy' }}</li>
+      <li><strong>Status:</strong> {{ selectedPolicy.status }}</li>
+    </ul>
+  </div>
+</div>
+
+<div class="modal" *ngIf="isModalOpen">
+  <div class="modal-content">
+    <!-- Close Button -->
+    <span class="close-button" (click)="closeModal()">×</span>
+
+    <!-- Document Display Section -->
+    <div class="document-slider">
+      <!-- Navigation Arrows -->
+      <button class="nav-arrow left-arrow" (click)="previousDocument()">&#8249;</button>
+      <div class="document-frame">
+        <img [src]="uploadedDocuments[currentIndex]?.filePath" alt="Document Preview" />
+      </div>
+      <button class="nav-arrow right-arrow" (click)="nextDocument()">&#8250;</button>
     </div>
-  
-    <!-- Policies Table -->
-    <div class="table-wrapper">
-      <table class="policies-table">
-        <thead>
-          <tr>
-            <th>Sr No.</th>
-            <th>Policy No</th>
-            <th>Customer Name</th>
-            <th>KYC Status</th>
-            <th>Agent Name</th>
-            <th>Scheme Name</th>
-            <th>Sum Assured</th>
-            <th>Premium Type</th>
-            <th>Policy Term</th>
-            <th>Premium Amount</th>
-            <th>Installment Amount</th>
-            <th>Applied Date</th>
-            <th>Est. Maturity Date</th>
-            <th>Status</th>
-            <th>Action</th>
-            <th>Details</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let policy of paginatedPolicies; let i = index">
-            <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
-            <td>{{ policy.policyNo | slice:0:7 }}</td>
-            <td>{{ policy.customer?.firstName }} {{ policy.customer?.lastName }}</td>
-            <td>
-              <span class="kyc-status">
-                <i
-                  class="status-icon fas"
-                  [ngClass]="policy.customer?.kycVerified ? 'fa-check-circle green' : 'fa-times-circle red'">
-                </i>
-              </span>
-            </td>
-            <td>{{ policy.agent ? policy.agent.firstName + ' ' + policy.agent.lastName : 'Not Applicable' }}</td>
-            <td>{{ policy.insuranceScheme?.schemeName }}</td>
-            <td>₹{{ policy.sumAssured }}</td>
-            <td>{{ policy.premiumType }}</td>
-            <td>{{ policy.policyTerm }} months</td>
-            <td>₹{{ policy.premiumAmount }}</td>
-            <td>{{ policy.installmentAmount ? '₹' + policy.installmentAmount : 'Not Applicable' }}</td>
-            <td>{{ policy.appliedDate | date: 'dd-MM-yyyy' }}</td>
-            <td>{{ policy.maturityDate | date: 'dd-MM-yyyy' }}</td>
-            <td>
-              <span class="status-pill" [ngClass]="policy.isApproved ? 'approved' : 'pending'">
-                {{ policy.status }}
-              </span>
-            </td>
-            <td>
-              <button class="approve-button" *ngIf="!policy.isApproved" (click)="approvePolicy(policy)">
-                Approve
-              </button>
-            </td>
-            <td>
-              <button class="details-toggle" (click)="togglePolicyDetails(policy)">
-                <i class="fas fa-eye"></i>
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+
+    <!-- Document Info Section -->
+    <div class="document-info">
+      <h3>{{ uploadedDocuments[currentIndex]?.documentName }}</h3>
+      <div class="document-status">
+        <span *ngIf="uploadedDocuments[currentIndex]?.isVerified" class="status verified">
+          <i class="fas fa-check-circle"></i> Verified
+        </span>
+        <span *ngIf="!uploadedDocuments[currentIndex]?.isVerified" class="status not-verified">
+          <i class="fas fa-times-circle"></i> Not Verified
+        </span>
+      </div>
     </div>
-  
-    <!-- Pagination -->
-    <div class="pagination-container">
-      <button class="pagination-button" [disabled]="currentPage === 1" (click)="goToPreviousPage()">Previous</button>
-      <span>Page {{ currentPage }} of {{ totalPages }}</span>
-      <button class="pagination-button" [disabled]="currentPage === totalPages" (click)="goToNextPage()">Next</button>
-    </div>
-  
-    <!-- Detailed View -->
-    <div *ngIf="selectedPolicy" class="policy-details">
-      <h3>Policy Details</h3>
-      <ul>
-        <li><strong>Policy No:</strong> {{ selectedPolicy.policyNo | slice:0:7 }}</li>
-        <li><strong>Customer Name:</strong> {{ selectedPolicy.customer?.firstName }} {{ selectedPolicy.customer?.lastName }}</li>
-        <li><strong>Agent Name:</strong> {{ selectedPolicy.agent ? selectedPolicy.agent.firstName + ' ' + selectedPolicy.agent.lastName : 'Not Applicable' }}</li>
-        <li><strong>Scheme Name:</strong> {{ selectedPolicy.insuranceScheme?.schemeName }}</li>
-        <li><strong>Sum Assured:</strong> ₹{{ selectedPolicy.sumAssured }}</li>
-        <li><strong>Premium Type:</strong> {{ selectedPolicy.premiumType }}</li>
-        <li><strong>Policy Term:</strong> {{ selectedPolicy.policyTerm }} months</li>
-        <li><strong>Premium Amount:</strong> ₹{{ selectedPolicy.premiumAmount }}</li>
-        <li><strong>Installment Amount:</strong> {{ selectedPolicy.installmentAmount ? '₹' + selectedPolicy.installmentAmount : 'Not Applicable' }}</li>
-        <li><strong>Applied Date:</strong> {{ selectedPolicy.appliedDate | date: 'dd-MM-yyyy' }}</li>
-        <li><strong>Estimated Maturity Date:</strong> {{ selectedPolicy.maturityDate | date: 'dd-MM-yyyy' }}</li>
-        <li><strong>Status:</strong> {{ selectedPolicy.status }}</li>
-      </ul>
+
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+      <button class="verify-button" (click)="verifyDocument(uploadedDocuments[currentIndex])">
+        Verify
+      </button>
+      <button class="reject-button" (click)="rejectDocument(uploadedDocuments[currentIndex])">
+        Reject
+      </button>
     </div>
   </div>
-  
+</div>
+

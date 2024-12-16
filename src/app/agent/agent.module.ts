@@ -16,6 +16,10 @@ import { ShowCustomersComponent } from './show-customers/show-customers.componen
 import { SalePolicyComponent } from './sale-policy/sale-policy.component';
 import { FormsModule } from '@angular/forms';
 import { MatSliderModule } from '@angular/material/slider';
+import { CustomerInstallmentComponent } from './customer-installment/customer-installment.component';
+import { TotalCommissionComponent } from './total-commission/total-commission.component';
+import { AgentTransactionComponent } from './agent-transaction/agent-transaction.component';
+
 @NgModule({
   declarations: [
     AgentDashboardComponent,
@@ -23,7 +27,10 @@ import { MatSliderModule } from '@angular/material/slider';
     AgentSidebarComponent,
     AddCustomerComponent,
     ShowCustomersComponent,
-    SalePolicyComponent
+    SalePolicyComponent,
+    CustomerInstallmentComponent,
+    TotalCommissionComponent,
+    AgentTransactionComponent
   ],
   imports: [
     CommonModule,

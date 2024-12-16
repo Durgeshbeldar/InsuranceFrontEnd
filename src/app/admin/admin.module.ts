@@ -5,7 +5,6 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { AdminHeaderComponent } from './admin-header/admin-header.component';
 import { MatIconModule } from '@angular/material/icon';
 import { CardsComponent } from './cards/cards.component';
-import { AddCustomerComponent } from './add-customer/add-customer.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -25,7 +24,6 @@ import { ManageInsuranceModule } from './manage-insurance/manage-insurance.modul
     AdminDashboardComponent,
     AdminHeaderComponent,
     CardsComponent,
-    AddCustomerComponent,
     AddEmployeeComponent,
     AddAgentComponent,
     ManageLocationComponent,

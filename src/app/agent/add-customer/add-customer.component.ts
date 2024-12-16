@@ -113,7 +113,7 @@ export class AddCustomerComponent {
         lastName: this.customerForm.get('lastName')?.value,
         dateOfBirth: this.customerForm.get('dateOfBirth')?.value,
         phoneNumber: this.customerForm.get('phoneNumber')?.value,
-        gender: this.customerForm.get('gender')?.value ? 'Male' : 'Female',
+        gender: this.customerForm.get('gender')?.value ? 'Male' : 'Female'
         // agentId :agentUserId
       };
       console.log('Payload being sent:', formData);

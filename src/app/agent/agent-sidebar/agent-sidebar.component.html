@@ -11,7 +11,7 @@
     <!-- Menu Items -->
     <ul class="sidebar-menu">
       <li class="menu-item active">
-        <a routerLink="/agent-dashboard" routerLinkActive="active">
+        <a  routerLink="/agent-dashboard" routerLinkActive="active">
           <span class="icon">🏠</span>
           <span class="label">Agent Dashboard</span>
         </a>
@@ -31,19 +31,25 @@
           <span class="label">All Customer List</span>
         </a>
       </li>
+      <li class="menu-item">
+        <a routerLink="manage-customer-installments" routerLinkActive="active">
+          <span class="icon">💸</span>
+          <span class="label">Pay Premium</span>
+        </a>
+      </li>
     </ul>
   
     <div class="sidebar-section-title">Manage Insurance Policies</div>
     <ul class="sidebar-menu">
       <li class="menu-item">
         <a routerLink="sale-policy" routerLinkActive="active">
-          <span class="icon">📜</span>
+          <span class="icon">🛍️</span>
           <span class="label">Sale Insurance Policy</span>
         </a>
       </li>
       <li class="menu-item">
         <a href="#">
-          <span class="icon">📈</span>
+          <span class="icon">💼</span>
           <span class="label">Manage Sold Policies</span>
         </a>
       </li>
@@ -51,21 +57,15 @@
     <div class="sidebar-section-title">Manage Wallet</div>
     <ul class="sidebar-menu">
       <li class="menu-item">
-        <a>
-          <span class="icon">💳</span>
-          <span class="label">Wallet Balance</span>
-        </a>
-      </li>
-      <li class="menu-item">
-        <a href="#">
-          <span class="icon">💵</span>
-          <span class="label">Withdraw Money</span>
-        </a>
-      </li>
-      <li class="menu-item">
-        <a href="#">
+        <a routerLink="show-balance" routerLinkActive="active">
           <span class="icon">💰</span>
-          <span class="label">Total Commission Earned</span>
+          <span class="label">Manage Wallet</span>
+        </a>
+      </li>
+      <li class="menu-item">
+        <a routerLink="agent-transaction" routerLinkActive="active">
+          <span class="icon">🏦</span>
+          <span class="label">My Transaction</span>
         </a>
       </li>
     </ul>

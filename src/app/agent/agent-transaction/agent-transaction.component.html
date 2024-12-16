@@ -1,0 +1,74 @@
+
+
+<div class="transaction-card-container">
+    <div class="transaction-card">
+      <h2>TRANSACTION TABLE</h2>
+      <div class="transaction-card-icon">
+        <i class="fas fa-file-invoice-dollar"></i> <!-- FontAwesome icon -->
+      </div>
+    </div>
+</div>
+
+
+<div class="transaction-container">
+   
+    <!-- Top Filters -->
+    <div class="table-controls">
+      <div class="input-container">
+        <input type="text" placeholder="🔍 Search for Transactions..." />
+      </div>
+      <div class="dropdown-container">
+  <select>
+    <option value="" disabled selected>Select Option</option>
+    <option value="1">Show 10</option>
+    <option value="2">Show 25</option>
+    <option value="3">Show 50</option>
+  </select>
+  <i class="icon fas fa-chevron-down"></i> <!-- Using FontAwesome icon here -->
+</div>
+    </div>
+  
+    <!-- Table -->
+    <div class="table-wrapper">
+      <table class="transaction-table">
+        <thead>
+          <tr>
+            <th>Sr. No.</th>
+            <th>Policy No</th>
+            <th>Installment ID</th>
+            <th>Type</th>
+            <th>Amount</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>A1B2C3D</td>
+            <td>XYZ123</td>
+            <td>Payment</td>
+            <td>₹5000</td>
+            <td class="status-success">Success</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>H5G6F7H</td>
+            <td>MNX348</td>
+            <td>UPI</td>
+            <td>₹2000</td>
+            <td class="status-failed">Failed</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <!-- Pagination -->
+    <div class="pagination-container">
+      <button class="pagination-button" disabled>Previous</button>
+      <button class="page-number-button">1</button>
+      <button class="page-number-button">2</button>
+      <button class="page-number-button active">3</button>
+      <button class="pagination-button">Next</button>
+    </div>
+  </div>
+  

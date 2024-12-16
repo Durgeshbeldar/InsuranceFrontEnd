@@ -10,9 +10,30 @@ export class InsuranceService {
   policyUrl = 'https://localhost:7191/api/PolicyAccount';
   schemeByPlanUrl = 'https://localhost:7191/Plan/'
   policyStatusUrl = 'https://localhost:7191/Status';
+  installmentUrl = 'https://localhost:7191/api/Installment/bulk-add';
+  getInstallmentByPolicyIdUrl = 'https://localhost:7191/api/Installment/PolicyAccount/';
+  updateInstallmentUrl = 'https://localhost:7191/api/Installment';
+
+
   constructor(private http: HttpClient) { }
   
+  addInstallmentScheduled(data:any){
+    return this.http.post(this.installmentUrl, data);
+  }
+  updatePolicyAccount(data:any){
+    return this.http.put(this.policyUrl, data);
+  }
 
+  updateInstallment(data :any){
+    return this.http.put(this.updateInstallmentUrl, data);
+  }
+
+  getInstallmentsByPolicyId(policyId : any){
+    return this.http.get(this.getInstallmentByPolicyIdUrl+policyId);
+  }
+  getPolicyAccountsByCustomerId(customerId : any){
+    return this.http.get(this.policyUrl+'/Customer/'+customerId);
+  }
   // Get Policies 
   getPolicyAccounts(){
     return this.http.get(this.policyUrl);

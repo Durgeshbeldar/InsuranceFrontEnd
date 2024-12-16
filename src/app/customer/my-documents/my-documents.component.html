@@ -1,0 +1,37 @@
+<div class="documents-container">
+    <h2 class="header">My Documents</h2>
+  
+    <!-- Documents Table -->
+    <div class="table-wrapper">
+      <table class="documents-table">
+        <thead>
+          <tr>
+            <th>Sr. No.</th>
+            <th>Document Name</th>
+            <th>Status</th>
+            <th>Message</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let document of documents; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ document.documentName }}</td>
+            <td>
+                <span class="status-icon" [ngClass]="document.isVerified ? 'verified' : 'not-verified'">
+                  <mat-icon *ngIf="document.isVerified">check_circle</mat-icon>
+                  <mat-icon *ngIf="!document.isVerified">cancel</mat-icon>
+                  {{ document.isVerified ? 'Verified' : 'Not Verified' }}
+                </span>
+              </td>
+            <td>{{document.message}}</td>
+            <td>
+              <button class="view-button" (click)="viewDocument(document.filePath)">View</button>
+             
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

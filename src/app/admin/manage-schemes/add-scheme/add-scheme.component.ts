@@ -88,8 +88,12 @@ export class AddSchemeComponent {
         next: () => {
           alert('Insurance Scheme Added Successfully');
           this.schemeForm.reset();
+          
         },
-        error: (err) => console.error('Error adding scheme:', err)
+        error: (err) =>{
+          alert("Error while adding scheme OR the scheme name is same!");  // Handle the error appropriately  // Example: Display an error message to the user
+           console.error('Error adding scheme:', err)
+          }
       });
     } else {
       console.warn('Form is invalid. Please fill out all fields correctly.');
