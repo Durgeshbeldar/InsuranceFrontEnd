@@ -1,0 +1,80 @@
+<div class="installment-container">
+    <!-- Header -->
+    <div class="header-section">
+        <h2>Installment Schedule</h2>
+    </div>
+
+    <!-- Customer and Policy Selection -->
+    <div class="form-container">
+        <div class="form-grid">
+            <!-- Policy Dropdown -->
+            <div class="form-group">
+                <label for="policy">Select Policy</label>
+                <div class="custom-dropdown">
+                    <select id="policy" formControlName="policyNo" (change)="onPolicyChange($event)">
+                        <option value="" disabled selected>Select Policy</option>
+                        <option *ngFor="let policy of policies" [value]="policy.policyNo">
+                            {{ policy.insuranceScheme.schemeName }}
+                        </option>
+                    </select>
+                    <div class="dropdown-icon"></div>
+                </div>
+                <div class="error-message"
+                    *ngIf="policyForm.get('policyNo')?.touched && policyForm.get('policyNo')?.invalid">
+                    Policy is required.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="installment-container">
+    <!-- Policy Information -->
+    <div *ngIf="selectedPolicy" class="policy-info">
+        <h3>Policy Information</h3>
+        <p><strong>Policy No:</strong> {{selectedPolicy?.policyNo | slice:0:7 }}</p>
+        <p><strong>Customer Name:</strong> {{ selectedPolicy.customer?.firstName }} {{ selectedPolicy.customer?.lastName
+            }}</p>
+        <p><strong>Sum Assured:</strong> ₹{{ selectedPolicy.sumAssured }}</p>
+        <p><strong>Policy Term:</strong> {{ selectedPolicy.policyTerm }} Months</p>
+        <p><strong>Total Amount Paid:</strong> {{ selectedPolicy.totalPaidAmount }}</p>
+        <p><strong>Status:</strong> {{ selectedPolicy.status }}</p>
+
+    </div>
+
+    <!-- Installment Table -->
+    <div *ngIf="showInstallmentsTable" class="installments-table">
+        <h3>Installment Schedule</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Sr No.</th>
+                    <th>Due Date</th>
+                    <th>Payment Date</th>
+                    <th>Amount Due</th>
+                    <th>Payment Method</th>
+                    <th>Status</th>
+                    <th>Pay Premium/EMI</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let installment of installments; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ installment.dueDate | date: 'dd-MM-yyyy' }}</td>
+                    <td>{{ installment.paymentDate ? (installment.paymentDate | date: 'dd-MM-yyyy') : 'Not Paid' }}</td>
+                    <td>₹{{ installment.amountDue }}</td>
+                    <td>{{ installment.paymentMethod ? installment.paymentMethod : 'N/A' }}</td>
+                    <td [ngClass]="installment.status === 'Paid' ? 'paid' : 'unpaid'">{{ installment.status }}</td>
+                    <td> <button mat-raised-button color="primary" [disabled]="!canPayInstallment(i)"
+                            (click)="payInstallment(installment)">
+                            {{ installment.status === 'Paid' ? 'Already Paid' : 'Pay Amount' }}
+                        </button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="isLoading" class="loading-spinner">
+        <p>Loading...</p>
+    </div>
+</div>

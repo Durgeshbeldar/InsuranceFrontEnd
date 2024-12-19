@@ -4,13 +4,12 @@ import { UserService } from 'src/app/services/user.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {PaymentService} from 'src/app/services/payment.service';
 @Component({
-  selector: 'app-customer-installment',
-  templateUrl: './customer-installment.component.html',
-  styleUrls: ['./customer-installment.component.css']
+  selector: 'app-pay-premium',
+  templateUrl: './pay-premium.component.html',
+  styleUrls: ['./pay-premium.component.css']
 })
-export class CustomerInstallmentComponent {
-
-  customers: any[] = [];
+export class PayPremiumComponent {
+customers: any[] = [];
   policies: any[] = [];
   installments: any[] = [];
   selectedCustomer: any = null;
@@ -28,6 +27,7 @@ export class CustomerInstallmentComponent {
     });
 
     this.loadCustomers();
+    this.loadPolicies();
   }
 
 
@@ -49,11 +49,11 @@ export class CustomerInstallmentComponent {
 
   // When customer is selected, fetch their policies
 
-  onCustomerChange(event: any) {
-    const customerId = event.target.value;
+  loadPolicies() {
+    const customerId = localStorage.getItem('userId');
     this.policies = [];
-    this.policyForm.patchValue({ customerId }); // Update form value
-    this.showInstallmentsTable = false; // Reset table view
+    this.policyForm.patchValue({ customerId }); 
+    this.showInstallmentsTable = false; 
 
     this.insuranceService.getPolicyAccountsByCustomerId(customerId).subscribe({
       next: (response: any) => {
@@ -84,19 +84,6 @@ export class CustomerInstallmentComponent {
     return previousInstallment?.status === 'Paid' && this.installments[index]?.status !== 'Paid';
   }
 
-  // payInstallment(installment: any) {
-  //   console.log(installment)
-  //   const amount = installment.amountDue;
-  //   const customerName = this.selectedPolicy.customer.customerName;
-  //   this.paymentService.makePayment(amount, customerName).subscribe({
-  //     next: (response:any) => {
-  //       installment.status = 'Paid';
-  //       console.log(response);
-  //       alert('Installment paid successfully!');
-  //     },
-  //     error: (err :any)  => console.error('Error making payment:', err)
-  //   })
-  // }
 
   payInstallment(installment: any) {
     console.log(installment);

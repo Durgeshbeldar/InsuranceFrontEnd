@@ -45,7 +45,6 @@ export class TotalCommissionComponent {
   });
 
   withdrawRequest() {
-   
     const payload = {
       agentId: this.agent.agentId,
       amount: this.withdrawForm.get('withdrawAmount')?.value,
@@ -56,12 +55,21 @@ export class TotalCommissionComponent {
     this.paymentService.addWithdrawalRequest(payload).subscribe({
       next: () => {
         alert('Withdrawal Request Sent Successfully!');
+        this.updateAgent(this.withdrawForm.get('withdrawAmount')?.value);
         this.withdrawForm.reset();
       },
       error: (err: any) => {
         this.errorMessage = 'Error requesting withdrawal!';
       }
     })
+  }
+
+  updateAgent(amount: any) {
+      this.agent.walletBalance -= amount;
+      this.userService.updateAgent(this.agent).subscribe({
+        next: () => alert('Wallet Balance Updated Successfully'),
+        error: (err) => console.error('Error updating agent wallet balance:', err)
+      });
   }
 
 
@@ -94,6 +102,4 @@ export class TotalCommissionComponent {
       }
     }, duration);
   }
-
-
 }

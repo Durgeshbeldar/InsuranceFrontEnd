@@ -28,6 +28,10 @@ export class InsuranceService {
     return this.http.put(this.updateInstallmentUrl, data);
   }
 
+  getInsuranceSchemeById(schemeId:any){
+      return this.http.get(`${this.schemeUrl}/${schemeId}`);
+  }
+
   getInstallmentsByPolicyId(policyId : any){
     return this.http.get(this.getInstallmentByPolicyIdUrl+policyId);
   }

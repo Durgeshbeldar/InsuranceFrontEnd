@@ -5,25 +5,24 @@
       <span class="brand-name" routerLink="customer-dashboard" routerLink="active">Ds Insurance LTD</span>
     </div>
     <div class="menu-items">
-      <a href="#" class="menu-link active">My Transaction</a>
-      <a href="#" class="menu-link">Priority</a>
-      <a href="#" class="menu-link">About Us</a>
-      <a href="#" class="menu-link">Support</a>
+      <a routerLink="customer-transaction" routerLinkActive="active" class="menu-link active">My Transaction</a>
+      <a  class="menu-link">Priority</a>
+      <a  class="menu-link">About Us</a>
+      <a routerLink="support" routerLinkActive="active" class="menu-link">Support</a>
     </div>
     <div class="header-right">
       <a  class="icon-link"><i class="fas fa-bell"></i><span class="notification-badge">3</span></a>
-      <button class="login-button"><mat-icon>logout</mat-icon>
+      <button (click)="logout()" class="login-button"><mat-icon>logout</mat-icon>
         <span>Log Out</span></button>
     </div>
   </div>
 
   <div class="header-bottom">
     <a routerLink="my-docs" routerLinkActive="active" class="bottom-link">My Documents</a>
-    <a href="#" class="bottom-link">Explore Products</a>
-    <a routerLink="upload-kyc" routerLinkActive="active" class="bottom-link">Upload Kyc Documents</a>
-    <a href="#" class="bottom-link">Pay Premium</a>
-   
-    <a class="bottom-link">Purchased Insurance Policies</a>
-    <a class="bottom-link highlight">Buy New Insurance Policy</a>
+    <a routerLink="my-policies" routerLinkActive="active" class="bottom-link">My Policies</a>
+    <a routerLink="upload-kyc" routerLinkActive="active" class="bottom-link">My KYC </a>
+    <a routerLink="pay-premium" routerLinkActive="active" class="bottom-link">Pay Premium</a>
+    <a class="bottom-link">Explore Insurance Policies</a>
+    <a routerLink="buy-policy" class="bottom-link highlight">Buy New Insurance Policy</a>
   </div>
 </div>

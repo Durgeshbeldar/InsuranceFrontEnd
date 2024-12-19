@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FileService } from 'src/app/services/file.service';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-kyc',
   templateUrl: './kyc.component.html',
@@ -8,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class KycComponent {
 
-
+  
  
   selectedFiles: { [key: string]: File | null } = {
     'Aadhar Card': null,
@@ -25,8 +26,22 @@ export class KycComponent {
   documents: any[] = []; // List of document objects to send to API
   selectedDocumentPath: string | null = null; // Path for viewing documents
   agent : any;
-  constructor(private fileService: FileService, private router : Router) 
+  isKycVerified : any;
+  customer : any;
+  constructor(private fileService: FileService, private router : Router,private userService: UserService) 
   {
+  }
+  ngOnInit(){
+    this.getCustomer();
+  }
+
+  getCustomer(){
+    const customerId = localStorage.getItem('userId');
+    this.userService.getCustomerById(customerId).subscribe((response: any) => {
+      this.customer = response.data;
+      console.log(this.customer);
+      this.isKycVerified = response.data.kycVerified;
+    });
   }
 
   // Handle File Selection
@@ -69,7 +84,7 @@ export class KycComponent {
     this.fileService.uploadDocuments(this.documents).subscribe({
       next: () => {
         alert('All documents uploaded successfully!')
-        this.router.navigateByUrl('customer-dashboard');
+        this.router.navigateByUrl('my-docs');
       },
       error: (err) => console.error('Error submitting documents:', err)
     });

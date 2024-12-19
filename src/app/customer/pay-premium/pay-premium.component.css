@@ -1,0 +1,342 @@
+.installment-container {
+    width: 90%;
+    margin: 20px auto;
+    padding: 20px;
+    background: #f3f3f3;
+    border-radius: 12px;
+  }
+  
+  .form-grid {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .form-group {
+    width: 45%;
+  }
+  
+  .form-group select {
+    width: 100%;
+    height: 40px !important;
+    border-radius: 8px;
+  }
+  
+  .policy-info {
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  }
+  
+  .installments-table table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .installments-table th, 
+  .installments-table td {
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+  }
+  
+  .installments-table th {
+    background-color: #0a0a42;
+    color: white;
+  }
+  
+  .paid {
+    color: green;
+    font-weight: bold;
+  }
+  
+  .unpaid {
+    color: rgb(151, 2, 2);
+    font-weight: 600;
+
+  }
+  
+  .loading-spinner p {
+    text-align: center;
+  }
+
+  /* Container Styles */
+.customers-container {
+    background: #0a1128;
+    border-radius: 12px;
+    width: 90%;
+    margin: 50px auto;
+    padding: 20px;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Header */
+  .header-section {
+    background: #ffffff;
+    padding: 5px 20px;
+    border-radius: 12px;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .header-section h2 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #060924;
+  }
+  
+  /* Table Wrapper */
+  .table-wrapper {
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .customers-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.9rem;
+  }
+  
+  .customers-table thead tr {
+    background: #f8f9fa;
+    color: #38393a;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+  
+  .customers-table th,
+  .customers-table td {
+    padding: 12px;
+    border-bottom: 1px solid #eaeaea;
+  }
+  
+  .customers-table tbody tr:hover {
+    background: rgba(0, 0, 0, 0.03);
+    transition: background 0.3s ease-in-out;
+  }
+  
+  /* KYC Status */
+  .kyc-status {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .status-icon {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .green {
+    color: #27ae60;
+  }
+  
+  .red {
+    color: #e74c3c;
+  }
+  
+  .status-icon:hover {
+    transform: scale(1.2);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Sale Button */
+  .sale-button {
+    background: #121d4c;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .sale-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 4px 10px rgba(64, 135, 210, 0.4);
+  }
+  
+  /* Details Button */
+  .details-toggle {
+    background: #e0e0e0;
+    color: #333;
+    border: none;
+    border-radius: 50%;
+    padding: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .details-toggle:hover {
+    transform: scale(1.2);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Customer Details Section */
+  .customer-details {
+    margin-top: 20px;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .customer-details h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #1f2937;
+  }
+  
+  .customer-details ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .customer-details li {
+    font-size: 1rem;
+    color: #6b7280;
+    margin-bottom: 8px;
+  }
+  
+  /* Pagination */
+  .pagination-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .pagination-button {
+    background: #4084cc;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .pagination-button:disabled {
+    background: #d6d6d6;
+    cursor: not-allowed;
+  }
+  
+  .pagination-button:hover:not(:disabled) {
+    transform: scale(1.05);
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  
+  .mat-mdc-raised-button.mat-primary {
+    --mdc-protected-button-container-color: #0c1a44;
+    --mdc-protected-button-label-text-color: #fff;
+}
+
+/* Dropdown  */
+/* Dropdown Wrapper */
+.form-group {
+    width: 45%;
+    position: relative;
+    margin-bottom: 15px;
+  }
+  
+  label {
+    font-size: 0.95rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #0a1128;
+  }
+  
+  /* Custom Dropdown Styling */
+  .custom-dropdown {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background-color: #f9f9f9;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  
+  .custom-dropdown:hover {
+    border-color: #3a8efb;
+    box-shadow: 0 4px 8px rgba(58, 142, 251, 0.3);
+  }
+  
+  .custom-dropdown select {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 1rem;
+    border: none;
+    outline: none;
+    background: none;
+    appearance: none;
+    color: #333333;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  
+  .custom-dropdown .dropdown-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: url('https://cdn-icons-png.flaticon.com/512/25/259.png') no-repeat center center / contain;
+    width: 24px;
+    height: 24px;
+    pointer-events: none;
+  }
+  
+  /* Dropdown Option Styling */
+  .custom-dropdown select option {
+    padding: 10px;
+    font-size: 1rem;
+    color: #333333;
+    font-weight: 600;
+  }
+  
+  /* Error Message Styling */
+  .error-message {
+    font-size: 0.85rem;
+    color: #e74c3c;
+    margin-top: 5px;
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  /* Dropdown Hover State */
+  .custom-dropdown:hover .dropdown-icon {
+    transform: translateY(-50%) scale(1.2);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  /* Smooth Animation */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }

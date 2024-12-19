@@ -6,18 +6,32 @@ import { MatIconModule } from '@angular/material/icon';
 import { KycComponent } from './kyc/kyc.component';
 import { RouterModule } from '@angular/router';
 import { MyDocumentsComponent } from './my-documents/my-documents.component';
-
+import { CustomerTransactionComponent } from './customer-transaction/customer-transaction.component';
+import { MyPoliciesComponent } from './my-policies/my-policies.component';
+import { PayPremiumComponent } from './pay-premium/pay-premium.component';
+import { MatButtonModule } from '@angular/material/button';
+import { BuyPolicyComponent } from './buy-policy/buy-policy.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { SupportComponent } from './support/support.component';
 @NgModule({
   declarations: [
     CustomerHeaderComponent,
     CustomerDashboardComponent,
     KycComponent,
-    MyDocumentsComponent
+    MyDocumentsComponent,
+    CustomerTransactionComponent,
+    MyPoliciesComponent,
+    PayPremiumComponent,
+    BuyPolicyComponent,
+    SupportComponent,
+    
   ],
   imports: [
     CommonModule,
     MatIconModule,
-    RouterModule
+    RouterModule,
+    MatButtonModule,
+    ReactiveFormsModule
   ]
 })
 export class CustomerModule { }

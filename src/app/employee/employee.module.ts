@@ -17,6 +17,8 @@ import { CustomerListComponent } from './customer-list/customer-list.component';
 import { VerifiedCustomersComponent } from './verified-customers/verified-customers.component';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatButtonModule} from '@angular/material/button';
+import { CustomerQueriesComponent } from './customer-queries/customer-queries.component';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     EmployeeHeaderComponent,
@@ -25,7 +27,8 @@ import {MatButtonModule} from '@angular/material/button';
     AppliedPoliciesComponent,
     VerifiedAccountsComponent,
     CustomerListComponent,
-    VerifiedCustomersComponent
+    VerifiedCustomersComponent,
+    CustomerQueriesComponent
   ],
   imports: [
     CommonModule,
@@ -39,6 +42,7 @@ import {MatButtonModule} from '@angular/material/button';
     MatButtonModule,
     MatFormFieldModule,
     MatDividerModule,
+    FormsModule
   ]
 })
 export class EmployeeModule { }

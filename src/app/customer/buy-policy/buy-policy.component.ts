@@ -2,15 +2,13 @@ import { Component } from '@angular/core';
 import { InsuranceService } from 'src/app/services/insurance.service';
 import { FormControl, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
-import { OnInit } from '@angular/core';
-
 @Component({
-  selector: 'app-sale-policy',
-  templateUrl: './sale-policy.component.html',
-  styleUrls: ['./sale-policy.component.css']
+  selector: 'app-buy-policy',
+  templateUrl: './buy-policy.component.html',
+  styleUrls: ['./buy-policy.component.css']
 })
-export class SalePolicyComponent {
-  customers: any[] = [];
+export class BuyPolicyComponent {
+
   plans: any[] = [];
   schemes: any[] = [];
   selectedScheme: any = null;
@@ -19,8 +17,8 @@ export class SalePolicyComponent {
   constructor(private insuranceService: InsuranceService, private userService: UserService) {}
 
   ngOnInit(): void {
-    this.getAgentId();
-    this.loadCustomers();
+  
+
     this.loadPlans();
 
     this.policyForm.get('premiumAmount')?.valueChanges.subscribe(() => {
@@ -34,11 +32,9 @@ export class SalePolicyComponent {
     });
   }
   
-  getAgentId(){
-    this.agentId = localStorage.getItem('userId');
-  }
+ 
   policyForm = new FormGroup({
-    customerId: new FormControl('', Validators.required),
+    customerId: new FormControl(),
     planId: new FormControl('', Validators.required),
     schemeId: new FormControl('', Validators.required),
     sumAssured: new FormControl({value : '', disabled:true}),
@@ -49,11 +45,7 @@ export class SalePolicyComponent {
   });
 
   // Load Customers
-  loadCustomers() {
-    this.userService.getCustomers().subscribe((response: any) => {
-      this.customers = response.data;
-    });
-  }
+
 
   // Load Plans
   loadPlans() {
@@ -194,11 +186,10 @@ export class SalePolicyComponent {
     const term = this.policyForm.get('policyTerm')?.value;
     const date = this.calculateDate(term);
     const payload = {
-      customerId: this.policyForm.get('customerId')?.value,
+      customerId: localStorage.getItem('userId'),
       schemeId: this.policyForm.get('schemeId')?.value,
       sumAssured: this.policyForm.get('sumAssured')?.value,
       premiumType: this.policyForm.get('premiumType')?.value,
-      agentId: this.agentId,
       policyTerm: this.policyForm.get('policyTerm')?.value,
       premiumAmount: this.policyForm.get('premiumAmount')?.value,
       installmentAmount: this.policyForm.get('installmentAmount')?.value,

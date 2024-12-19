@@ -1,0 +1,121 @@
+<div class="form-container">
+    <form [formGroup]="policyForm" (ngSubmit)="createPolicyAccount()">
+      <!-- Form Header -->
+      <div class="form-header">
+        <span class="form-header-icon">📄</span>
+        CREATE POLICY ACCOUNT
+      </div>
+  
+      <!-- Grid Layout -->
+      <div class="form-grid">
+        <!-- Customer Selection -->
+      
+  
+        <!-- Plan Selection -->
+        <div class="form-group">
+          <label for="plan">Select Plan</label>
+          <div class="custom-dropdown">
+            <select id="plan" formControlName="planId" (change)="onPlanChange($event)">
+              <option value="" disabled selected>Select Plan</option>
+              <option *ngFor="let plan of plans" [value]="plan.planId">
+                {{ plan.planName }}
+              </option>
+            </select>
+            <mat-icon class="dropdown-icon">expand_more</mat-icon>
+          </div>
+          <div class="error-message" *ngIf="policyForm.get('planId')?.touched && policyForm.get('planId')?.invalid">
+            Plan is required.
+          </div>
+        </div>
+  
+        <!-- Scheme Selection -->
+        <div class="form-group">
+          <label for="scheme">Select Scheme</label>
+          <div class="custom-dropdown">
+            <select id="scheme" formControlName="schemeId" (change)="onSchemeChange($event)">
+              <option value="" disabled selected>Select Scheme</option>
+              <option *ngFor="let scheme of schemes" [value]="scheme.schemeId">
+                {{ scheme.schemeName }}
+              </option>
+            </select>
+            <mat-icon class="dropdown-icon">expand_more</mat-icon>
+          </div>
+          <div class="error-message" *ngIf="policyForm.get('schemeId')?.touched && policyForm.get('schemeId')?.invalid">
+            Scheme is required.
+          </div>
+        </div>
+  
+      
+        <!-- Premium Type -->
+        <div class="form-group">
+          <label for="premiumType">Premium Type</label>
+          <div class="custom-dropdown">
+            <select id="premiumType" formControlName="premiumType" (change)="onPremiumTypeChange()">
+              <option value="" disabled selected>Select Premium Type</option>
+              <option value="Monthly">Monthly</option>
+              <option value="Quarterly">Quarterly</option>
+              <option value="Yearly">Yearly</option>
+            </select>
+            <mat-icon class="dropdown-icon">expand_more</mat-icon>
+          </div>
+          <div class="error-message"
+            *ngIf="policyForm.get('premiumType')?.touched && policyForm.get('premiumType')?.invalid">
+            Premium Type is required.
+          </div>
+        </div>
+  
+        <!-- Policy Term -->
+        <div class="form-group">
+          <label for="policyTerm">Policy Term (Months)</label>
+          <input type="number" id="policyTerm" formControlName="policyTerm" placeholder="Enter Policy Term" (change)="onPremiumAmountChange()" />
+          <div class="error-message"
+            *ngIf="policyForm.get('policyTerm')?.touched && policyForm.get('policyTerm')?.invalid">
+            <span *ngIf="policyForm.get('policyTerm')?.errors?.['required']">Policy Term is required.</span>
+            <span *ngIf="policyForm.get('policyTerm')?.errors?.['invalidPolicyTerm']">
+              {{ policyForm.get('policyTerm')?.errors?.['invalidPolicyTerm'] }}
+            </span>
+          </div>
+        </div>
+  
+  
+      
+        <div class="form-group">
+          <label for="premiumAmount">Investment Amount (₹)</label>
+          <input type="number" id="premiumAmount" formControlName="premiumAmount" placeholder="Enter Premium Amount"(change)="onPremiumAmountChange()" />
+          <div class="error-message"
+            *ngIf="policyForm.get('premiumAmount')?.touched && policyForm.get('premiumAmount')?.invalid">
+            <span *ngIf="policyForm.get('premiumAmount')?.errors?.['required']">Premium Amount is required.</span>
+            <span *ngIf="policyForm.get('premiumAmount')?.errors?.['invalidPremiumAmount']">
+              {{ policyForm.get('premiumAmount')?.errors?.['invalidPremiumAmount'] }}
+            </span>
+          </div>
+        </div>
+  
+        <div class="form-group">
+          <label for="sumAssured">Sum Assured (₹)</label>
+          <input
+            type="number"
+            id="sumAssured"
+            formControlName="sumAssured"
+            placeholder="Calculated Sum Assured"
+            [readonly]="true"
+          />
+        </div>
+        
+        <!-- Installment Amount -->
+        <div class="form-group">
+          <label for="installmentAmount">Installment Amount (₹)</label>
+          <input type="number" id="installmentAmount" formControlName="installmentAmount"
+            placeholder="Calculated EMI/Installment Amount" readonly />
+        </div>
+      </div>
+  
+  
+  
+      <!-- Submit and Cancel Buttons -->
+      <div class="form-actions">
+        <button class="submit-button" type="submit" [disabled]="policyForm.invalid">Create Policy Account</button>
+        <button class="cancel-button" type="button" (click)="onCancel()">Cancel</button>
+      </div>
+    </form>
+  </div>

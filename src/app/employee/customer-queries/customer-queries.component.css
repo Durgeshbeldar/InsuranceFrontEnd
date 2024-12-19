@@ -1,0 +1,855 @@
+/* Full Page Transaction Table Container */
+
+
+
+/* 🔥 Card Wrapper 🔥 */
+.transaction-card-container {
+    width: 94%;
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .transaction-card {
+    width: 100%; 
+    background-color: #ffffff; 
+    border-radius: 4px; 
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1); 
+    padding: 10px 30px; 
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    transition: all 0.3s ease;
+    position: relative;
+  }
+  
+  .transaction-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.15);
+  }
+  
+  
+  .transaction-card h2 {
+    font-size: 1.8rem; 
+    font-weight: 900; 
+    color: #071234; 
+    font-family: 'Poppins', sans-serif; 
+    text-transform: capitalize;
+    transition: color 0.3s ease;
+  }
+  
+  .transaction-card:hover h2 {
+    color: #0d6efd; 
+  }
+  
+  /* 🔥 Icon for the card 🔥 */
+  .transaction-card-icon {
+    width: 50px; 
+    height: 50px; 
+    background-color: #0d6efd; 
+    border-radius: 50%; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15); 
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .transaction-card-icon i {
+    color: #ffffff; 
+    font-size: 1.5rem; 
+  }
+  
+  .transaction-card:hover .transaction-card-icon {
+    background-color: #10b981; 
+    transform: scale(1.1);
+  }
+  
+  
+  
+  @media (max-width: 768px) {
+    .transaction-card {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .transaction-card h2 {
+      font-size: 1.5rem; 
+    }
+  
+    .transaction-card-icon {
+      margin-top: 15px;
+    }
+  }
+  
+  
+  .transaction-container {
+    background: #f4f6fa; /* Subtle background */
+    border-radius: 4px;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+    padding: 20px 25px;
+    margin: 30px auto;
+    width: 90%;
+    animation: fadeIn 0.6s ease-in-out;
+    position: relative;
+  }
+  
+  /* 🕵️ Table Controls (Search + Filter) */
+  .table-controls {
+    display: flex;
+    justify-content: space-between !important;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .input-container {
+    width: 25%;
+    position: relative;
+  }
+  
+  .input-container input {
+    width: 100%;
+    padding: 12px 20px;
+    border-radius: 4px;
+    border: 2px solid #03091d;
+    font-size: 1rem;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .input-container input:focus {
+    outline: 0.5px solid #000000;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .input-container .icon {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    color: #000000;
+  }
+  
+  .date-container {
+    width: 18%;
+    position: relative;
+  }
+  
+  .date-container input {
+    width: 100%;
+    padding: 12px 20px;
+    border-radius: 4px;
+    border: 2px solid #03091d;
+    font-size: 1rem;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .date-container input:focus {
+    outline: 0.5px solid #000000;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .date-container .icon {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    color: #000000;
+  }
+  
+  /* New Date Css  */
+  
+  /* 🌟 Date Container */
+  .date-container {
+  position: relative; 
+  
+  }
+  
+  
+  
+  .date-container input[type="date"]::placeholder {
+  color: #aaa; 
+  }
+  
+  .date-container input[type="date"]:focus {
+  outline: 1px solid #000000; 
+  border-color: #000000; 
+  box-shadow: 0px 4px 10px rgba(0, 123, 255, 0.2); 
+  background-color: #ffffff; 
+  }
+  
+  .date-container input[type="date"]:hover {
+  box-shadow: 0px 4px 10px rgba(0, 123, 255, 0.2); 
+  transform: translateY(-2px); 
+  }
+  
+  .date-container input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none !important; /*  Remove the default calendar icon  */
+  }
+  
+  .date-container input[type="date"].input-error {
+  border-color: #e74c3c; 
+  box-shadow: 0px 4px 10px rgba(231, 76, 60, 0.2); 
+  }
+  
+  /* Custom Calendar Icon */
+  .date-container .icon {
+  position: absolute; 
+  right: -20px; 
+  top: 50%; 
+  transform: translateY(-50%); 
+  font-size: 1.2rem; 
+  color: #363636; 
+  cursor: pointer; 
+  transition: all 0.3s ease; 
+  }
+  
+  .date-container .icon:hover {
+  color: #010101; 
+  transform: translateY(-50%) scale(1.1); 
+  }
+  
+  
+  
+  /*  Error Message */
+  .error-message {
+  font-size: 0.85rem; 
+  color: #e74c3c; 
+  margin-top: 5px; 
+  animation: fadeIn 0.3s ease-in-out; 
+  }
+  
+  @keyframes fadeIn {
+  from {
+    opacity: 0; 
+    transform: translateY(-5px); 
+  }
+  to {
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+  }
+  
+  
+  
+  
+  
+  
+  .dropdown-container {
+    position: relative;
+    width: 20%; 
+  }
+  
+  .dropdown-container select {
+    width: 100%; 
+    padding: 12px 40px 12px 16px; /* Right padding increased for icon space */
+    border-radius: 4px; /* Reduced radius as per your preference */
+    font-size: 1rem;
+    background-color: #ffffff; 
+    border: 2px solid #000000;
+    color: #000000;
+    appearance: none;
+    -webkit-appearance: none; /* Remove default arrow */
+    -moz-appearance: none;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .dropdown-container select:hover {
+    cursor: pointer;
+  
+  }
+  
+  .dropdown-container select:focus {
+  
+    border-color: #000000;
+    outline: 1px solid black;
+    box-shadow: 0px 4px 10px rgba(0, 123, 255, 0.2);
+  }
+  
+  .dropdown-container .icon {
+    position: absolute;
+    right: 16px; 
+    top: 50%; 
+    transform: translateY(-50%);
+    font-size: 1.2rem; 
+    color: #555555;
+    pointer-events: none; 
+    transition: color 0.3s ease;
+  }
+  
+  .dropdown-container select:focus ~ .icon {
+    color: #000000; 
+  }
+  
+  .dropdown-container select:hover ~ .icon {
+    color: #000000;
+  }
+  
+  /* Option Styling */
+  .dropdown-container select option {
+    padding: 10px !important;
+    font-size: 1rem !important;
+    font-weight: 700 !important;
+    color: #272727 !important;
+  }
+  
+  option[selected] {
+    font-weight: bold;
+    color: #101c36; 
+  }
+  
+  
+  /* 🌟 Table Wrapper */
+  .table-wrapper {
+    background: #ffffff;
+    border-radius: 4px;
+    margin-top: 40px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+    overflow: auto;
+    position: relative;
+  }
+  
+  .transaction-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+  
+  .transaction-table th, 
+  .transaction-table td {
+    text-align: center;
+    padding: 15px 10px;
+    white-space: nowrap;
+  }
+  
+  .transaction-table th {
+    background: #071234;
+    color: #ffffff;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  
+  .transaction-table tbody tr:hover {
+    background: rgba(0, 0, 0, 0.03);
+  }
+  
+  .transaction-table tbody td {
+    color: #3d3d3d;
+    font-size: 0.95rem;
+  }
+  
+  
+  
+  /* 🚥 Status Colors */
+  .status-success {
+    color: #10b981;
+    font-weight: bold;
+  }
+  
+  .status-failed {
+    color: #e74c3c;
+    font-weight: bold;
+  }
+  
+  .status-pending {
+    color: #f59e0b;
+    font-weight: bold;
+  }
+  
+  .status-inprogress {
+    color: #3b82f6;
+    font-weight: bold;
+  }
+  
+  /* 📜 Pagination */
+  .pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-top: 20px;
+  }
+  
+  .pagination-button, 
+  .page-number-button {
+    background: #071234;
+    color: #ffffff;
+    border: none;
+    padding: 10px 16px;
+    font-size: 0.9rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .pagination-button:hover, 
+  .page-number-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 4px 10px rgba(64, 135, 210, 0.4);
+  }
+  
+  .pagination-button:disabled {
+    background: #d6d6d6;
+    cursor: not-allowed;
+  }
+  
+  .page-number-button.active {
+    background: #32b910;
+    color: #ffffff;
+  }
+  
+  .page-number-button.disabled {
+    background: #d6d6d6;
+    cursor: not-allowed;
+  }
+  
+  /* 💡 Row Animations */
+  .transaction-table tbody tr {
+    animation: fadeInRow 0.4s ease-in-out;
+  }
+  
+  @keyframes fadeInRow {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* 🌀 Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes highlight {
+    0% {
+      background-color: #fff8dc;
+    }
+    100% {
+      background-color: transparent;
+    }
+  }
+  /* 🎉 Success & Failed Status Styling */
+  .status-success {
+    color: #009623 !important; /* Tailwind-style Green */
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  .status-failed {
+    color: #b3000f !important; /* Bright Red */
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  /* Smooth transition for status change */
+  .table-status {
+    transition: color 0.3s ease-in-out;
+  }
+  
+  
+  /* Buttons for Approve & Reject */
+  .action-btns{
+  display: flex;
+  justify-content: end;
+  margin-right: 20px;
+  gap: 10px;
+  }
+  .approve-button, 
+  .reject-button {
+  background: #011431;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  }
+  
+  .approve-button:hover {
+  background: #1b8900;
+  }
+  
+  .reject-button {
+  background: #9d1000;
+  }
+  
+  .reject-button:hover {
+  background: #c0392b;
+  }
+  
+  .approve-button:disabled, 
+  .reject-button:disabled {
+  background: #d6d6d6;
+  cursor: not-allowed;
+  }
+  
+  /* 🔍 Search Icon Styling */
+  .input-container .icon {
+  color: #6c757d;
+  }
+  
+  .input-container input:focus {
+  border-color: #000000;
+  outline: none;
+  /* box-shadow: 0 0 4px #000000; */
+  }
+  
+
+  /* Card Css  */
+
+  /* 🔘 View Button */
+.view-button {
+    background-color: #071234;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .view-button:hover {
+    background-color: #0d6efd;
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* 📝 Policy Details Card */
+ /* 🔘 View Button */
+.view-button {
+    background-color: #071234;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .view-button:hover {
+    background-color: #0d6efd;
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* 📜 Policy Details Section */
+  .policy-details-container {
+    width: 90%;
+    margin : 40px auto;
+    animation: slideDown 0.5s ease-in-out;
+  }
+  
+  .policy-details-card {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
+    padding: 20px 25px;
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  .policy-details-card h2 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: #071234;
+  }
+  
+  .details-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .details-list li {
+    font-size: 1rem;
+    color: #555555;
+    margin-bottom: 10px;
+  }
+  
+  .details-list strong {
+    color: #333333;
+  }
+  
+  /* 🎉 Claim Button */
+  .claim-button {
+    background-color: #32b910;
+    color: #ffffff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .claim-button:disabled {
+    background-color: #b2b2b2;
+    cursor: not-allowed;
+  }
+  
+  .claim-button:hover:not(:disabled) {
+    background-color: #28a745;
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* 🎉 Animations */
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  
+ 
+  
+  .table-wrapper::-webkit-scrollbar {
+    height: 6px; /* Height for horizontal scrollbar */
+  }
+  
+  .table-wrapper::-webkit-scrollbar-track {
+    background: #f3f3f3; /* Light background for the track */
+    border-radius: 8px;
+  }
+  
+  .table-wrapper::-webkit-scrollbar-thumb {
+    background-color: #041734; /* Scrollbar thumb color (blue shade) */
+    border-radius: 6px; /* Smooth round edges */
+    transition: background-color 0.3s ease-in-out; /* Smooth transition */
+  }
+  
+  .table-wrapper::-webkit-scrollbar-thumb:hover {
+    background-color: #071234; /* Darker blue on hover */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25); /* Slight shadow on hover */
+  }
+  
+  .table-wrapper::-webkit-scrollbar-thumb:active {
+    background-color: #02132c; /* Color change on click/drag */
+  }
+  
+  /* 🌟 Custom Scrollbar for Vertical Scroll */
+  .table-wrapper::-webkit-scrollbar {
+    width: 8px; 
+  }
+  
+  .table-wrapper::-webkit-scrollbar-track {
+    background: #f3f3f3; 
+    border-radius: 8px;
+  }
+  
+  .table-wrapper::-webkit-scrollbar-thumb {
+    background-color: #031b3f; 
+    border-radius: 6px; 
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .table-wrapper::-webkit-scrollbar-thumb:hover {
+    background-color: #071234; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25); 
+  }
+  
+  .table-wrapper::-webkit-scrollbar-thumb:active {
+    background-color: #001739; 
+  }
+
+  .response-button,
+.close-button {
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-right: 5px;
+}
+
+.response-button {
+  background-color: #0d6efd;
+  color: #ffffff;
+}
+
+.response-button:hover {
+  background-color: #0b5ed7;
+}
+
+.response-button:disabled {
+  background-color: #b6c1d2;
+  cursor: not-allowed;
+}
+
+.close-button {
+  background-color: #e63946;
+  color: #ffffff;
+}
+
+.close-button:hover {
+  background-color: #d62839;
+}
+
+.close-button:disabled {
+  background-color: #f4cccc;
+  cursor: not-allowed;
+}
+
+/* Response Section Container */
+.response-section-container {
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  /* Section Header */
+  .response-section-header h3 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #071234;
+    text-transform: uppercase;
+  }
+  
+  /* Details Card */
+  .response-details-card {
+    background-color: #f9f9f9;
+    border-radius: 4px;
+    padding: 15px 25px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
+  
+  .details-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  .details-row p {
+    font-size: 1rem;
+    color: #333333;
+    margin: 0;
+  }
+  
+  .details-row p strong {
+    color: #071234;
+  }
+  
+  /* Response Input Section */
+  .response-input-section {
+    margin-bottom: 20px;
+  }
+  
+  .response-input-section label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #071234;
+  }
+  
+  .response-input-section textarea {
+    width: 94%;
+    height: 100px;
+    padding: 10px;
+    border: 2px solid #000000;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  }
+  
+  .response-input-section textarea:focus {
+    border-color:2px solid #000000;
+    box-shadow: 0px 4px 8px rgba(13, 110, 253, 0.2);
+    outline: none;
+  }
+  
+  /* Action Buttons */
+  .response-action-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+  }
+  
+  .submit-button,
+  .cancel-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+  }
+  
+  .submit-button {
+    background-color: #10b981; /* Green */
+  }
+  
+  .submit-button:hover {
+    background-color: #0a9c6b;
+    transform: translateY(-3px);
+  }
+  
+  .cancel-button {
+    background-color: #e74c3c; /* Red */
+  }
+  
+  .cancel-button:hover {
+    background-color: #d62c1a;
+    transform: translateY(-3px);
+  }
+  
+  /* Fade In Animation */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  

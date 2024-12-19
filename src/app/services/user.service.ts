@@ -9,6 +9,8 @@ export class UserService {
   customerUrl = 'https://localhost:7191/api/Customer';
   employeeUrl = 'https://localhost:7191/api/Employee';
   agentUrl = 'https://localhost:7191/api/Agent';
+  queryUrl = 'https://localhost:7191/api/CustomerQuery';
+
   constructor(private http: HttpClient) { }
 
   getCustomers() {
@@ -29,6 +31,12 @@ export class UserService {
   getRoles() {
     return this.http.get(this.roleUrl);
   }
+  getCustomerById(customerId : any){
+    return this.http.get(`${this.customerUrl}/${customerId}`);
+  }
+  getEmployeeById(employeeId : any){
+    return this.http.get(`${this.employeeUrl}/${employeeId}`);
+  }
   addUser(userData: any) {
     return this.http.post(this.userUrl, userData);
   }
@@ -47,4 +55,16 @@ export class UserService {
   addAgent(agent: any) {
     return this.http.post(this.agentUrl, agent);
   }
+
+  raiseCustomerQuery(data:any){
+    return this.http.post(this.queryUrl, data);
+  }
+
+  getCustomerQueries(){
+    return this.http.get(this.queryUrl);
+  }
+  updateQueryResponse(data:any){
+    return this.http.put(this.queryUrl,data);
+  }
+
 }

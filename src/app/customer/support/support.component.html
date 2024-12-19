@@ -1,0 +1,64 @@
+<div class="form-container">
+    <!-- Form Header -->
+    <div class="form-header">
+        <span class="form-header-icon">📄</span>
+        Raise Your Query
+    </div>
+
+    <!-- Form Start -->
+    <form [formGroup]="queryForm" (ngSubmit)="submitQuery()">
+        <!-- Dropdown for Policy Selection -->
+        <div class="input-container">
+            <label for="policy">Select Policy</label>
+            <div class="custom-dropdown">
+                <select placeholder="Select Policy" id="policy" formControlName="policyNo"
+                    (change)="onPolicyChange($event)">
+                    <option value="" disabled selected>Select Policy</option>
+                    <option *ngFor="let policy of policies" [value]="policy.policyNo">
+                        {{ policy.insuranceScheme?.schemeName }} ({{ policy.policyNo | slice: 0:7 }})
+                    </option>
+                    <option value="null">Other</option>
+                </select>
+                <span class="dropdown-icon"><i class="fas fa-chevron-down"></i></span>
+            </div>
+            <div class="error-message" *ngIf="queryForm.get('policyNo')?.touched && queryForm.get('policyNo')?.invalid">
+                Policy selection is required.
+            </div>
+        </div>
+
+        <!-- Policy Information Section -->
+        <div *ngIf="selectedPolicy" class="policy-info-card">
+            <h3>Policy Information</h3>
+            <p><strong>Policy Name:</strong> {{ selectedPolicy?.insuranceScheme?.schemeName }}</p>
+            <p><strong>Sum Assured:</strong> ₹{{ selectedPolicy?.sumAssured }}</p>
+            <p><strong>Status:</strong> {{ selectedPolicy?.status }}</p>
+        </div>
+
+        <!-- Query Title -->
+        <div class="input-container">
+            <label for="queryTitle">Query Title</label>
+            <input type="text" id="queryTitle" placeholder="Enter your query title" formControlName="title" />
+            <div class="error-message" *ngIf="queryForm.get('title')?.touched && queryForm.get('title')?.invalid">
+                Title is required.
+            </div>
+        </div>
+
+        <!-- Query Description -->
+        <div class="input-container">
+            <label for="queryDescription">Query Description</label>
+            <textarea id="queryDescription" rows="4" placeholder="Describe your query"
+                formControlName="description"></textarea>
+            <div class="error-message"
+                *ngIf="queryForm.get('description')?.touched && queryForm.get('description')?.invalid">
+                Description is required.
+            </div>
+        </div>
+
+        <!-- Submit and Cancel Buttons -->
+        <div class="form-actions">
+            <button class="submit-button" type="submit" [disabled]="queryForm.invalid">Submit Query</button>
+            <button class="cancel-button" type="button" (click)="onCancel()">Cancel</button>
+        </div>
+    </form>
+</div>
+<div class="my"></div>

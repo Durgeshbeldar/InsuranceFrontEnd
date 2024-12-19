@@ -80,8 +80,12 @@ approvePolicy(policy: any) {
       )
       this.submitInstallments(installments);
       alert("Installment Schedule Generated Successfully!");
+      if(policy.agentId === null){
+        this.loadAppliedPolicies();
+      }else{
       this.updateAgentCommision(policy);
       this.loadAppliedPolicies();
+      }
     },
     error: (err) => {
       alert("error while changing the status");
@@ -101,7 +105,7 @@ updateAgentCommision(policy:any){
       let amount = policy.premiumAmount;
       let commisionPercentage = policy.insuranceScheme.registrationCommission;
       let commissionAmount = amount * (commisionPercentage / 100);
-      console.log(this.agent);
+
     
       this.agent.totalCommission += commissionAmount;
       this.agent.walletBalance += commissionAmount;
@@ -125,12 +129,13 @@ updateAgentCommision(policy:any){
 
 updateTransactionTable(policy:any, isTrue:boolean){
 
-  let amount = policy.premiumAmount * (policy.insuranceScheme.registrationCommission/100);
+ 
   const payload = {
+    userId : policy.agentId,
     policyNo: policy.policyNo,
     transactionType : "Reg. Comm. Credited",
     transactionDate : new Date().toISOString(),
-    transactionAmount : amount,
+    transactionAmount :  policy.premiumAmount * (policy.insuranceScheme.registrationCommission/100),
     status : isTrue ? "Successful" : "Failed"
   }
   this.paymentService.addTransaction(payload).subscribe({

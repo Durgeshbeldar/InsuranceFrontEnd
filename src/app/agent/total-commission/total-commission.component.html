@@ -50,12 +50,15 @@
             <span *ngIf="withdrawForm.get('withdrawAmount')?.errors?.['required']">Amount is required.</span>
             <span *ngIf="withdrawForm.get('withdrawAmount')?.errors?.['min']">Amount must be at least ₹500.</span>
             <span *ngIf="withdrawForm.get('withdrawAmount')?.errors?.['max']">Amount cannot be more than ₹{{ walletBalance }}.</span>
-            <span *ngIf="withdrawForm.get('withdrawAmount')?.errors?.['']"></span>
+          
         </div>
     </div>
 
     <div class="withdraw-button-container">
-        <button class="withdraw-money-button" (click)="withdrawRequest()">
+        <button 
+        class="withdraw-money-button"
+        type = "submit"
+        >
             Withdraw Money
         </button>
     </div>

@@ -24,9 +24,22 @@ export class PaymentService {
   addTransaction(data:any){
     return this.http.post(this.transactionUrl, data);
   }
-
+  getTransactionsByCustomerId(customerId:any){
+    return this.http.get(`${this.transactionUrl}/Customer/${customerId}`);
+  }
+  getTransactionsByUserId(userId:any){
+    return this.http.get(`${this.transactionUrl}/User/${userId}`);
+  }
   addWithdrawalRequest(data:any){
     return this.http.post(this.withDrawUrl, data);
+  }
+
+  getAllWithdrawRequests(){
+    return this.http.get(this.withDrawUrl);
+  }
+
+  updateWithdrawalRequest(data:any){
+    return this.http.put(this.withDrawUrl, data);
   }
 
   makePayment(dueAmount: any, customerName: any): Observable<any> {

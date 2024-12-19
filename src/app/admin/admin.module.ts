@@ -16,6 +16,7 @@ import { AddEmployeeComponent } from './add-employee/add-employee.component';
 import { AddAgentComponent } from './add-agent/add-agent.component';
 import { ManageLocationComponent } from './manage-location/manage-location.component';
 import { ManageInsuranceModule } from './manage-insurance/manage-insurance.module';
+import { WithdrawRequestsComponent } from './withdraw-requests/withdraw-requests.component';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { ManageInsuranceModule } from './manage-insurance/manage-insurance.modul
     AddEmployeeComponent,
     AddAgentComponent,
     ManageLocationComponent,
+    WithdrawRequestsComponent,
 
   ],
   imports: [

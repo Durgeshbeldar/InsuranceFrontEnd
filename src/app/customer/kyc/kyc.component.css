@@ -212,4 +212,72 @@
       transform: translateY(0);
     }
   }
+
+  /* 🌟 KYC Verified Card */
+.kyc-verified-card {
+  width: 320px; /* Width of the card */
+  background-color: #ffffff; /* White background */
+  border-radius: 4px; /* Smooth corners */
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  padding: 20px; /* Padding inside the card */
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  margin: 50px auto; /* Center the card horizontally */
+  text-align: center; 
+  animation: fadeIn 0.6s ease-in-out; /* Smooth entrance animation */
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.kyc-verified-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* 🌟 KYC Content */
+.kyc-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center;
+}
+
+/* ✅ Green Tick Icon */
+.green-tick {
+  font-size: 3rem; 
+  color: #10b981; /* Tailwind green color */
+  margin-bottom: 10px; 
+  transition: transform 0.3s ease;
+}
+
+.kyc-verified-card:hover .green-tick {
+  transform: scale(1.2); /* Tick scales up on hover */
+}
+
+.kyc-content h2 {
+  font-size: 1.5rem; 
+  font-weight: bold; 
+  color: #071234; /* Dark blue */
+  font-family: 'Poppins', sans-serif; 
+  text-transform: capitalize;
+  transition: color 0.3s ease;
+}
+
+.kyc-verified-card:hover h2 {
+  color: #0d6efd; 
+}
+
+/* ✨ Fade-in Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
   

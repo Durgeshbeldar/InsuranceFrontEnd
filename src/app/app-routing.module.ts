@@ -30,6 +30,13 @@ import { KycComponent } from './customer/kyc/kyc.component';
 import { MyDocumentsComponent } from './customer/my-documents/my-documents.component';
 import { TotalCommissionComponent } from './agent/total-commission/total-commission.component';
 import { AgentTransactionComponent } from './agent/agent-transaction/agent-transaction.component';
+import { CustomerTransactionComponent } from './customer/customer-transaction/customer-transaction.component';
+import { WithdrawRequestsComponent } from './admin/withdraw-requests/withdraw-requests.component';
+import { MyPoliciesComponent } from './customer/my-policies/my-policies.component';
+import { PayPremiumComponent } from './customer/pay-premium/pay-premium.component';
+import { BuyPolicyComponent } from './customer/buy-policy/buy-policy.component';
+import { SupportComponent } from './customer/support/support.component';
+import { CustomerQueriesComponent } from './employee/customer-queries/customer-queries.component';
 const routes: Routes = [
   {
     path: "",
@@ -47,6 +54,10 @@ const routes: Routes = [
       {
         path:"add-agent",
         component: AddAgentComponent
+      },
+      {
+        path: 'withdraw-requests',
+        component: WithdrawRequestsComponent
       },
       {
         path:"manage-location",
@@ -67,7 +78,7 @@ const routes: Routes = [
           {
             path:'show-plans',
             component: ShowPlansComponent
-          }
+          },
         ]
       },
       {
@@ -102,6 +113,26 @@ const routes: Routes = [
       {
         path: "my-docs",
         component: MyDocumentsComponent
+      },
+      {
+        path:"customer-transaction",
+        component: CustomerTransactionComponent
+      },
+      {
+        path:"my-policies",
+        component: MyPoliciesComponent
+      },
+      {
+        path: 'pay-premium',
+        component: PayPremiumComponent
+      },
+      {
+        path: 'buy-policy',
+        component: BuyPolicyComponent
+      },
+      {
+        path: 'support',
+        component: SupportComponent
       }
     ]
   },
@@ -165,6 +196,10 @@ const routes: Routes = [
       {
         path: 'verified-customers',
         component: VerifiedCustomersComponent
+      },
+      {
+        path: 'customer-queries',
+        component: CustomerQueriesComponent
       }
     ]
   }
