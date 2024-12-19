@@ -94,6 +94,8 @@ customers: any[] = [];
         console.log('Payment Response:', response);
         if (response.status) {
           this.updateInstallment(installment);
+          if(this.selectedPolicy.agentId !== null)
+          this.updateAgentCommision(installment);
           this.updatePolicyAccount(amount);
           alert("Installment paid successfully!");
         } else {
@@ -131,16 +133,68 @@ customers: any[] = [];
       error: (err) => console.error('Error updating policy account:', err)
     })
   }
+
+  agent :any;
+  updateAgentCommision(installment:any){
+    this.userService.getAgentById(this.selectedPolicy.agentId).subscribe({
+      next:(response:any)=>{
+        this.agent = response.data;
+        const amount = installment.amountDue;
+        const commisionPercentage = this.selectedPolicy.insuranceScheme.installmentCommission;
+        const commissionAmount = amount * (commisionPercentage / 100);
+        this.agent.totalCommission += commissionAmount;
+        this.agent.walletBalance += commissionAmount;
+        this.userService.updateAgent(this.agent).subscribe({
+          next: () => {console.log('Agent Commission Updated Successfully')
+            alert("Agent Commission Updated Successfully");
+            this.updateTransactionTableForAgent(installment);
+          },
+          error: (err) =>{ console.error('Error updating agent commission:', err)
+          }
+        });
+      },
+      error: (error)=>{
+        console.log("Error While Fetching Agent",error);
+      }
+    });
+  }
+  
+  
+  updateTransactionTableForAgent(installment:any){
+    const amount = installment.amountDue;
+    const commisionPercentage = this.selectedPolicy.insuranceScheme.installmentCommission;
+    const commissionAmount = amount * (commisionPercentage / 100);
+    const payload = {
+      userId : this.selectedPolicy.agentId,
+      policyNo: this.selectedPolicy.policyNo,
+      transactionType : "Premium Comm. Credited",
+      transactionDate : new Date().toISOString(),
+      amount :  commissionAmount,
+      description:"Premium Amount/EMI",
+      status : "Successful"
+    }
+    this.paymentService.addTransaction(payload).subscribe({
+      next: () =>{
+        alert("Transaction History Saved!")
+        console.log('Transaction added successfully!')
+      } ,
+      error: (err) =>{ console.error('Error adding transaction:', err)}
+    });
+  }
+
+  
   updateTransactionTable(installment:any, isTrue:boolean){
     const payload = {
-      agentId : this.selectedPolicy.agentId,
+      userId : this.selectedPolicy.customerId,
       policyNo: this.selectedPolicy.policyNo,
       installmentId : installment.installmentId,
-      transactionType : "Premium Amount/EMI",
+      transactionType : "Premium Amt. Debited",
       transactionDate : new Date().toISOString(),
-      transactionAmount : installment.amountDue,
+      amount : installment.amountDue,
+      description : "Premium Amount/EMI",
       status : isTrue ? "Successful" : "Failed"
     }
+    console.log("Customer Transaction Amount: ", payload);
     this.paymentService.addTransaction(payload).subscribe({
       next: () =>{
         alert("Transaction History Saved!")

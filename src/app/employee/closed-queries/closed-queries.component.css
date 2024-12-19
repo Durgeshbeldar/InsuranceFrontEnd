@@ -685,163 +685,107 @@
     background-color: #071234; 
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.25); 
   }
-  
   .table-wrapper::-webkit-scrollbar-thumb:active {
     background-color: #001739; 
   }
 
-  .response-button,
-.close-button {
-  padding: 8px 12px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-right: 5px;
-}
+  .closed-queries-container {
+    margin: 20px auto;
+    width: 95%;
+  }
 
-.response-button {
-  background-color: #0d6efd;
-  color: #ffffff;
-}
-
-.response-button:hover {
-  background-color: #0b5ed7;
-}
-
-.response-button:disabled {
-  background-color: #b6c1d2;
-  cursor: not-allowed;
-}
-
-.close-button {
-  background-color: #e63946;
-  color: #ffffff;
-}
-
-.close-button:hover {
-  background-color: #d62839;
-}
-
-.close-button:disabled {
-  background-color: #f4cccc;
-  cursor: not-allowed;
-}
-
-/* Response Section Container */
-.response-section-container {
-    margin: 30px auto;
+  /* Expanded Query Section Styling */
+.expanded-query-section {
+    margin-top: 20px;
+    background-color: #f9fafc;
     padding: 20px;
-    background-color: #ffffff;
-    border-radius: 8px;
+    border-radius: 4px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-    width: 90%;
-    animation: fadeIn 0.5s ease-in-out;
+    animation: fadeIn 0.4s ease-in-out;
   }
   
-  /* Section Header */
-  .response-section-header h3 {
-    margin-bottom: 20px;
+  .query-details-card {
+    padding: 20px;
+    border-radius: 4px;
+  }
+  
+  .query-details-title {
     font-size: 1.5rem;
-    font-weight: 700;
+    font-weight: bold;
+    margin-bottom: 15px;
     color: #071234;
+    border-bottom: 2px solid #f1f1f1;
+  }
+  
+  .query-details-content p {
+    font-size: 1rem;
+    margin: 10px 0;
+    color: #333333;
+  }
+  
+  .query-details-content p strong {
+    color: #071234;
+  }
+  
+  .close-details-button {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 15px;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .close-details-button:hover {
+    background-color: #c0392b;
+  }
+  
+  /* Table Styling */
+  .transaction-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    margin-top: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .transaction-table th,
+  .transaction-table td {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  
+  .transaction-table th {
+    background-color: #071234;
+    color: #ffffff;
+    font-weight: bold;
     text-transform: uppercase;
   }
   
-  /* Details Card */
-  .response-details-card {
+  .transaction-table tbody tr:hover {
     background-color: #f9f9f9;
-    border-radius: 4px;
-    padding: 15px 25px;
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
   }
   
-  .details-row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-  }
-  
-  .details-row p {
-    font-size: 1rem;
-    color: #333333;
-    margin: 0;
-  }
-  
-  .details-row p strong {
-    color: #071234;
-  }
-  
-  /* Response Input Section */
-  .response-input-section {
-    margin-bottom: 20px;
-  }
-  
-  .response-input-section label {
-    display: block;
-    font-weight: 600;
-    margin-bottom: 10px;
-    color: #071234;
-  }
-  
-  .response-input-section textarea {
-    width: 94%;
-    height: 100px;
-    padding: 10px;
-    border: 2px solid #000000;
-    border-radius: 6px;
-    font-size: 1rem;
-    font-family: inherit;
-    transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-  }
-  
-  .response-input-section textarea:focus {
-    border-color:2px solid #000000;
-    box-shadow: 0px 4px 8px rgba(13, 110, 253, 0.2);
-    outline: none;
-  }
-  
-  /* Action Buttons */
-  .response-action-buttons {
-    display: flex;
-    justify-content: flex-end;
-    gap: 15px;
-  }
-  
-  .submit-button,
-  .cancel-button {
-    padding: 10px 20px;
-    font-size: 1rem;
-    font-weight: 600;
+  .transaction-table .view-details-button {
+    background-color: #0d6efd;
     color: #ffffff;
+    padding: 10px 15px;
     border: none;
-    border-radius: 6px;
+    border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+    transition: all 0.3s ease-in-out;
   }
   
-  .submit-button {
-    background-color: #10b981; /* Green */
+  .transaction-table .view-details-button:hover {
+    background-color: #084298;
   }
   
-  .submit-button:hover {
-    background-color: #0a9c6b;
-    transform: translateY(-3px);
-  }
-  
-  .cancel-button {
-    background-color: #e74c3c; /* Red */
-  }
-  
-  .cancel-button:hover {
-    background-color: #d62c1a;
-    transform: translateY(-3px);
-  }
-  
-  /* Fade In Animation */
+  /* Fade-in Animation */
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -851,29 +795,31 @@
       opacity: 1;
       transform: translateY(0);
     }
-  }
-  /* Status Pill Styling */
+}
+
+/* Status Pill Styling */
 .status-pill {
-  padding: 5px 10px;
-  font-size: 0.9rem;
-  font-weight: bold;
-  border-radius: 4px;
-  text-align: center;
-  display: inline-block;
-  min-width: 80px; /* Ensure uniform width */
-  transition: all 0.3s ease;
-}
-
-/* Active Status */
-.status-active {
-  background-color: #e6f9ee; /* Light Green Background */
-  color: #28a745; /* Dark Green Text */
-  border: 1px solid #28a745;
-}
-
-/* Inactive Status */
-.status-inactive {
-  background-color: #fbeaea; /* Light Red Background */
-  color: #dc3545; /* Dark Red Text */
-  border: 1px solid #dc3545;
-}
+    padding: 5px 10px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    border-radius: 4px;
+    text-align: center;
+    display: inline-block;
+    min-width: 80px; /* Ensure uniform width */
+    transition: all 0.3s ease;
+  }
+  
+  /* Active Status */
+  .status-active {
+    background-color: #e6f9ee; /* Light Green Background */
+    color: #28a745; /* Dark Green Text */
+    border: 1px solid #28a745;
+  }
+  
+  /* Inactive Status */
+  .status-inactive {
+    background-color: #fbeaea; /* Light Red Background */
+    color: #dc3545; /* Dark Red Text */
+    border: 1px solid #dc3545;
+  }
+  

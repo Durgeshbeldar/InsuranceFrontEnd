@@ -19,6 +19,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatButtonModule} from '@angular/material/button';
 import { CustomerQueriesComponent } from './customer-queries/customer-queries.component';
 import { FormsModule } from '@angular/forms';
+import { ClosedQueriesComponent } from './closed-queries/closed-queries.component';
 @NgModule({
   declarations: [
     EmployeeHeaderComponent,
@@ -28,7 +29,8 @@ import { FormsModule } from '@angular/forms';
     VerifiedAccountsComponent,
     CustomerListComponent,
     VerifiedCustomersComponent,
-    CustomerQueriesComponent
+    CustomerQueriesComponent,
+    ClosedQueriesComponent
   ],
   imports: [
     CommonModule,

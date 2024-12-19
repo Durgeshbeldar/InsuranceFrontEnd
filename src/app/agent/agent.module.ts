@@ -19,6 +19,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { CustomerInstallmentComponent } from './customer-installment/customer-installment.component';
 import { TotalCommissionComponent } from './total-commission/total-commission.component';
 import { AgentTransactionComponent } from './agent-transaction/agent-transaction.component';
+import { MywithdrawRequestComponent } from './mywithdraw-request/mywithdraw-request.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { AgentTransactionComponent } from './agent-transaction/agent-transaction
     SalePolicyComponent,
     CustomerInstallmentComponent,
     TotalCommissionComponent,
-    AgentTransactionComponent
+    AgentTransactionComponent,
+    MywithdrawRequestComponent
   ],
   imports: [
     CommonModule,

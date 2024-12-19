@@ -37,6 +37,8 @@ import { PayPremiumComponent } from './customer/pay-premium/pay-premium.componen
 import { BuyPolicyComponent } from './customer/buy-policy/buy-policy.component';
 import { SupportComponent } from './customer/support/support.component';
 import { CustomerQueriesComponent } from './employee/customer-queries/customer-queries.component';
+import { ClosedQueriesComponent } from './employee/closed-queries/closed-queries.component';
+import { MywithdrawRequestComponent } from './agent/mywithdraw-request/mywithdraw-request.component';
 const routes: Routes = [
   {
     path: "",
@@ -172,6 +174,10 @@ const routes: Routes = [
       {
         path: 'agent-transaction',
         component: AgentTransactionComponent
+      },
+      {
+        path: 'mywithdraw-requests',
+        component: MywithdrawRequestComponent
       }
     ]
   },
@@ -200,6 +206,10 @@ const routes: Routes = [
       {
         path: 'customer-queries',
         component: CustomerQueriesComponent
+      },
+      {
+        path: 'closed-queries',
+        component: ClosedQueriesComponent
       }
     ]
   }

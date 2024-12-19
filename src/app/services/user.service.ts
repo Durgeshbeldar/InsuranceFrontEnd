@@ -43,7 +43,10 @@ export class UserService {
   hardDeleteUser(id: any) {
     return this.http.delete(`${this.userUrl}/User/${id}`);
   }
-
+  
+  getCustomersByAgentId(id: any){
+    return this.http.get(`${this.customerUrl}/Agent/${id}`);
+  }
   addCustomer(customer: any) {
     return this.http.post(this.customerUrl, customer);
   }
@@ -59,12 +62,16 @@ export class UserService {
   raiseCustomerQuery(data:any){
     return this.http.post(this.queryUrl, data);
   }
-
+  
   getCustomerQueries(){
     return this.http.get(this.queryUrl);
   }
   updateQueryResponse(data:any){
     return this.http.put(this.queryUrl,data);
+  }
+
+  getQueriesByCustomerId(customerId:any){
+    return this.http.get(`${this.queryUrl}/Customer/${customerId}`);
   }
 
 }

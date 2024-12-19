@@ -50,7 +50,7 @@ export class SalePolicyComponent {
 
   // Load Customers
   loadCustomers() {
-    this.userService.getCustomers().subscribe((response: any) => {
+    this.userService.getCustomersByAgentId(this.agentId).subscribe((response: any) => {
       this.customers = response.data;
     });
   }

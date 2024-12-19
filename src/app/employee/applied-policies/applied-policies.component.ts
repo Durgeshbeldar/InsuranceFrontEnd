@@ -124,8 +124,8 @@ updateAgentCommision(policy:any){
       console.log("Error While Fetching Agent",error);
     }
   });
-
 }
+
 
 updateTransactionTable(policy:any, isTrue:boolean){
 
@@ -135,7 +135,7 @@ updateTransactionTable(policy:any, isTrue:boolean){
     policyNo: policy.policyNo,
     transactionType : "Reg. Comm. Credited",
     transactionDate : new Date().toISOString(),
-    transactionAmount :  policy.premiumAmount * (policy.insuranceScheme.registrationCommission/100),
+    amount :  policy.premiumAmount * (policy.insuranceScheme.registrationCommission/100),
     status : isTrue ? "Successful" : "Failed"
   }
   this.paymentService.addTransaction(payload).subscribe({

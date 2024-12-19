@@ -45,6 +45,18 @@
           </div>
         </div>
   
+         <!-- Policy Term -->
+         <div class="form-group">
+          <label for="policyTerm">Policy Term (Months)</label>
+          <input type="number" id="policyTerm" formControlName="policyTerm" placeholder="Enter Policy Term" (change)="onPremiumAmountChange()" />
+          <div class="error-message"
+            *ngIf="policyForm.get('policyTerm')?.touched && policyForm.get('policyTerm')?.invalid">
+            <span *ngIf="policyForm.get('policyTerm')?.errors?.['required']">Policy Term is required.</span>
+            <span *ngIf="policyForm.get('policyTerm')?.errors?.['invalidPolicyTerm']">
+              {{ policyForm.get('policyTerm')?.errors?.['invalidPolicyTerm'] }}
+            </span>
+          </div>
+        </div>
       
         <!-- Premium Type -->
         <div class="form-group">
@@ -64,21 +76,7 @@
           </div>
         </div>
   
-        <!-- Policy Term -->
-        <div class="form-group">
-          <label for="policyTerm">Policy Term (Months)</label>
-          <input type="number" id="policyTerm" formControlName="policyTerm" placeholder="Enter Policy Term" (change)="onPremiumAmountChange()" />
-          <div class="error-message"
-            *ngIf="policyForm.get('policyTerm')?.touched && policyForm.get('policyTerm')?.invalid">
-            <span *ngIf="policyForm.get('policyTerm')?.errors?.['required']">Policy Term is required.</span>
-            <span *ngIf="policyForm.get('policyTerm')?.errors?.['invalidPolicyTerm']">
-              {{ policyForm.get('policyTerm')?.errors?.['invalidPolicyTerm'] }}
-            </span>
-          </div>
-        </div>
-  
-  
-      
+       
         <div class="form-group">
           <label for="premiumAmount">Investment Amount (₹)</label>
           <input type="number" id="premiumAmount" formControlName="premiumAmount" placeholder="Enter Premium Amount"(change)="onPremiumAmountChange()" />

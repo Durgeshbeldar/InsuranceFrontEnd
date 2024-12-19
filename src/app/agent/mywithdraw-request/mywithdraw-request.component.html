@@ -1,0 +1,74 @@
+<div class="transaction-card-container">
+    <!-- Header Card -->
+    <div class="transaction-card">
+      <h2>Withdrawal Requests</h2>
+      <div class="transaction-card-icon">
+        <i class="fas fa-coins"></i> <!-- Icon for withdrawal requests -->
+      </div>
+    </div>
+  </div>
+  
+  <!-- Full Transaction Table Container -->
+  <div class="transaction-container">
+  
+    <!--  Table Controls (Search, Filter, Page Size) -->
+    <div class="table-controls">
+      <div class="input-container">
+        <input type="text" placeholder="🔍 Search Requests..."(keyup)="applyFilters()" />
+      </div>
+      
+      
+  
+      <!--  Filter by Date -->
+      <div class="date-container">
+        <input type="date" (change)="filterByDate($event)" class="search-input" #dateInput>
+        <i class="icon fas fa-calendar-alt" (click)="triggerDateInput()"></i>
+      </div>
+  
+      <!--  Page Size Selector -->
+      <div class="dropdown-container">
+        <select (change)="changePageSize($event)">
+          <option value="5" selected>5</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+        </select>
+        <i class="icon fas fa-chevron-down"></i>
+      </div>
+    </div>
+  
+    <!-- 📝 Table Wrapper -->
+    <div class="table-wrapper">
+      <table class="transaction-table">
+        <thead>
+          <tr>
+            <th>Sr No.</th>
+            <th>Requested Amount</th>
+            <th>Status</th>
+            <th>Request Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let request of paginatedRequests; let i = index">
+            <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+            <td>₹{{ request.amount }}</td>
+            <td [ngClass]="{
+                'status-success': request.status === 'Approved',
+                'status-failed': request.status === 'Rejected',
+                'status-pending': request.status === 'Pending'
+              }">{{ request.status }}</td>
+            <td>{{ request.requestDate | date: 'dd-MM-yyyy' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <!--  Pagination Controls -->
+    <div class="pagination-container">
+      <button class="pagination-button" (click)="goToPreviousPage()" [disabled]="currentPage === 1">Previous</button>
+      <button class="page-number-button" *ngFor="let page of totalPagesArray" [ngClass]="{'active': page === currentPage}"
+        (click)="goToPage(page)">
+        {{ page }}
+      </button>
+      <button class="pagination-button" (click)="goToNextPage()">Next</button>
+    </div>
+  </div>

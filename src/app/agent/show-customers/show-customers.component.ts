@@ -12,15 +12,19 @@ export class ShowCustomersComponent {
   itemsPerPage: number = 5;
   totalPages: number = 1;
   selectedCustomer: any = null;
-
+  agentId :any;
   constructor(private customerService: UserService) {}
-
+  getAgentId(){
+    this.agentId = localStorage.getItem('userId');
+  }
   ngOnInit() {
+    this.getAgentId();
     this.loadCustomers();
   }
 
+ 
   loadCustomers() {
-    this.customerService.getCustomers().subscribe((response: any) => {
+    this.customerService.getCustomersByAgentId(this.agentId).subscribe((response: any) => {
       this.customers = response.data;
       this.totalPages = Math.ceil(this.customers.length / this.itemsPerPage);
       this.updatePagination();

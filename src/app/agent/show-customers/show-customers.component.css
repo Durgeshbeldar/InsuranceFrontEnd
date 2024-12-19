@@ -1,7 +1,7 @@
 /* Container Styles */
 .customers-container {
     background: #0a1128;
-    border-radius: 12px;
+    border-radius: 4px;
     width: 90%;
     margin: 50px auto;
     padding: 20px;
@@ -12,7 +12,7 @@
   .header-section {
     background: #ffffff;
     padding: 5px 20px;
-    border-radius: 12px;
+    border-radius: 4px;
     font-size: 1rem;
     margin-bottom: 20px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
@@ -28,7 +28,7 @@
   .table-wrapper {
     background: #ffffff;
     padding: 15px;
-    border-radius: 12px;
+    border-radius: 4px;
     box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
   }
   
@@ -87,7 +87,7 @@
     background: #121d4c;
     color: white;
     border: none;
-    border-radius: 8px;
+    border-radius: 4px;
     padding: 8px 12px;
     font-size: 0.9rem;
     cursor: pointer;
@@ -120,7 +120,7 @@
   .customer-details {
     margin-top: 20px;
     background: #ffffff;
-    border-radius: 12px;
+    border-radius: 4px;
     padding: 20px;
     box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
   }
@@ -155,7 +155,7 @@
     background: #4084cc;
     color: #fff;
     border: none;
-    border-radius: 8px;
+    border-radius: 4px;
     padding: 8px 16px;
     font-size: 1rem;
     cursor: pointer;

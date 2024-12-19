@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { FormControl,FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
-import { LocationService } from'src/app/services/location.service';
+import { LocationService } from 'src/app/services/location.service';
+import { EmailService } from 'src/app/services/email.service';
 @Component({
   selector: 'app-add-customer',
   templateUrl: './add-customer.component.html',
@@ -12,25 +13,25 @@ export class AddCustomerComponent {
 
   isUserAdded = false;
   roleId = "43bdb71b-24b3-49d0-47d5-08dd191da96b";
-  states:any;
+  states: any;
   cities: any;
 
-  constructor(private userService: UserService, private locationService: LocationService) {
+  constructor(private userService: UserService, private locationService: LocationService, private emailService: EmailService) {
 
   }
-  getAgent(){
-    const agentId = localStorage.getItem('userId');
-    console.log(agentId);
+  agentId: any;
+  getAgent() {
+    this.agentId = localStorage.getItem('userId');
   }
   ngOnInit(): void {
     this.loadStates();
+    this.getAgent();
   }
-  
+
   loadStates() {
     this.locationService.getStates().subscribe({
       next: (response: any) => {
         this.states = response.data;
-        
       },
       error: (err) => console.error('Error loading states:', err)
     });
@@ -51,7 +52,7 @@ export class AddCustomerComponent {
     email: new FormControl('', [Validators.required, Validators.email]),
     phoneNumber: new FormControl('', [
       Validators.required,
-      Validators.pattern(/^[0-9]{10}$/) 
+      Validators.pattern(/^[0-9]{10}$/)
     ]),
     roleId: new FormControl()
   })
@@ -64,11 +65,11 @@ export class AddCustomerComponent {
     gender: new FormControl(false),
     phoneNumber: new FormControl('', [
       Validators.required,
-      Validators.pattern(/^[0-9]{10}$/) 
+      Validators.pattern(/^[0-9]{10}$/)
     ])
   });
 
-  onStateChange(event:Event) {
+  onStateChange(event: Event) {
     this.addressForm.get('cityId')?.reset(); // Clear previous city selection
     const stateId = (event.target as HTMLSelectElement).value; // Get selected state ID
     this.locationService.getCitiesByStateId(stateId).subscribe({
@@ -78,17 +79,18 @@ export class AddCustomerComponent {
       error: (err) => console.error('Error loading cities:', err)
     });
   }
-  
+
   userName: any;
   userId: any;
+
   // On Submit Handlers
   addUser() {
     if (this.userForm.valid) {
-    
+
       const formData = {
         ...this.userForm.value,
-        roleId : this.roleId,
-       
+        roleId: this.roleId,
+
       }
       this.userService.addUser(formData).subscribe({
         next: (response: any) => {
@@ -103,24 +105,31 @@ export class AddCustomerComponent {
     }
   }
 
-   // Add Customer Details
+  // Add Customer Details
   addCustomerDetails() {
+    const firstName = this.customerForm.get('firstName')?.value;
+    const lastName = this.customerForm.get('lastName')?.value;
+    const name = `${firstName} ${lastName}`;
+    const userName = this.userForm.get('userName')?.value;
+    const password = this.userForm.get('password')?.value;
+    const email = this.userForm.get('email')?.value;
+
     if (this.customerForm.valid && this.userId != null) {
-      const agentUserId = localStorage.getItem('userId');
       const formData = {
-        customerId : this.userId,
+        customerId: this.userId,
         firstName: this.customerForm.get('firstName')?.value,
         lastName: this.customerForm.get('lastName')?.value,
         dateOfBirth: this.customerForm.get('dateOfBirth')?.value,
         phoneNumber: this.customerForm.get('phoneNumber')?.value,
-        gender: this.customerForm.get('gender')?.value ? 'Male' : 'Female'
-        // agentId :agentUserId
+        gender: this.customerForm.get('gender')?.value ? 'Male' : 'Female',
+        agentId: this.agentId
       };
       console.log('Payload being sent:', formData);
 
       this.userService.addCustomer(formData).subscribe({
         next: () => {
           alert('Customer Details Added Successfully');
+          this.sendCredentialsToCustomer(name, userName, password, email);
           this.isUserAdded = false;
           this.userForm.reset();
           this.customerForm.reset();
@@ -132,10 +141,20 @@ export class AddCustomerComponent {
     }
   }
 
+  sendCredentialsToCustomer(name: any, username: any, password: any, email: any) {
+
+    this.emailService.sendCredentials(name, email, username, password).then(() => {
+      alert('Email sent successfully!');
+    })
+      .catch((error) => {
+        console.error('Error sending email:', error);
+      });
+  }
+
   addAddress() {
     console.log("Address Payload", this.addressForm.value);
     if (this.addressForm.invalid) {
-      this.addressForm.markAllAsTouched(); // Mark all fields as touched to show validation errors
+      this.addressForm.markAllAsTouched();
       return;
     }
 
@@ -145,8 +164,8 @@ export class AddCustomerComponent {
     this.locationService.addAddress(addressData).subscribe({
       next: (response: any) => {
         alert('Address added successfully!');
-        this.addressForm.reset(); // Reset the form
-        this.cities = []; // Clear cities
+        this.addressForm.reset();
+        this.cities = [];
       },
       error: (err) => {
         console.error('Error adding address:', err);

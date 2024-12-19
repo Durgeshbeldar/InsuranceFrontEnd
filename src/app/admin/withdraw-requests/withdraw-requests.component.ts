@@ -120,8 +120,8 @@ export class WithdrawRequestsComponent {
     request.status = 'Approved';
     this.paymentService.updateWithdrawalRequest(request).subscribe({
       next: () => {
-        this.updateTransactionTable(request);
         alert('Request Approved Successfully');
+        this.updateTransactionTable(request);
         this.loadRequests();
       },
       error: (err: any) => console.error('Error updating request:', err)
@@ -133,16 +133,29 @@ export class WithdrawRequestsComponent {
     this.paymentService.updateWithdrawalRequest(request).subscribe({
       next: () => {
         this.updateAgent(request);
-        this.updateTransactionTable(request);
         alert('Request Rejected Successfully');
         this.loadRequests();
       },
       error: (err: any) => console.error('Error updating request:', err)
     });
   }
-
-  updateTransactionTable(request: any) {
-    alert('Transaction updated successfully');
+  updateTransactionTable(request:any){
+    const payload = {
+      userId : request.agentId,
+      transactionType : "Amount Debited",
+      transactionDate : new Date().toISOString(),
+      amount : request.amount,
+      status : "Successful",
+      description:"Withdrawal to Bank A/C"
+    }
+    console.log("Payload is here", payload);
+    this.paymentService.addTransaction(payload).subscribe({
+      next: () =>{
+        alert("Transaction History Saved!")
+        console.log('Transaction added successfully!')
+      } ,
+      error: (err) =>{ console.error('Error adding transaction:', err)}
+    });
   }
 
   updateAgent(request: any) {

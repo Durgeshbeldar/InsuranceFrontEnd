@@ -25,7 +25,7 @@ export class CustomerTransactionComponent {
 
   loadTransactionsByPolicyId() {
     const customerId = localStorage.getItem('userId'); // Use the correct policy ID
-    this.paymentService.getTransactionsByCustomerId(customerId).subscribe((response: any) => {
+    this.paymentService.getTransactionsByUserId(customerId).subscribe((response: any) => {
       this.transactions = response.data;
       this.filteredTransactions = [...this.transactions];
       console.log(this.filteredTransactions);

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PaymentService } from 'src/app/services/payment.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-total-commission',
   templateUrl: './total-commission.component.html',
@@ -9,7 +10,7 @@ import { PaymentService } from 'src/app/services/payment.service';
 })
 export class TotalCommissionComponent {
 
-  constructor(private userService: UserService, private paymentService: PaymentService) {
+  constructor(private userService: UserService, private paymentService: PaymentService, private router : Router) {
     this.loadAgentDetails();
   }
   agent: any = {};
@@ -57,6 +58,8 @@ export class TotalCommissionComponent {
         alert('Withdrawal Request Sent Successfully!');
         this.updateAgent(this.withdrawForm.get('withdrawAmount')?.value);
         this.withdrawForm.reset();
+        this.router.navigateByUrl("mywithdraw-requests");
+        
       },
       error: (err: any) => {
         this.errorMessage = 'Error requesting withdrawal!';

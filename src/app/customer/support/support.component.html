@@ -1,4 +1,29 @@
-<div class="form-container">
+
+<div class="query-cards-container">
+    <!-- My Queries Card -->
+    <div class="query-card" (click)="viewMyQueries()">
+      <i class="fas fa-list-alt card-icon"></i> 
+      <div class="card-content">
+        <h3>My Queries</h3>
+        <p>View all your raised queries</p>
+      </div>
+    </div>
+  
+    <!-- Create New Query Card -->
+    <div class="query-card" (click)="createNewQuery()">
+      <i class="fas fa-plus-circle card-icon"></i> 
+      <div class="card-content">
+        <h3>Create New Query</h3>
+        <p>Raise a new support request</p>
+      </div>
+    </div>
+  </div>
+  
+
+
+
+
+<div class="form-container" *ngIf="showCreateQuerySection">
     <!-- Form Header -->
     <div class="form-header">
         <span class="form-header-icon">📄</span>
@@ -62,3 +87,108 @@
     </form>
 </div>
 <div class="my"></div>
+
+
+
+<!-- View Queries  -->
+
+<div class="transaction-card-container" *ngIf=" showQueriesSection">
+    <!-- Header Card -->
+    <div class="transaction-card">
+        <h2>Customer Queries</h2>
+        <div class="transaction-card-icon">
+            <i class="fas fa-question-circle"></i> <!-- Icon for queries -->
+        </div>
+    </div>
+</div>
+
+<!-- Full Table Container -->
+<div class="transaction-container" *ngIf=" showQueriesSection">
+    <!-- Table Controls -->
+    <div class="table-controls">
+        
+
+        <!-- Page Size -->
+        <div class="custom-dropdown2">
+            <select (change)="changePageSize($event)">
+                <option value="" [disabled]="">Page Size</option>
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+            </select>
+            <i class="icon fas fa-chevron-down dropdown-icon2"></i>
+        </div>
+    </div>
+
+    <!-- Table -->
+    <div class="table-wrapper">
+        <table class="transaction-table">
+            <thead>
+                <tr>
+                    <th>Sr No.</th>
+                    <th>Policy No</th>
+          
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Response</th>
+                    <th>Created At</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let query of paginatedQueries; let i = index">
+                    <td>{{ (currentPage - 1) * pageSize + i + 1 }}</td>
+                    <td>{{ query.policyNo | slice:0:7 }}</td>
+             
+                    <td>{{ query.title }}</td>
+                    <td>{{ query.description }}</td>
+                    <td>{{ query.response || 'Pending' }}</td>
+                    <td>{{ query.createdAt | date: 'dd-MM-yyyy' }}</td>
+                    <td>
+                        <span class="status-pill" [ngClass]="query.isActive ? 'status-active' : 'status-inactive'">
+                            {{ query.isActive ? 'Open' : 'Closed' }}
+                        </span>
+                    </td>
+                    <td>
+                        <button class="view-details-button" (click)="viewDetails(query)">
+                            View Details
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination-container">
+        <button class="pagination-button" (click)="goToPreviousPage()" [disabled]="currentPage === 1">
+            Previous
+        </button>
+        <button class="page-number-button" *ngFor="let page of totalPagesArray"
+            [ngClass]="{'active': page === currentPage}" (click)="goToPage(page)">
+            {{ page }}
+        </button>
+        <button class="pagination-button" (click)="goToNextPage()" [disabled]="currentPage === totalPagesArray.length">
+            Next
+        </button>
+    </div>
+
+    <!-- Query Details Section -->
+    <div *ngIf="selectedQuery" class="expanded-query-section">
+        <div class="query-details-card">
+            <h3 class="query-details-title">Query Details</h3>
+            <div class="query-details-content">
+                <p><strong>Policy No:</strong> {{ selectedQuery.policyNo || 'N/A' }}</p>
+                <p><strong>Customer Name:</strong> {{ selectedQuery.policyAccount?.customer?.firstName }} {{
+                    selectedQuery.policyAccount?.customer?.lastName }}</p>
+                <p><strong>Title:</strong> {{ selectedQuery.title }}</p>
+                <p><strong>Description:</strong> {{ selectedQuery.description }}</p>
+                <p><strong>Response:</strong> {{ selectedQuery.response || 'No response yet' }}</p>
+                <p><strong>Resolved By:</strong> {{ employee.firstName }} {{employee.lastName}}</p>
+                <p><strong>Resolved At:</strong> {{ selectedQuery.resolvedAt | date: 'dd-MM-yyyy, h:mm a' }}</p>
+            </div>
+            <button class="close-details-button" (click)="closeDetails()">Close Details</button>
+        </div>
+    </div>
+</div>

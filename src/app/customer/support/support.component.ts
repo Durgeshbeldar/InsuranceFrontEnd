@@ -21,6 +21,7 @@ export class SupportComponent {
   ngOnInit(): void {
     this.loadPolicies();
     this.initializeForm();
+    this.loadCustomerQueries();
   }
 
   // Load Customer Policies
@@ -68,6 +69,8 @@ export class SupportComponent {
         alert('Query submitted successfully!');
         this.queryForm.reset();
         this.queryForm.controls['policyNo'].setValue('other');
+        this.showQueriesSection = true;
+        this.showCreateQuerySection = false;
       },
       error: (err :any) => console.error('Error submitting query:', err)
     });
@@ -80,4 +83,124 @@ export class SupportComponent {
     this.selectedPolicy = null;
   }
 
+  // Manage Components 
+
+  showQueriesSection: boolean = false;
+  showCreateQuerySection: boolean = true;
+
+  // Function to show "My Queries" section
+  viewMyQueries() {
+    this.showQueriesSection = true;
+    this.showCreateQuerySection = false;
+  }
+
+  // Function to show "Create New Query" section
+  createNewQuery() {
+    this.showQueriesSection = false;
+    this.showCreateQuerySection = true;
+  }
+
+
+
+
+
+  // View My Quries Code 
+
+  customerQueries: any[] = [];
+    scheme :any;
+    filteredQueries: any[] = [];
+    paginatedQueries: any[] = [];
+    searchQuery: string = '';
+    currentPage: number = 1;
+    pageSize: number = 10;
+    totalPagesArray: number[] = [];
+    selectedQuery: any = null;
+    responseMessage: string = '';
+    employee:any;
+  
+    loadCustomerQueries() {
+      this.userService.getCustomerQueries().subscribe({
+        next: (response: any) => {
+          this.customerQueries = response.data;
+          this.customerQueries.filter((query : any)=> !query.isActive);
+          this.filteredQueries = [...this.customerQueries];
+          this.updatePagination();
+        },
+        error: (err) => console.error('Error fetching customer queries:', err)
+      });
+    }
+    applyFilters() {
+      this.filteredQueries = this.customerQueries.filter(query =>
+        query.title.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+        `${query.policyAccount?.customer?.firstName} ${query.policyAccount?.customer?.lastName}`
+          .toLowerCase()
+          .includes(this.searchQuery.toLowerCase())
+      );
+      this.currentPage = 1;
+      this.updatePagination();
+    }
+  
+    updatePagination() {
+      const totalPages = Math.ceil(this.filteredQueries.length / this.pageSize);
+      this.totalPagesArray = Array.from({ length: totalPages }, (_, i) => i + 1);
+      this.setPaginatedQueries();
+    }
+  
+    setPaginatedQueries() {
+      const startIndex = (this.currentPage - 1) * this.pageSize;
+      this.paginatedQueries = this.filteredQueries.slice(startIndex, startIndex + this.pageSize);
+    }
+  
+    changePageSize(event: any) {
+      this.pageSize = +event.target.value;
+      this.currentPage = 1;
+      this.updatePagination();
+    }
+  
+    goToPreviousPage() {
+      if (this.currentPage > 1) {
+        this.currentPage--;
+        this.setPaginatedQueries();
+      }
+    }
+  
+    goToNextPage() {
+      if (this.currentPage < this.totalPagesArray.length) {
+        this.currentPage++;
+        this.setPaginatedQueries();
+      }
+    }
+  
+    goToPage(page: number) {
+      this.currentPage = page;
+      this.setPaginatedQueries();
+    }
+  
+   
+  
+    getEmployeeDetails(employeeId :any){
+      
+      this.userService.getEmployeeById(employeeId).subscribe({
+        next: (response: any) => {
+          console.log(response.data);
+          this.employee = response.data;
+        },
+        error: (err) => console.error('Error fetching employee details:', err)
+      })
+    }
+
+    viewDetails(query: any) {
+      this.userService.getEmployeeById(query.resolvedBy).subscribe({
+        next: (response: any) => {
+          console.log(response.data);
+          this.employee = response.data;
+        },
+        error: (err) => console.error('Error fetching employee details:', err)
+      })
+      this.selectedQuery = query; // Open details section
+    }
+    closeDetails() {
+      this.selectedQuery = null; // Close details section
+    }
+  
 }
