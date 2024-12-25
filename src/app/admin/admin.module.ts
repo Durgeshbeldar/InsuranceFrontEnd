@@ -17,7 +17,10 @@ import { AddAgentComponent } from './add-agent/add-agent.component';
 import { ManageLocationComponent } from './manage-location/manage-location.component';
 import { ManageInsuranceModule } from './manage-insurance/manage-insurance.module';
 import { WithdrawRequestsComponent } from './withdraw-requests/withdraw-requests.component';
-
+import { CustomerClaimsComponent } from './customer-claims/customer-claims.component';
+import { FormsModule } from '@angular/forms';
+import { ManageAgentsComponent } from './manage-agents/manage-agents.component';
+import { ManageEmployeesComponent } from './manage-employees/manage-employees.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +32,9 @@ import { WithdrawRequestsComponent } from './withdraw-requests/withdraw-requests
     AddAgentComponent,
     ManageLocationComponent,
     WithdrawRequestsComponent,
+    CustomerClaimsComponent,
+    ManageAgentsComponent,
+    ManageEmployeesComponent,
 
   ],
   imports: [
@@ -42,6 +48,7 @@ import { WithdrawRequestsComponent } from './withdraw-requests/withdraw-requests
     MatButtonModule,
     RouterModule,
     ManageInsuranceModule,
+    FormsModule
     
   ]
 })

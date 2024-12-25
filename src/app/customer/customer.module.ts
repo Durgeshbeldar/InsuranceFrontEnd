@@ -13,6 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { BuyPolicyComponent } from './buy-policy/buy-policy.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SupportComponent } from './support/support.component';
+import { MyClaimsComponent } from './my-claims/my-claims.component';
 @NgModule({
   declarations: [
     CustomerHeaderComponent,
@@ -24,6 +25,7 @@ import { SupportComponent } from './support/support.component';
     PayPremiumComponent,
     BuyPolicyComponent,
     SupportComponent,
+    MyClaimsComponent,
     
   ],
   imports: [

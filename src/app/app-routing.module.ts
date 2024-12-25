@@ -39,6 +39,10 @@ import { SupportComponent } from './customer/support/support.component';
 import { CustomerQueriesComponent } from './employee/customer-queries/customer-queries.component';
 import { ClosedQueriesComponent } from './employee/closed-queries/closed-queries.component';
 import { MywithdrawRequestComponent } from './agent/mywithdraw-request/mywithdraw-request.component';
+import { MyClaimsComponent } from './customer/my-claims/my-claims.component';
+import { CustomerClaimsComponent } from './admin/customer-claims/customer-claims.component';
+import { ManageAgentsComponent } from './admin/manage-agents/manage-agents.component';
+import { ManageEmployeesComponent } from './admin/manage-employees/manage-employees.component';
 const routes: Routes = [
   {
     path: "",
@@ -58,12 +62,24 @@ const routes: Routes = [
         component: AddAgentComponent
       },
       {
+        path:'manage-agents',
+        component: ManageAgentsComponent
+      },
+      {
+        path: 'manage-employees',
+        component: ManageEmployeesComponent
+      },
+      {
         path: 'withdraw-requests',
         component: WithdrawRequestsComponent
       },
       {
         path:"manage-location",
         component: ManageLocationComponent
+      },
+      {
+        path: 'manage-claims',
+        component : CustomerClaimsComponent
       },
       {
         path: "manage-insurance",
@@ -135,6 +151,10 @@ const routes: Routes = [
       {
         path: 'support',
         component: SupportComponent
+      },
+      {
+        path: 'my-claims',
+        component : MyClaimsComponent
       }
     ]
   },

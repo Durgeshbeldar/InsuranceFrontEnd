@@ -1,0 +1,135 @@
+<div class="transaction-card-container">
+    <!-- Header Card -->
+    <div class="transaction-card">
+      <h2>EMPLOYEE MANAGEMENT</h2>
+      <div class="transaction-card-icon">
+        <i class="fas fa-users"></i> <!-- Icon for Employees -->
+      </div>
+    </div>
+  </div>
+  
+  <!-- Full Transaction Table Container -->
+  <div class="transaction-container">
+    <!-- Table Controls -->
+    <div class="table-controls">
+      <!-- Search Box -->
+      <div class="input-container">
+        <input 
+          type="text" 
+          placeholder="🔍 Search Employees..." 
+          [(ngModel)]="searchText" 
+          (keyup)="applyFilters()" 
+        />
+      </div>
+  
+      <!-- Date Picker -->
+      <div class="date-container">
+        <input 
+          type="date" 
+          [(ngModel)]="selectedDate" 
+          (change)="applyFilters()" 
+          class="search-input"
+        />
+      </div>
+  
+      <!-- Page Size Selector -->
+      <div class="dropdown-container">
+        <select (change)="changePageSize($event)">
+          <option value="5">5</option>
+          <option value="10" selected>10</option>
+          <option value="20">20</option>
+        </select>
+        <i class="icon fas fa-chevron-down"></i>
+      </div>
+    </div>
+  
+    <!-- Table Wrapper -->
+    <div class="table-wrapper">
+      <table class="transaction-table">
+        <thead>
+          <tr>
+            <th>Sr No.</th>
+            <th>Employee ID</th>
+            <th>Employee Name</th>
+            <th>Age</th>
+            <th>Department</th>
+            <th>Salary</th>
+            <th>Joining Date</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- No Records Found -->
+          <tr *ngIf="paginatedEmployees.length === 0">
+            <td colspan="9" class="no-records">No Records Found</td>
+          </tr>
+          
+          <!-- Records -->
+          <tr *ngFor="let employee of paginatedEmployees; let i = index">
+            <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+            <td>{{ employee.employeeId | slice:0:7 }}</td>
+            <td>{{ employee.firstName }} {{ employee.lastName }}</td>
+            <td>{{ calculateAge(employee.dateOfBirth) }} years</td>
+            <td>{{ employee.department }}</td>
+            <td>₹{{ employee.salary }}</td>
+            <td>{{ employee.joiningDate | date: 'dd-MM-yyyy' }}</td>
+            <td>
+              <span [ngClass]="{
+                'status-success capsule': employee.user.isActive,
+                'status-failed capsule': !employee.user.isActive
+              }">
+                {{ employee.user.isActive ? 'Active' : 'Inactive' }}
+              </span>
+            </td>
+            <td class="action-btns">
+              <button 
+                *ngIf="employee.user.isActive" 
+                class="reject-button" 
+                (click)="toggleEmployeeStatus(employee, false)">Deactivate
+              </button>
+              <button 
+                *ngIf="!employee.user.isActive" 
+                class="approve-button" 
+                (click)="toggleEmployeeStatus(employee, true)">Activate
+              </button>
+              <button class="view-button" (click)="viewDetails(employee)">View Details</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <!-- Pagination Controls -->
+    <div class="pagination-container" *ngIf="paginatedEmployees.length > 0">
+      <button class="pagination-button" (click)="goToPreviousPage()" [disabled]="currentPage === 1">Previous</button>
+      <button 
+        *ngFor="let page of totalPagesArray" 
+        class="page-number-button" 
+        [ngClass]="{'active': page === currentPage}"
+        (click)="goToPage(page)">
+        {{ page }}
+      </button>
+      <button class="pagination-button" (click)="goToNextPage()" [disabled]="currentPage === totalPagesArray.length">Next</button>
+    </div>
+  </div>
+  
+  <!-- Employee Details Modal -->
+  <div *ngIf="selectedEmployee" class="agent-details-container">
+    <div class="agent-details-card">
+      <h2>Employee Details</h2>
+      <ul class="details-list">
+        <li><strong>Name </strong> {{ selectedEmployee.firstName }} {{ selectedEmployee.lastName }}</li>
+        <li><strong>Employee ID </strong> {{ selectedEmployee.employeeId | slice:0:7 }}</li>
+        <li><strong>Age </strong> {{ calculateAge(selectedEmployee.dateOfBirth) }} years</li>
+        <li><strong>Gender </strong> {{ selectedEmployee.gender }}</li>
+        <li><strong>Department </strong> {{ selectedEmployee.department }}</li>
+        <li><strong>Salary </strong> ₹{{ selectedEmployee.salary }}</li>
+        <li><strong>Phone </strong> {{ selectedEmployee.user.phoneNumber }}</li>
+        <li><strong>Email </strong> {{ selectedEmployee.user.email }}</li>
+        <li><strong>Status </strong> {{ selectedEmployee.user.isActive ? 'Active' : 'Inactive' }}</li>
+      </ul>
+      <button class="close-details-button" (click)="closeEmployeeDetails()">Close</button>
+    </div>
+  </div>
+  

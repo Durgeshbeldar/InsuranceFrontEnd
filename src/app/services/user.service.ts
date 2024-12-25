@@ -16,11 +16,17 @@ export class UserService {
   getCustomers() {
     return this.http.get(this.customerUrl);
   }
+  getAgents(){
+    return this.http.get(this.agentUrl);
+  }
   getAgentById(agentId: any) {
     return this.http.get(`${this.agentUrl}/${agentId}`);
   }
   updateAgent(agent: any) {
     return this.http.put(this.agentUrl, agent);
+  }
+  updateUser(user: any){
+    return this.http.put(this.userUrl, user);
   }
   getUserById(id:any){
     return this.http.get(`${this.userUrl}/${id}`);
@@ -53,6 +59,9 @@ export class UserService {
 
   addEmployee(employee: any) {
     return this.http.post(this.employeeUrl, employee);
+  }
+  getEmployees(){
+    return this.http.get(this.employeeUrl);
   }
 
   addAgent(agent: any) {

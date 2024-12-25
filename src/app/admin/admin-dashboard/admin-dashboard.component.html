@@ -7,7 +7,7 @@
   
     <!-- Main Content Area -->
     <div class="main-content">
-     <app-cards></app-cards>
+     <app-cards *ngIf="isDashboard"></app-cards>
      
       <router-outlet></router-outlet>
     </div>

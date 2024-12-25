@@ -1,0 +1,81 @@
+<div class="transaction-card-container">
+    <!-- Header Card -->
+    <div class="transaction-card">
+      <h2>Claim Requests</h2>
+      <div class="transaction-card-icon">
+        <i class="fas fa-file-invoice-dollar"></i> <!-- Icon for Claims -->
+      </div>
+    </div>
+  </div>
+  
+  <!-- Full Transaction Table Container -->
+  <div class="transaction-container">
+    <!-- Table Controls -->
+    <div class="table-controls">
+      <!-- Search Box -->
+      <div class="input-container">
+        <input type="text" placeholder="🔍 Search Claims..." (keyup)="applyFilters()" #searchInput />
+      </div>
+  
+      <!-- Page Size Selector -->
+      <div class="dropdown-container">
+        <select (change)="changePageSize($event)">
+          <option value="5">5</option>
+          <option value="10" selected>10</option>
+          <option value="20">20</option>
+        </select>
+        <i class="icon fas fa-chevron-down"></i>
+      </div>
+    </div>
+  
+    <!-- Table Wrapper -->
+    <div class="table-wrapper">
+      <table class="transaction-table">
+        <thead>
+          <tr>
+            <th>Sr No.</th>
+            <th>Policy No</th>
+            <th>Customer Name</th>
+            <th>Claim Amount</th>
+            <th>Bank Name</th>
+            <th>Claim Date</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let claim of paginatedClaims; let i = index">
+            <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+            <td style="text-transform: uppercase; font-weight: 600;">{{ claim.policyNo | slice: 0:7 }}</td>
+            <td>{{ claim.bankAccountHolderName }}</td>
+            <td style="color: green; font-weight: 500;">₹{{ claim.claimAmount }}</td>
+            <td>{{ claim.bankName }}</td>
+            <td>{{ claim.claimDate | date: 'dd-MM-yyyy' }}</td>
+            <td [ngClass]="{
+                  'status-submitted1': claim.status === 'Submitted',
+                  'status-approved1': claim.status === 'Approved',
+                  'status-rejected1': claim.status === 'Rejected'
+                }">
+              {{ claim.status }}
+            </td>
+            <td>
+              <button class="view-button" (click)="viewClaimDetails(claim)">
+                View Details
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <!-- Pagination Controls -->
+    <div class="pagination-container">
+      <button class="pagination-button" (click)="goToPreviousPage()" [disabled]="currentPage === 1">Previous</button>
+      <button class="page-number-button" *ngFor="let page of totalPagesArray" [ngClass]="{'active': page === currentPage}"
+        (click)="goToPage(page)">
+        {{ page }}
+      </button>
+      <button class="pagination-button" (click)="goToNextPage()">Next</button>
+    </div>
+  </div>
+  

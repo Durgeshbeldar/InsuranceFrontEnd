@@ -11,7 +11,7 @@
   /* Individual Card */
   .card {
     background: #fffffff0;
-    border-radius: 12px;
+    border-radius: 4px;
     box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.25); /* Same shadow as sidebar */
     padding: 20px;
     display: flex;

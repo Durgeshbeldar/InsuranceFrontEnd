@@ -1,0 +1,143 @@
+<div class="transaction-card-container">
+    <!-- Header Card -->
+    <div class="transaction-card">
+      <h2>AGENT MANAGEMENT</h2>
+      <div class="transaction-card-icon">
+        <i class="fas fa-user-tie"></i> <!-- Icon for Agents -->
+      </div>
+    </div>
+  </div>
+  
+  <!-- Full Transaction Table Container -->
+  <div class="transaction-container">
+    <!-- Table Controls -->
+    <div class="table-controls">
+      <!-- Search Box -->
+      <div class="input-container">
+        <input 
+          type="text" 
+          placeholder="🔍 Search Agents..." 
+          [(ngModel)]="searchText" 
+          (keyup)="applyFilters()" 
+        />
+      </div>
+  
+      <!-- Date Picker -->
+      <div class="date-container">
+        <input 
+          type="date" 
+          [(ngModel)]="selectedDate" 
+          (change)="applyFilters()" 
+          class="search-input"
+        />
+      </div>
+  
+      <!-- Page Size Selector -->
+      <div class="dropdown-container">
+        <select (change)="changePageSize($event)">
+          <option value="5">5</option>
+          <option value="10" selected>10</option>
+          <option value="20">20</option>
+        </select>
+        <i class="icon fas fa-chevron-down"></i>
+      </div>
+    </div>
+  
+    <!-- Table Wrapper -->
+    <div class="table-wrapper">
+      <table class="transaction-table">
+        <thead>
+          <tr>
+            <th>Sr No.</th>
+            <th>Agent ID</th>
+            <th>Agent Name</th>
+            <th>Age</th>
+            <th>KYC Status</th>
+            <th>Active Since</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- No Records Found -->
+          <tr *ngIf="paginatedAgents.length === 0">
+            <td colspan="8" class="no-records">No Records Found</td>
+          </tr>
+          
+          <!-- Records -->
+          <tr *ngFor="let agent of paginatedAgents; let i = index">
+            <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+            <td>{{ agent.agentId | slice:0:7 }}</td>
+            <td>{{ agent.firstName }} {{ agent.lastName }}</td>
+            <td>{{ calculateAge(agent.dateOfBirth) }} years</td>
+            <td [ngClass]="{ 'status-success': agent.kycVerified, 'status-failed': !agent.kycVerified }">
+              {{ agent.kycVerified ? 'Verified' : 'Not Verified' }}
+            </td>
+            <td>{{ agent.activeSince | date: 'dd-MM-yyyy' }}</td>
+            <td>
+              <span [ngClass]="{
+                'status-success capsule': agent.user.isActive,
+                'status-failed capsule': !agent.user.isActive
+              }">
+                {{ agent.user.isActive ? 'Active' : 'Inactive' }}
+              </span>
+            </td>
+            <td class="action-btns">
+              <button 
+                *ngIf="agent.user.isActive" 
+                class="reject-button" 
+                (click)="toggleAgentStatus(agent, false)">Deactivate
+              </button>
+              <button 
+                *ngIf="!agent.user.isActive" 
+                class="approve-button" 
+                (click)="toggleAgentStatus(agent, true)">Activate
+              </button>
+              <button class="view-button" (click)="viewDetails(agent)">View Details</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <!-- Pagination Controls -->
+    <div class="pagination-container" *ngIf="paginatedAgents.length > 0">
+      <button class="pagination-button" (click)="goToPreviousPage()" [disabled]="currentPage === 1">Previous</button>
+      <button 
+        *ngFor="let page of totalPagesArray" 
+        class="page-number-button" 
+        [ngClass]="{'active': page === currentPage}"
+        (click)="goToPage(page)">
+        {{ page }}
+      </button>
+      <button class="pagination-button" (click)="goToNextPage()" [disabled]="currentPage === totalPagesArray.length">Next</button>
+    </div>
+  </div>
+  
+  <!-- Agent Details Modal -->
+  <div *ngIf="selectedAgent" class="agent-details-container">
+    <div class="agent-details-card">
+      <h2>Agent Details</h2>
+      <ul class="details-list">
+        <li><strong>Name </strong> {{ selectedAgent.firstName }} {{ selectedAgent.lastName }}</li>
+        <li><strong>Agent ID </strong> {{ selectedAgent.agentId | slice:0:7}}</li>
+        <li><strong>Age </strong> {{ calculateAge(selectedAgent.dateOfBirth) }} years</li>
+        <li><strong>Gender </strong> {{ selectedAgent.gender }}</li>
+        <li><strong>KYC Status </strong> 
+          <span 
+            class="status-indicator" 
+            [ngClass]="{
+              'verified': selectedAgent.kycVerified,
+              'not-verified': !selectedAgent.kycVerified
+            }"></span>
+          {{ selectedAgent.kycVerified ? 'Verified' : 'Not Verified' }}
+        </li>
+        <li><strong>Phone </strong> {{ selectedAgent.user.phoneNumber }}</li>
+        <li><strong>Email </strong> {{ selectedAgent.user.email }}</li>
+        <li><strong>Active Since </strong> {{ selectedAgent.activeSince | date: 'dd-MM-yyyy' }}</li>
+        <li><strong>Status </strong> {{ selectedAgent.user.isActive ? 'Active' : 'Inactive' }}</li>
+      </ul>
+      <button class="close-details-button" (click)="closeAgentDetails()">Close</button>
+    </div>
+  </div>
+  

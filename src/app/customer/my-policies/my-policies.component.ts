@@ -1,5 +1,8 @@
 import { Component, ViewChild, ElementRef  } from '@angular/core';
 import { InsuranceService } from 'src/app/services/insurance.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-my-policies',
@@ -16,10 +19,11 @@ export class MyPoliciesComponent {
   selectedPolicy: any = null;
   @ViewChild('searchInput', { static: false }) searchInput!: ElementRef<HTMLInputElement>;
 
-  constructor(private insuranceService: InsuranceService) {}
+  constructor(private insuranceService: InsuranceService, private router:Router) {}
 
   ngOnInit(): void {
     this.loadPoliciesByCustomerId();
+    this.initializeForm();
   }
 
   loadPoliciesByCustomerId() {
@@ -90,4 +94,68 @@ export class MyPoliciesComponent {
     this.selectedPolicy = 
       this.selectedPolicy?.policyNo === policy.policyNo ? null : policy;
   }
+
+  // Claim Section
+
+  isClaimFormVisible: boolean = false; 
+  claimForm!: FormGroup;
+
+  
+
+  initializeForm() {
+    const customerName = this.getCustomerName(); 
+
+    this.claimForm = new FormGroup({
+      policyNo: new FormControl({ disabled: true }, [Validators.required]),
+      customerId: new FormControl({  disabled: true }, [Validators.required]),
+      claimAmount: new FormControl('', [Validators.required, Validators.min(1)]),
+      bankAccountNo: new FormControl('', [Validators.required, Validators.pattern('^[0-9]{9,18}$')]),
+      bankAccountHolderName: new FormControl(customerName, [Validators.required, Validators.minLength(3)]),
+      ifscCode: new FormControl('', [Validators.required, Validators.pattern('^[A-Z|a-z]{4}[0-9]{7}$')]),
+      bankName: new FormControl('', [Validators.required, Validators.minLength(3)])
+    });
+  }
+
+  toggleClaimForm(policy: any) {
+    this.isClaimFormVisible = true;
+    this.claimForm.patchValue({
+      policyNo: policy.policyNo,
+      customerId: policy.customerId,
+      bankAccountHolderName: policy.customer.firstName + ' ' + policy.customer.lastName,
+      claimAmount : policy.sumAssured
+    });
+  }
+
+  submitClaim() {
+  
+
+    const payload = this.claimForm.getRawValue();
+    console.log('Claim Submitted:', payload);
+    this.insuranceService.addClaim(payload).subscribe({
+      next: () => {
+        alert("Claim Submitted Successfully");
+        this.claimForm.reset();
+        this.router.navigateByUrl("my-claims");
+      },
+      error: (err) => {
+        console.log("error", err);
+      }
+    })
+  }
+
+  cancelClaim() {
+    this.isClaimFormVisible = false;
+    this.claimForm.reset();
+  }
+
+  getCustomerName() {
+    // Logic to fetch customer name (from API or localStorage)
+    return 'John Doe'; // Example name
+  }
+
+
+
+
+
+
 }

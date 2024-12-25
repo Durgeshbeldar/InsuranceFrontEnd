@@ -1,0 +1,134 @@
+<div class="transaction-card-container">
+    <!-- Header Card -->
+    <div class="transaction-card">
+        <h2>CLAIMS MANAGEMENT</h2>
+        <div class="transaction-card-icon">
+            <i class="fas fa-file-invoice-dollar"></i> <!-- Icon for Claims -->
+        </div>
+    </div>
+</div>
+
+<!-- Full Transaction Table Container -->
+<div class="transaction-container">
+    <!-- Table Controls -->
+    <div class="table-controls">
+        <!-- Search Box -->
+        <div class="input-container">
+            <input type="text" placeholder="🔍 Search Claims..." (keyup)="applyFilters()" #searchInput
+            [(ngModel)]="searchText" 
+            (keyup)="applyFilters()" 
+             />
+        </div>
+
+        <div class="date-container">
+            <input 
+              type="date" 
+              [(ngModel)]="selectedDate" 
+              (change)="applyFilters()" 
+              class="search-input"
+            />
+          </div>
+        <!-- Page Size Selector -->
+        <div class="dropdown-container">
+            <select (change)="changePageSize($event)">
+                <option value="5">5</option>
+                <option value="10" selected>10</option>
+                <option value="20">20</option>
+            </select>
+            <i class="icon fas fa-chevron-down"></i>
+        </div>
+    </div>
+
+    <!-- Table Wrapper -->
+    <div class="table-wrapper">
+        <table class="transaction-table" >
+            <thead>
+                <tr>
+                    <th>Sr No.</th>
+                    <th>Policy No</th>
+                    <th>Customer Name</th>
+                    <th>Claim Amount</th>
+                    <th>Bank Name</th>
+                    <th>Claim Date</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngIf="paginatedClaims.length === 0">
+                    <td colspan="8" class="no-records">No Records Found</td>
+                </tr>
+                <tr  *ngFor="let claim of paginatedClaims; let i = index">
+                    <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+                    <td style="text-transform: uppercase; font-weight:600;">{{ claim.policyNo | slice: 0:7 }}</td>
+                    <td>{{ claim.bankAccountHolderName }}</td>
+                    <td style="color: green; font-weight: 500;">₹{{ claim.claimAmount }}</td>
+                    <td>{{ claim.bankName }}</td>
+                    <td>{{ claim.claimDate | date: 'dd-MM-yyyy' }}</td>
+                    <td [ngClass]="{
+    'status-approved1': claim.status === 'Approved',
+    'status-rejected1': claim.status === 'Rejected',
+    'status-submitted1': claim.status === 'Submitted'
+  }">
+                        {{ claim.status }}
+                    </td>
+
+
+                    <td class="action-btns">
+                        <!-- <button class="view-button" (click)="viewClaimDetails(claim)">
+                            View Details
+                        </button> -->
+                        <button class="approve-button" (click)="onApprove(claim)"
+                            [disabled]="claim.status === 'Approved' ||claim.status === 'Rejected'">Approve</button>
+                        <button class="reject-button" (click)="onReject(claim)"
+                            [disabled]="claim.status === 'Approved' || claim.status === 'Rejected'">Reject</button>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Pagination Controls -->
+    <div class="pagination-container" *ngIf="paginatedClaims.length > 0">
+        <button class="pagination-button" (click)="goToPreviousPage()" [disabled]="currentPage === 1">
+          Previous
+        </button>
+        <button 
+          *ngFor="let page of totalPagesArray" 
+          class="page-number-button" 
+          [ngClass]="{'active': page === currentPage}"
+          (click)="goToPage(page)">
+          {{ page }}
+        </button>
+        <button class="pagination-button" (click)="goToNextPage()" [disabled]="currentPage === totalPagesArray.length">
+          Next
+        </button>
+      </div>
+      
+</div>
+
+<!-- Modal  -->
+
+<!-- Reject Reason Modal -->
+<div *ngIf="showRejectModal" class="modal-overlay">
+    <div class="modal">
+        <div class="modal-header">
+            <h2>Rejection Reason</h2>
+            <span class="close-button" (click)="closeRejectModal()">×</span>
+        </div>
+        <div class="modal-body">
+            <label for="rejectionReason">Please provide the reason for rejection :</label>
+            <textarea id="rejectionReason" [(ngModel)]="rejectionReason" rows="4"
+                placeholder="Enter rejection reason"></textarea>
+        </div>
+        <div class="modal-footer">
+            <button class="confirm-button" (click)="confirmRejection()">Confirm</button>
+            <button class="close-button" (click)="closeRejectModal()">Close</button>
+        </div>
+    </div>
+</div>
+
+
+<!-- Details  -->
+

@@ -12,7 +12,7 @@ import { EmailService } from 'src/app/services/email.service';
 export class AddCustomerComponent {
 
   isUserAdded = false;
-  roleId = "43bdb71b-24b3-49d0-47d5-08dd191da96b";
+  roleId = "3aedb5cb-b9e6-4750-6aa7-08dd20ccb884";
   states: any;
   cities: any;
 

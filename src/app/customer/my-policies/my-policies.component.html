@@ -67,9 +67,9 @@
               <button class="view-button"  (click)="togglePolicyDetails(policy)">
                 View Details
               </button>
-              <button 
+              <button (click)="toggleClaimForm(policy)"
               class="claim-button" 
-              [disabled]="policy.totalPaidAmount < policy.premiumAmount">
+              >
               Claim
             </button>
             </td>
@@ -118,3 +118,63 @@
       </div>
     </div>
   </div>
+
+  <!-- Claim Form  -->
+
+  <!-- Full Claim Form Section (Visible on Claim Button Click) -->
+<div class="claim-form-container" *ngIf="isClaimFormVisible">
+  <div class="claim-form-card">
+    <h2>CLAIM YOUR POLICY</h2>
+    <form [formGroup]="claimForm" (ngSubmit)="submitClaim()">
+      <!-- Policy Details (Read-Only Fields) -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="policyNo">Policy No</label>
+          <input id="policyNo" type="text" formControlName="policyNo" readonly/>
+        </div>
+        <div class="form-group">
+          <label for="customerId">Customer ID</label>
+          <input id="customerId" type="text" formControlName="customerId" readonly />
+        </div>
+      </div>
+
+      <!-- Claim Amount -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="claimAmount">Claim Amount (₹)</label>
+          <input style="font-weight: 600; color: green;" id="claimAmount" type="number" formControlName="claimAmount" readonly />
+        </div>
+      </div>
+
+      <!-- Bank Account Details -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="bankAccountNo">Bank Account No</label>
+          <input id="bankAccountNo" type="text" formControlName="bankAccountNo" placeholder="Enter Bank Account Number" />
+        </div>
+        <div class="form-group">
+          <label for="bankAccountHolderName">Account Holder Name</label>
+          <input id="bankAccountHolderName" type="text" formControlName="bankAccountHolderName" 
+          placeholder="Enter Account Holder Name" />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="ifscCode">IFSC Code</label>
+          <input id="ifscCode" type="text" formControlName="ifscCode" placeholder="Enter IFSC Code" />
+        </div>
+        <div class="form-group">
+          <label for="bankName">Bank Name</label>
+          <input id="bankName" type="text" formControlName="bankName" placeholder="Enter Bank Name" />
+        </div>
+      </div>
+
+      <!-- Form Actions -->
+      <div class="form-actions">
+        <button type="submit" class="submit-button" >Submit Claim</button>
+        <button type="button" class="cancel-button" (click)="cancelClaim()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>

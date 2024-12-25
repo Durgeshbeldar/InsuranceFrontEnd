@@ -13,7 +13,7 @@ export class InsuranceService {
   installmentUrl = 'https://localhost:7191/api/Installment/bulk-add';
   getInstallmentByPolicyIdUrl = 'https://localhost:7191/api/Installment/PolicyAccount/';
   updateInstallmentUrl = 'https://localhost:7191/api/Installment';
-
+  claimUrl = 'https://localhost:7191/api/Claim';
 
   constructor(private http: HttpClient) { }
   
@@ -22,6 +22,22 @@ export class InsuranceService {
   }
   updatePolicyAccount(data:any){
     return this.http.put(this.policyUrl, data);
+  }
+
+  addClaim( claimData:any){
+     return this.http.post(this.claimUrl,claimData)
+  }
+
+  getClaimsByCustomerId(id :any){
+      return this.http.get(this.claimUrl+'/Customer/'+id);
+  }
+
+  getAllClaims(){
+    return this.http.get(this.claimUrl);
+  }
+
+  updateClaim(claimData:any){
+    return this.http.put(this.claimUrl,claimData);
   }
 
   updateInstallment(data :any){
