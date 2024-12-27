@@ -59,11 +59,14 @@ export class LoginComponent {
           alert("Login successful");
           this.router.navigateByUrl('/admin-dashboard');
         } else if(this.role.roleName === 'Customer') {
+          alert("Login successful");
           this.router.navigateByUrl('/customer-dashboard');
         }else if(this.role.roleName === 'Agent'){
+          alert("Login successful");
           this.router.navigateByUrl('/agent-dashboard');
         }
         else if(this.role.roleName === "Employee"){
+          alert("Login successful");
           this.router.navigateByUrl('/employee-dashboard');
         }
         else  {

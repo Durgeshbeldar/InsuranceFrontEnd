@@ -528,7 +528,7 @@
   font-weight: bold; /* Bold text */
   padding: 10px 20px; /* Padding for the button */
   border: none; /* Remove border */
-  border-radius: 5px; /* Rounded corners */
+  border-radius: 4px; /* Rounded corners */
   cursor: pointer; /* Pointer cursor on hover */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
   transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover animations */

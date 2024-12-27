@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
-
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-manage-agents',
   templateUrl: './manage-agents.component.html',
@@ -113,5 +113,66 @@ export class ManageAgentsComponent {
   closeAgentDetails() {
     this.showAgentDetails = false;
     this.selectedAgent = null;
+  }
+
+  // Edit Agent 
+
+  showEditModal: boolean = false;
+
+  editAgentForm: FormGroup = new FormGroup({
+    firstName: new FormControl('', Validators.required),
+    lastName: new FormControl('', Validators.required),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    phoneNumber: new FormControl('', [Validators.required, Validators.pattern(/^\d{10}$/)])
+  });
+
+  openEditModal(agent: any) {
+    this.selectedAgent = agent;
+    this.editAgentForm.patchValue({
+      firstName: agent.firstName,
+      lastName: agent.lastName,
+      email: agent.user.email,
+      phoneNumber: agent.user.phoneNumber
+    });
+    this.showEditModal = true;
+  }
+
+  closeEditModal() {
+    this.showEditModal = false;
+    this.selectedAgent = null;
+    this.editAgentForm.reset();
+  }
+
+  submitEditForm() {
+    if (this.editAgentForm.invalid) return;
+
+    this.selectedAgent.user.email = this.editAgentForm.get('email')?.value;
+    this.selectedAgent.user.phoneNumber = this.editAgentForm.get('phoneNumber')?.value;
+    this.selectedAgent.firstName = this.editAgentForm.get('firstName')?.value;
+    this.selectedAgent.lastName = this.editAgentForm.get('lastName')?.value;
+
+    console.log(this.selectedAgent);
+    const user = this.selectedAgent.user;
+    this.userService.updateUser(user).subscribe({
+      next : ()=>{
+        console.log("User updated successfully");
+        this.updateAgent();
+      },
+      error: (err)=>{
+        console.log("Failed to update user",err);
+      }
+    })
+  }
+  updateAgent(){
+    this.userService.updateAgent(this.selectedAgent).subscribe({
+      next: () => {
+        alert('Agent updated successfully!');
+        this.loadAgents();
+        this.closeEditModal();
+      },
+      error: (err) => {
+        console.error('Error updating agent:', err);
+      }
+    });
   }
 }

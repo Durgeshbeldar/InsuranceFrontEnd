@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef  } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { InsuranceService } from 'src/app/services/insurance.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -17,17 +17,30 @@ export class MyPoliciesComponent {
   itemsPerPage: number = 10;
   totalPagesArray: number[] = [];
   selectedPolicy: any = null;
+  nominees : any[] = [];
   @ViewChild('searchInput', { static: false }) searchInput!: ElementRef<HTMLInputElement>;
 
-  constructor(private insuranceService: InsuranceService, private router:Router) {}
+  constructor(private insuranceService: InsuranceService, private router: Router) { }
 
   ngOnInit(): void {
+    this.loadNominees();
     this.loadPoliciesByCustomerId();
     this.initializeForm();
   }
+  loadNominees(){
+    this.insuranceService.getNominees().subscribe({
+      next: (response:any)=>{
+        console.log('Nominees loaded');
+        this.nominees= response.data;
+      },
+      error: (error)=>{
+        console.log('Error loading nominees', error);
+      }
+    })
+  }
 
   loadPoliciesByCustomerId() {
-    const customerId = localStorage.getItem('userId'); 
+    const customerId = localStorage.getItem('userId');
     this.insuranceService.getPolicyAccountsByCustomerId(customerId).subscribe((response: any) => {
       this.policies = response.data;
       this.filteredPolicies = [...this.policies];
@@ -35,13 +48,18 @@ export class MyPoliciesComponent {
     });
   }
 
+  // isNomineeExist : boolean = false;
+  isNomineeExist(policyNo :any) : boolean {
+    return this.nominees.some(nominee=>nominee.policyNo === policyNo);
+  }
+
   applyFilters() {
     const searchQuery = this.searchInput.nativeElement.value.toLowerCase();
 
-    this.filteredPolicies = this.policies.filter(policy => 
-      policy.policyNo.toLowerCase().includes(searchQuery) || 
-      policy.insuranceScheme?.schemeName.toLowerCase().includes(searchQuery) || 
-      policy.agent?.firstName.toLowerCase().includes(searchQuery) 
+    this.filteredPolicies = this.policies.filter(policy =>
+      policy.policyNo.toLowerCase().includes(searchQuery) ||
+      policy.insuranceScheme?.schemeName.toLowerCase().includes(searchQuery) ||
+      policy.agent?.firstName.toLowerCase().includes(searchQuery)
     );
 
     this.updatePagination();
@@ -57,7 +75,7 @@ export class MyPoliciesComponent {
 
   changePageSize(event: any) {
     this.itemsPerPage = parseInt(event.target.value, 10);
-    this.currentPage = 1; 
+    this.currentPage = 1;
     this.updatePagination();
   }
 
@@ -85,29 +103,33 @@ export class MyPoliciesComponent {
     this.setPaginatedPolicies();
   }
 
- 
+
 
   viewPolicyDetails(policy: any) {
     this.selectedPolicy = policy;
   }
   togglePolicyDetails(policy: any) {
-    this.selectedPolicy = 
+    this.selectedPolicy =
       this.selectedPolicy?.policyNo === policy.policyNo ? null : policy;
   }
 
   // Claim Section
 
-  isClaimFormVisible: boolean = false; 
+  isClaimFormVisible: boolean = false;
   claimForm!: FormGroup;
 
-  
+  getNomineeName(policyNo :any) : string {
+    let nominee = this.nominees.find(nominee => nominee.policyNo === policyNo);
+    return nominee.nomineeName;
+  }
+
 
   initializeForm() {
-    const customerName = this.getCustomerName(); 
+    const customerName = this.getCustomerName();
 
     this.claimForm = new FormGroup({
       policyNo: new FormControl({ disabled: true }, [Validators.required]),
-      customerId: new FormControl({  disabled: true }, [Validators.required]),
+      customerId: new FormControl({ disabled: true }, [Validators.required]),
       claimAmount: new FormControl('', [Validators.required, Validators.min(1)]),
       bankAccountNo: new FormControl('', [Validators.required, Validators.pattern('^[0-9]{9,18}$')]),
       bankAccountHolderName: new FormControl(customerName, [Validators.required, Validators.minLength(3)]),
@@ -122,12 +144,12 @@ export class MyPoliciesComponent {
       policyNo: policy.policyNo,
       customerId: policy.customerId,
       bankAccountHolderName: policy.customer.firstName + ' ' + policy.customer.lastName,
-      claimAmount : policy.sumAssured
+      claimAmount: policy.sumAssured
     });
   }
 
   submitClaim() {
-  
+
 
     const payload = this.claimForm.getRawValue();
     console.log('Claim Submitted:', payload);
@@ -152,10 +174,53 @@ export class MyPoliciesComponent {
     // Logic to fetch customer name (from API or localStorage)
     return 'John Doe'; // Example name
   }
+  // Nominee logic 
+
+  showNomineeModal = false; // Controls modal visibility
+
+  relationships: string[] = ['Spouse', 'Child', 'Parent', 'Sibling', 'Other']; // Dropdown options
+
+  addNomineeForm = new FormGroup({
+    nomineeName: new FormControl('', [Validators.required, Validators.maxLength(50)]),
+    relationship: new FormControl('', Validators.required),
+    age: new FormControl('', [Validators.required, Validators.min(0), Validators.max(150)]),
+  });
 
 
+  // Open Modal
+  openAddNomineeModal(policy:any) {
+    this.selectedPolicy = policy;
+    this.showNomineeModal = true;
+  }
 
+  // Close Modal
+  closeAddNomineeModal() {
+    this.showNomineeModal = false;
+    this.addNomineeForm.reset();
+    this.selectedPolicy= null;
+  }
 
+  // Submit Form
+  submitNomineeForm() {
+    if (this.addNomineeForm.invalid) {
+      alert('Please fill all fields correctly.');
+      return;
+    }
 
+    const nomineePayload = {
+      ...this.addNomineeForm.value,
+      policyNo: this.selectedPolicy.policyNo,
+    };
 
+    this.insuranceService.addNominee(nomineePayload).subscribe({
+      next: () => {
+        alert('Nominee added successfully!');
+        this.closeAddNomineeModal();
+      },
+      error: (err) => {
+        console.error('Error adding nominee:', err);
+        alert('Failed to add nominee. Please try again.');
+      },
+    });
+  }
 }

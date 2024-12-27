@@ -40,7 +40,7 @@
               </i>
             </span>
           </td>
-          <td>{{ policy.agent ? policy.agent.firstName + ' ' + policy.agent.lastName : 'Not Applicable' }}</td>
+          <td>{{ policy.agent ? policy.agent.firstName + ' ' + policy.agent.lastName : 'Not Available' }}</td>
           <td>{{ policy.insuranceScheme?.schemeName }}</td>
           <td>₹{{ policy.sumAssured }}</td>
           <td>{{ policy.premiumType }}</td>
@@ -98,7 +98,7 @@
       <li><strong>Policy Term:</strong> {{ selectedPolicy.policyTerm }} months</li>
       <li><strong>Premium Amount:</strong> ₹{{ selectedPolicy.premiumAmount }}</li>
       <li><strong>Installment Amount:</strong> {{ selectedPolicy.installmentAmount ? '₹' +
-        selectedPolicy.installmentAmount : 'Not Applicable' }}</li>
+        selectedPolicy.installmentAmount : 'Not Available' }}</li>
       <li><strong>Applied Date:</strong> {{ selectedPolicy.appliedDate | date: 'dd-MM-yyyy' }}</li>
       <li><strong>Estimated Maturity Date:</strong> {{ selectedPolicy.maturityDate | date: 'dd-MM-yyyy' }}</li>
       <li><strong>Status:</strong> {{ selectedPolicy.status }}</li>

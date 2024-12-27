@@ -1,75 +1,165 @@
-<div class="customers-container">
-    <!-- Header Section -->
-    <div class="header-section">
-      <h2>Customer List</h2>
-    </div>
-  
-    <!-- Customer Table -->
-    <div class="table-wrapper">
-      <table class="customers-table">
-        <thead>
-          <tr>
-            <th>Sr No.</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Gender</th>
-            <th>Phone</th>
-            <th>KYC Verified</th>
-            <th>Created At</th>
-            <th>Action</th>
-            <th>Details</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let customer of paginatedCustomers; let i = index">
-            <td>{{ i + 1 }}</td>
-            <td>{{ customer.firstName }}</td>
-            <td>{{ customer.lastName }}</td>
-            <td>{{ customer.gender }}</td>
-            <td>{{ customer.phoneNumber }}</td>
-            <td>
-              <span class="kyc-status">
-                <i 
-                  class="status-icon fas"
-                  [ngClass]="customer.kycVerified ? 'fa-check-circle green' : 'fa-times-circle red'"
-                ></i>
-              </span>
-            </td>
-            <td>{{ customer.createdAt | date: 'dd-MM-yyyy' }}</td>
-            <td>
-              <button class="sale-button" (click)="onSalePolicy(customer)">
-              Update
-              </button>
-            </td>
-            <td>
-              <button class="details-toggle" (click)="toggleCustomerDetails(customer)">
-                <i class="fas fa-eye"></i>
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  
-    <!-- Pagination -->
-    <div class="pagination-container">
-      <button class="pagination-button" [disabled]="currentPage === 1" (click)="goToPreviousPage()">Previous</button>
-      <span style="color:white; font-weight: 700;">Page {{ currentPage }} of {{ totalPages }}</span>
-      <button class="pagination-button" [disabled]="currentPage === totalPages" (click)="goToNextPage()">Next</button>
-    </div>
-  
-    <!-- Detailed View -->
-    <div *ngIf="selectedCustomer" class="customer-details">
-      <h3>Customer Details</h3>
-      <ul>
-        <li><strong>First Name:</strong> {{ selectedCustomer.firstName }}</li>
-        <li><strong>Last Name:</strong> {{ selectedCustomer.lastName }}</li>
-        <li><strong>Gender:</strong> {{ selectedCustomer.gender }}</li>
-        <li><strong>Date of Birth:</strong> {{ selectedCustomer.dateOfBirth | date: 'dd-MM-yyyy' }}</li>
-        <li><strong>Phone:</strong> {{ selectedCustomer.phoneNumber }}</li>
-        <li><strong>KYC Verified:</strong> {{ selectedCustomer.kycVerified ? 'Yes' : 'No' }}</li>
-        <li><strong>Created At:</strong> {{ selectedCustomer.createdAt | date: 'dd-MM-yyyy' }}</li>
-      </ul>
+<div class="transaction-card-container">
+  <!-- Header Section -->
+  <div class="transaction-card">
+    <h2>CUSTOMER LIST</h2>
+    <div class="transaction-card-icon">
+      <i class="fas fa-users"></i> <!-- Icon for Customers -->
     </div>
   </div>
-  
+</div>
+
+<!-- Table and Controls -->
+<div class="transaction-container">
+  <div class="table-controls">
+    <!-- Search Box -->
+    <div class="input-container">
+      <input type="text" placeholder="🔍 Search Customers..." [(ngModel)]="searchText" (keyup)="applyFilters()" />
+      <i class="icon fas fa-search"></i>
+    </div>
+
+    <!-- Date Filter -->
+    <div class="date-container">
+      <input type="date" [(ngModel)]="selectedDate" (change)="applyFilters()" />
+      <i class="icon fas fa-calendar-alt"></i>
+    </div>
+
+    <!-- Page Size Dropdown -->
+    <div class="dropdown-container">
+      <select (change)="changePageSize($event)">
+        <option value="5">5</option>
+        <option value="10" selected>10</option>
+        <option value="20">20</option>
+      </select>
+      <i class="icon fas fa-chevron-down"></i>
+    </div>
+  </div>
+
+  <!-- Table -->
+  <div class="table-wrapper">
+    <table class="transaction-table">
+      <thead>
+        <tr>
+          <th>Sr No.</th>
+          <th>Customer Name</th>
+          <th>Gender</th>
+          <th>Phone Number</th>
+          <th>KYC Verified</th>
+          <th>Created At</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- No Records Found -->
+        <tr *ngIf="paginatedCustomers.length === 0">
+          <td colspan="9" class="no-records">No Records Found</td>
+        </tr>
+
+        <!-- Customer Records -->
+        <tr *ngFor="let customer of paginatedCustomers; let i = index">
+          <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+          <td>{{ customer.firstName }} {{ customer.lastName }}</td>
+          <td>{{ customer.gender }}</td>
+          <td>{{ customer.phoneNumber }}</td>
+          <td>
+            <span class="status-indicator" [ngClass]="{
+                'verified': customer.kycVerified,
+                'not-verified': !customer.kycVerified
+              }"></span>
+
+          </td>
+          <td>{{ customer.createdAt | date: 'dd-MM-yyyy' }}</td>
+          <td>
+            <span class="status-success capsule" *ngIf="customer.user.isActive">Active</span>
+            <span class="status-failed capsule" *ngIf="!customer.user.isActive">Inactive</span>
+          </td>
+          <td class="action-btns">
+            <button *ngIf="!customer.user.isActive" class="approve-button"
+              (click)="toggleCustomerStatus(customer, true)">Activate</button>
+            <button *ngIf="customer.user.isActive" class="reject-button"
+              (click)="toggleCustomerStatus(customer, false)">Deactivate</button>
+            <button class="view-button" (click)=" toggleCustomerDetails(customer)">View Details</button>
+            <button class="edit-button" (click)="openEditModal(customer)">Update</button>
+            <button class="verify-button" *ngIf="!customer.kycVerified" (click)="verifyCustomer(customer)">Verify</button>
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination -->
+  <div class="pagination-container">
+    <button class="pagination-button" [disabled]="currentPage === 1" (click)="goToPreviousPage()">Previous</button>
+    <button *ngFor="let page of totalPagesArray" class="page-number-button"
+      [ngClass]="{ 'active': page === currentPage }" (click)="goToPage(page)">{{ page }}</button>
+    <button class="pagination-button" [disabled]="currentPage === totalPagesArray.length"
+      (click)="goToNextPage()">Next</button>
+  </div>
+</div>
+
+<!-- Customer Details Modal -->
+<div *ngIf="selectedCustomer" class="agent-details-container">
+  <div class="agent-details-card">
+    <h2>Customer Details</h2>
+    <ul class="details-list">
+      <li><strong>First Name </strong> {{ selectedCustomer.firstName }}</li>
+      <li><strong>Last Name </strong> {{ selectedCustomer.lastName }}</li>
+      <li><strong>Age </strong> {{ calculateAge(selectedCustomer.dateOfBirth) }} years</li>
+      <li><strong>Gender </strong> {{ selectedCustomer.gender }}</li>
+      <li><strong>KYC Status </strong>
+       
+        {{ selectedCustomer.kycVerified ? 'Verified' : 'Not Verified' }}
+      </li>
+      <li><strong>Phone </strong> {{ selectedCustomer.user.phoneNumber }}</li>
+      <li><strong>Email </strong> {{ selectedCustomer.user.email }}</li>
+      <li><strong>Created At </strong> {{ selectedCustomer.createdAt | date: 'dd-MM-yyyy' }}</li>
+      <li><strong>Status </strong>
+        <span>
+          {{ selectedCustomer.user.isActive ? 'Active' : 'Inactive' }}
+        </span>
+      </li>
+    </ul>
+    <button class="close-details-button" (click)="closeCustomerDetails()">Close</button>
+  </div>
+</div>
+
+<!-- Edit Modal -->
+<div *ngIf="showEditModal" class="modal-overlay">
+  <div class="modal">
+    <div class="modal-header">
+      <h2>Edit Customer</h2>
+      <span class="close-button" (click)="closeEditModal()">×</span>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="editCustomerForm" (ngSubmit)="submitEditForm()">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input id="firstName" formControlName="firstName" type="text" />
+            <div class="error-message"
+              *ngIf="editCustomerForm.get('firstName')?.invalid && editCustomerForm.get('firstName')?.touched">
+              <span *ngIf="editCustomerForm.get('firstName')?.errors?.['required']">First Name is required.</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input id="lastName" formControlName="lastName" type="text" />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input id="email" formControlName="email" type="email" />
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input id="phone" formControlName="phoneNumber" type="text" />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" [disabled]="editCustomerForm.invalid" class="save-button">Save Changes</button>
+          <button type="button" (click)="closeEditModal()" class="cancel-button">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

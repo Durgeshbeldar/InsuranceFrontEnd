@@ -244,9 +244,10 @@
   
   /* 🔍 Search Input Styling */
   .input-container {
-    width: 40%; /* Adjust width */
+    width: 40%;
     position: relative;
   }
+  
   
   .input-container input {
     width: 100%;
@@ -316,7 +317,7 @@
   /* Hover Effects */
   .dropdown-container select:hover ~ .icon,
   .input-container input:hover ~ .icon {
-    color: #0d6efd; /* Icon highlights on hover */
+    color: #003077; /* Icon highlights on hover */
   }
   
   .dropdown-container select:focus ~ .icon {
@@ -354,7 +355,7 @@
   
   .input-container input,
   .date-container input {
-    width: 50%;
+    width: 80%;
     padding: 12px 20px;
     border-radius: 4px;
     border: 2px solid #03091d;
@@ -379,6 +380,7 @@
     font-size: 1.2rem;
     color: #000000;
   }
+  
   
   @media (max-width: 768px) {
     .table-controls {
@@ -418,7 +420,6 @@
     padding: 10px 15px; /* Button padding */
     font-size: 0.9rem; /* Font size */
     font-weight: 600; /* Bold text */
-    text-transform: uppercase; /* Uppercase text */
     border-radius: 4px; /* Rounded corners */
     cursor: pointer; /* Pointer cursor */
     transition: all 0.3s ease; /* Smooth hover transition */
@@ -439,7 +440,6 @@
     padding: 10px 15px; /* Button padding */
     font-size: 0.9rem; /* Font size */
     font-weight: 600; /* Bold text */
-    text-transform: uppercase; /* Uppercase text */
     border-radius: 4px; /* Rounded corners */
     cursor: pointer; /* Pointer cursor */
     transition: all 0.3s ease; /* Smooth hover transition */
@@ -776,6 +776,7 @@
       transform: translateY(0);
     }
   }
+  
 
   /* Edit Modal  */
 
@@ -996,6 +997,248 @@
   font-weight: 500 !important;
   margin-top: 6px;
 }
+
+  /* Status Approved: Green */
+.status-approved2 {
+    color: #00a808 !important; 
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  .status-rejected2 {
+    color: #dd1f0a !important;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  .status-pending2 {
+    color: #f59e0b  !important; 
+    font-weight: bold;
+    text-transform: uppercase;
+  }
   
 
+  /* Status Indicator for KYC Verified */
+.status-indicator.verified {
+    background: #00b542; /* Green */
+  }
+  
+  .status-indicator.not-verified {
+    background: #c50101; /* Red */
+  }
+  
+  /* Close Button Styling */
+  .close-details-button {
+    display: inline-block;
+    margin-top: 20px;
+    background: #071234;
+    color: #ffffff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 11px 20px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .close-details-button:hover {
+    background: #04112c;
+    box-shadow: 0px 6px 15px rgba(37, 99, 235, 0.3);
+    transform: translateY(-3px);
+  }
+  
 
+  /* Document Window  */
+
+  /* Modal Overlay */
+.documents-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  /* Modal */
+  .documents-modal {
+    margin-top: 4%;
+    margin-left: 20%;
+    background: #f9f9f9;
+    border-radius: 4px;
+    width: 50%;
+    max-width: 800px;
+    padding: 20px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+    position: relative;
+    animation: slideIn 0.4s ease-in-out;
+  }
+  
+  /* Modal Header */
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #e3e3e3;
+    padding-bottom: 10px;
+  }
+  
+  .modal-header h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #071234;
+  }
+  
+  .modal-header .close-button {
+    font-size: 1.8rem;
+    color: #ff4d4d;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .modal-header .close-button:hover {
+    color: #c0392b;
+  }
+  
+  /* Modal Body */
+  .modal-body {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  /* Document Viewer */
+  .document-slider {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+  
+  .document-viewer {
+    text-align: center;
+    max-width: 400px;
+  }
+  
+  .document-preview {
+    width: 100%;
+    height: auto;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .document-info {
+    margin-top: 10px;
+    font-size: 1rem;
+    color: #333333;
+  }
+.slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+  font-weight: bold;
+  color: #071234; /* Neutral dark color */
+  background-color: rgba(172, 197, 255, 0.8); /* Subtle background */
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for a floating effect */
+  transition: all 0.3s ease;
+  z-index: 2; /* Ensure it stays above the image */
+}
+
+/* Left Arrow Position */
+.slider-arrow.left {
+  left: -80px; /* Adjust spacing from the image */
+  margin-left: 10px !important;
+}
+
+/* Right Arrow Position */
+.slider-arrow.right {
+  right: -80px; /* Adjust spacing from the image */
+}
+
+/* Hover Effect for Arrows */
+.slider-arrow:hover {
+  transform: translateY(-50%) scale(1.1);
+  background-color: #e6e6e6; /* Slightly darker background on hover */
+}
+
+/* Disabled State */
+.slider-arrow.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+
+  
+  /* No Documents State */
+  .no-documents {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #a80000;
+  }
+  
+  /* Modal Footer */
+  .modal-footer {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .close-modal-button {
+    padding: 10px 20px;
+    background: #071234;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .close-modal-button:hover {
+    background: #04112c;
+    transform: translateY(-2px);
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideIn {
+    from {
+      transform: translateY(-20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  

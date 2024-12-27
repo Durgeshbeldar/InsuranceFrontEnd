@@ -14,7 +14,7 @@ export class InsuranceService {
   getInstallmentByPolicyIdUrl = 'https://localhost:7191/api/Installment/PolicyAccount/';
   updateInstallmentUrl = 'https://localhost:7191/api/Installment';
   claimUrl = 'https://localhost:7191/api/Claim';
-
+  nomineeUrl = 'https://localhost:7191/api/Nominee';
   constructor(private http: HttpClient) { }
   
   addInstallmentScheduled(data:any){
@@ -31,7 +31,12 @@ export class InsuranceService {
   getClaimsByCustomerId(id :any){
       return this.http.get(this.claimUrl+'/Customer/'+id);
   }
-
+  addNominee(data :any){
+    return this.http.post(this.nomineeUrl, data);
+  }
+  getNominees(){
+    return this.http.get(this.nomineeUrl);
+  }
   getAllClaims(){
     return this.http.get(this.claimUrl);
   }

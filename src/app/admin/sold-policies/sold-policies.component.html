@@ -1,0 +1,210 @@
+<div class="transaction-card-container">
+    <!-- Header Card -->
+    <div class="transaction-card">
+      <h2>Policy Account Management</h2>
+      <div class="transaction-card-icon">
+        <i class="fas fa-file-invoice-dollar"></i> <!-- Icon -->
+      </div>
+    </div>
+  </div>
+  
+  <!-- Full Table Container -->
+  <div class="transaction-container">
+    <!-- Table Controls -->
+    <div class="table-controls">
+      <!-- Search Box -->
+      <div class="input-container">
+        <input
+          type="text"
+          placeholder="🔍 Search Policy Accounts..."
+          [(ngModel)]="searchText"
+          (keyup)="applyFilters()"
+        />
+      </div>
+  
+      <!-- Date Picker -->
+      <div class="date-container">
+        <input
+          type="date"
+          [(ngModel)]="selectedDate"
+          (change)="applyFilters()"
+          class="search-input"
+        />
+      </div>
+  
+      <div class="dropdown-container">
+        <select [(ngModel)]="selectedStatus" (change)="applyFilters()">
+          <option value="">Filter By</option>
+          <option value="Approved">Approved</option>
+          <option value="Rejected">Rejected</option>
+          <option value="Pending">Pending</option>
+        </select>
+        <i class="icon fas fa-chevron-down"></i>
+      </div>
+
+      <!-- Page Size Selector -->
+      <div class="dropdown-container">
+        <select (change)="changePageSize($event)">
+          <option value="5">5</option>
+          <option value="10" selected>10</option>
+          <option value="20">20</option>
+        </select>
+        <i class="icon fas fa-chevron-down"></i>
+      </div>
+    </div>
+  
+    <!-- Table Wrapper -->
+    <div class="table-wrapper">
+      <table class="transaction-table">
+        <thead>
+          <tr>
+            <th>Sr No.</th>
+            <th>Policy No</th>
+            <th>Customer Name</th>
+            <th>KYC Status</th>
+            <th>Agent Name</th>
+            <th>Scheme Name</th>
+            <th>Sum Assured</th>
+            <th>Premium Type</th>
+            <th>Policy Term</th>
+            <th>Premium Amount</th>
+            <th>Installment Amount</th>
+            <th>Applied Date</th>
+            <th>Est. Maturity Date</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- No Records Found -->
+          <tr *ngIf="paginatedPolicies.length === 0">
+            <td colspan="17" class="no-records">No Records Found</td>
+          </tr>
+  
+          <!-- Records -->
+          <tr *ngFor="let policy of paginatedPolicies; let i = index">
+            <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+            <td style="text-transform: uppercase; font-weight: 500;">{{ policy.policyNo | slice:0:7 }}</td>
+            <td>{{ policy.customer.firstName }} {{ policy.customer.lastName }}</td>
+            <td [ngClass]="{ 'status-success': policy.customer.kycVerified, 'status-failed': !policy.customer.kycVerified }">
+              {{ policy.customer.kycVerified ? 'Verified' : 'Not Verified' }}
+            </td>
+            <td>{{ policy.agent ? policy.agent.firstName + ' ' + policy.agent.lastName : 'N/A' }}</td>
+            <td>{{ policy.insuranceScheme.schemeName }}</td>
+            <td>₹{{ policy.sumAssured | number }}</td>
+            <td>{{ policy.premiumType }}</td>
+            <td>{{ policy.policyTerm }} months</td>
+            <td>₹{{ policy.premiumAmount | number }}</td>
+            <td>₹{{ policy.installmentAmount | number }}</td>
+            <td>{{ policy.appliedDate | date: 'dd-MM-yyyy' }}</td>
+            <td>{{ policy.maturityDate | date: 'dd-MM-yyyy' }}</td>
+            <td [ngClass]="{
+              'status-approved2': policy.status === 'Approved',
+              'status-rejected2': policy.status === 'Rejected',
+              'status-pending2': policy.status === 'Pending'
+            }">
+              {{ policy.status }}
+            </td>
+            <td class="action-btns">
+              <button class="view-button" (click)="viewPolicyDocuments(policy)">View Docs</button>
+              <button class="view-button" (click)="viewPolicyDetails(policy)">View Details</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <!-- Pagination Controls -->
+    <div class="pagination-container" *ngIf="paginatedPolicies.length > 0">
+      <button class="pagination-button" (click)="goToPreviousPage()" [disabled]="currentPage === 1">Previous</button>
+      <button
+        *ngFor="let page of totalPagesArray"
+        class="page-number-button"
+        [ngClass]="{ 'active': page === currentPage }"
+        (click)="goToPage(page)">
+        {{ page }}
+      </button>
+      <button class="pagination-button" (click)="goToNextPage()" [disabled]="currentPage === totalPagesArray.length">Next</button>
+    </div>
+  </div>
+  
+  <!-- Policy Details Modal -->
+<div *ngIf="selectedPolicy" class="agent-details-container">
+    <div class="agent-details-card">
+      <h2>Policy Details</h2>
+      <ul class="details-list">
+        <li><strong>Policy No:</strong> {{ selectedPolicy.policyNo }}</li>
+        <li><strong>Customer Name:</strong> {{ selectedPolicy.customer.firstName }} {{ selectedPolicy.customer.lastName }}</li>
+        <li><strong>KYC Status:</strong> 
+        
+          {{ selectedPolicy.customer.kycVerified ? 'Verified' : 'Not Verified' }}
+        </li>
+        <li><strong>Agent Name:</strong> 
+          {{ selectedPolicy.agent ? selectedPolicy.agent.firstName + ' ' + selectedPolicy.agent.lastName : 'N/A' }}
+        </li>
+        <li><strong>Scheme Name:</strong> {{ selectedPolicy.insuranceScheme.schemeName }}</li>
+        <li><strong>Sum Assured:</strong> ₹{{ selectedPolicy.sumAssured }}</li>
+        <li><strong>Premium Type:</strong> {{ selectedPolicy.premiumType }}</li>
+        <li><strong>Policy Term:</strong> {{ selectedPolicy.policyTerm }} months</li>
+        <li><strong>Premium Amount:</strong> ₹{{ selectedPolicy.premiumAmount }}</li>
+        <li><strong>Installment Amount:</strong> ₹{{ selectedPolicy.installmentAmount }}</li>
+        <li><strong>Applied Date:</strong> {{ selectedPolicy.appliedDate | date: 'dd-MM-yyyy' }}</li>
+        <li><strong>Est. Maturity Date:</strong> {{ selectedPolicy.maturityDate | date: 'dd-MM-yyyy' }}</li>
+        <li><strong>Status:</strong> {{ selectedPolicy.status }}</li>
+      </ul>
+      <button class="close-details-button" (click)="closePolicyDetails()">Close</button>
+    </div>
+  </div>
+  
+
+  <!-- Document Modal  -->
+
+ <!-- Documents Modal -->
+<div *ngIf="isModalOpen" class="documents-modal-overlay">
+    <div class="documents-modal">
+      <div class="modal-header">
+        <h2>Uploaded Documents</h2>
+        <span class="close-button" (click)="closeModal()">×</span>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="uploadedDocuments.length > 0" class="document-slider">
+          <!-- Left Arrow -->
+          <span 
+            class="slider-arrow left" 
+            (click)="previousDocument()" 
+            [class.disabled]="currentIndex === 0">
+            &#9664;
+          </span>
+  
+          <!-- Current Document -->
+          <div class="document-viewer">
+            <img 
+              [src]="uploadedDocuments[currentIndex]?.filePath" 
+              alt="{{ uploadedDocuments[currentIndex]?.documentName || 'Document' }}" 
+              class="document-preview" 
+            />
+            <p class="document-info">
+              <strong>{{ uploadedDocuments[currentIndex]?.documentName || 'Unknown Type' }}</strong>
+            </p>
+          </div>
+  
+          <!-- Right Arrow -->
+          <span 
+            class="slider-arrow right" 
+            (click)="nextDocument()" 
+            [class.disabled]="currentIndex === uploadedDocuments.length - 1">
+            &#9654;
+          </span>
+        </div>
+  
+        <!-- No Documents State -->
+        <div *ngIf="uploadedDocuments.length === 0" class="no-documents">
+          <p>No documents available for this policy.</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="close-modal-button" (click)="closeModal()">Close</button>
+      </div>
+    </div>
+  </div>
+  

@@ -63,7 +63,14 @@ export class UserService {
   getEmployees(){
     return this.http.get(this.employeeUrl);
   }
+  
+  updateEmployee(employee: any){
+    return this.http.put(this.employeeUrl, employee);
+  }
 
+  updateCustomer(customer: any){
+    return this.http.put(this.customerUrl, customer);
+  }
   addAgent(agent: any) {
     return this.http.post(this.agentUrl, agent);
   }

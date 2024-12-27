@@ -43,77 +43,129 @@ import { MyClaimsComponent } from './customer/my-claims/my-claims.component';
 import { CustomerClaimsComponent } from './admin/customer-claims/customer-claims.component';
 import { ManageAgentsComponent } from './admin/manage-agents/manage-agents.component';
 import { ManageEmployeesComponent } from './admin/manage-employees/manage-employees.component';
+import { AuthGuard } from './guards/auth.guard';
+import { SoldPoliciesComponent } from './admin/sold-policies/sold-policies.component';
+import { AllTransactionsComponent } from './admin/all-transactions/all-transactions.component';
+
 const routes: Routes = [
   {
     path: "",
     component: LoginComponent
   },
   {
-    path:"admin-dashboard",
-    component:AdminDashboardComponent,
-    children:[
-      
+    path: "login",
+    component: LoginComponent
+  },
+  {
+    path: "admin-dashboard",
+    component: AdminDashboardComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ["Admin"] },
+    children: [
+
       {
         path: "add-employee",
-        component: AddEmployeeComponent
+        component: AddEmployeeComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ["Admin"] },
       },
       {
-        path:"add-agent",
-        component: AddAgentComponent
+        path:"sold-policies",
+        component: SoldPoliciesComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ["Admin"] },
       },
       {
-        path:'manage-agents',
-        component: ManageAgentsComponent
+        path: "add-agent",
+        component: AddAgentComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ["Admin"] },
+      },
+      {
+        path: 'manage-agents',
+        component: ManageAgentsComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ["Admin"] },
       },
       {
         path: 'manage-employees',
-        component: ManageEmployeesComponent
+        component: ManageEmployeesComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ["Admin"] },
       },
       {
         path: 'withdraw-requests',
-        component: WithdrawRequestsComponent
+        component: WithdrawRequestsComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ["Admin"] },
       },
       {
-        path:"manage-location",
-        component: ManageLocationComponent
+        path:'manage-transactions',
+        component: AllTransactionsComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ["Admin"] },
+      },
+      {
+        path: "manage-location",
+        component: ManageLocationComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ["Admin"] },
       },
       {
         path: 'manage-claims',
-        component : CustomerClaimsComponent
+        component: CustomerClaimsComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ["Admin"] },
       },
       {
         path: "manage-insurance",
-        component:ManageInusrancePoliciesComponent,
-        children:[
+        component: ManageInusrancePoliciesComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ["Admin"] },
+        children: [
           {
-            path : 'add-plan',
-            component: AddInsurancePlanComponent
+            path: 'add-plan',
+            component: AddInsurancePlanComponent,
+            canActivate: [AuthGuard],
+            data: { roles: ["Admin"] },
           },
           {
-            path:'update-plan',
-            component: UpdatePlanComponent
+            path: 'update-plan',
+            component: UpdatePlanComponent,
+            canActivate: [AuthGuard],
+            data: { roles: ["Admin"] },
           },
           {
-            path:'show-plans',
-            component: ShowPlansComponent
+            path: 'show-plans',
+            component: ShowPlansComponent,
+            canActivate: [AuthGuard],
+            data: { roles: ["Admin"] },
           },
         ]
       },
       {
         path: "manage-schemes",
         component: ManageSchemesComponent,
-        children:[
+        canActivate: [AuthGuard],
+        data: { roles: ["Admin"] },
+        children: [
           {
             path: 'add-scheme',
-            component: AddSchemeComponent
+            component: AddSchemeComponent,
+            canActivate: [AuthGuard],
+            data: { roles: ["Admin"] },
           },
           {
-            path :'update-scheme',
-            component: UpdateSchemeComponent
+            path: 'update-scheme',
+            component: UpdateSchemeComponent,
+            canActivate: [AuthGuard],
+            data: { roles: ["Admin"] },
           },
           {
-            path:'show-schemes',
-            component: ShowSchemesComponent
+            path: 'show-schemes',
+            component: ShowSchemesComponent,
+            canActivate: [AuthGuard],
+            data: { roles: ["Admin"] },
           }
         ]
       }
@@ -122,82 +174,117 @@ const routes: Routes = [
   },
   {
     path: "customer-dashboard",
-    component:CustomerDashboardComponent,
-    children:[
+    component: CustomerDashboardComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ["Customer"] },
+    children: [
       {
-        path:"upload-kyc",
-        component: KycComponent
+        path: "upload-kyc",
+        component: KycComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ["Customer"] },
       },
       {
         path: "my-docs",
-        component: MyDocumentsComponent
+        component: MyDocumentsComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ["Customer"] },
       },
       {
-        path:"customer-transaction",
-        component: CustomerTransactionComponent
+        path: "customer-transaction",
+        component: CustomerTransactionComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ["Customer"] },
       },
       {
-        path:"my-policies",
-        component: MyPoliciesComponent
+        path: "my-policies",
+        component: MyPoliciesComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ["Customer"] },
       },
       {
         path: 'pay-premium',
-        component: PayPremiumComponent
+        component: PayPremiumComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ["Customer"] },
       },
       {
         path: 'buy-policy',
-        component: BuyPolicyComponent
+        component: BuyPolicyComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ["Customer"] },
       },
       {
         path: 'support',
-        component: SupportComponent
+        component: SupportComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ["Customer"] },
       },
       {
         path: 'my-claims',
-        component : MyClaimsComponent
+        component: MyClaimsComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ["Customer"] },
       }
     ]
   },
   {
-    path:"user-registration",
-    component:CustomerRegistrationComponent
+    path: "user-registration",
+    component: CustomerRegistrationComponent
   },
   {
     path: "agent-registration",
     component: AgentRegistrationComponent
   },
-   // Agent Module Paths 
+  // Agent Module Paths 
   {
-    path:"agent-dashboard",
-    component : AgentDashboardComponent,
-    children:[
+    path: "agent-dashboard",
+    component: AgentDashboardComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ["Agent"] },
+
+    children: [
       {
         path: "add-customerbyagent",
-        component: AgentAddCustomerComponent
+        component: AgentAddCustomerComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ["Agent"] },
       },
       {
-        path:'show-customers',
-        component: ShowCustomersComponent
+        path: 'show-customers',
+        component: ShowCustomersComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ["Agent"] },
       },
       {
-        path:'sale-policy',
-        component: SalePolicyComponent
+        path: 'sale-policy',
+        component: SalePolicyComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ["Agent"] },
       },
       {
         path: 'manage-customer-installments',
-        component : CustomerInstallmentComponent
+        component: CustomerInstallmentComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ["Agent"] },
       },
       {
         path: 'show-balance',
-        component: TotalCommissionComponent
+        component: TotalCommissionComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ["Agent"] },
       },
       {
         path: 'agent-transaction',
-        component: AgentTransactionComponent
+        component: AgentTransactionComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ["Agent"] },
       },
       {
         path: 'mywithdraw-requests',
-        component: MywithdrawRequestComponent
+        component: MywithdrawRequestComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ["Agent"] },
       }
     ]
   },
@@ -206,30 +293,44 @@ const routes: Routes = [
   {
     path: "employee-dashboard",
     component: EmployeeDashboardComponent,
-    children:[
+    canActivate: [AuthGuard],
+    data: { roles: ["Employee"] },
+    children: [
       {
         path: "applied-policies",
-        component: AppliedPoliciesComponent
+        component: AppliedPoliciesComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ["Employee"] },
       },
       {
         path: "verified-accounts",
-        component : VerifiedAccountsComponent
+        component: VerifiedAccountsComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ["Employee"] },
       },
       {
-        path : 'customer-list',
-        component: CustomerListComponent
+        path: 'customer-list',
+        component: CustomerListComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ["Employee"] },
       },
       {
         path: 'verified-customers',
-        component: VerifiedCustomersComponent
+        component: VerifiedCustomersComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ["Employee"] },
       },
       {
         path: 'customer-queries',
-        component: CustomerQueriesComponent
+        component: CustomerQueriesComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ["Employee"] },
       },
       {
         path: 'closed-queries',
-        component: ClosedQueriesComponent
+        component: ClosedQueriesComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ["Employee"] },
       }
     ]
   }

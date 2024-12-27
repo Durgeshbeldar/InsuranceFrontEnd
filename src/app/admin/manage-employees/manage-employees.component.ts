@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 @Component({
   selector: 'app-manage-employees',
   templateUrl: './manage-employees.component.html',
@@ -108,4 +109,73 @@ export class ManageEmployeesComponent {
     this.showEmployeeDetails = false;
     this.selectedEmployee = null;
   }
+
+  showEditModal: boolean = false;
+
+editEmployeeForm: FormGroup = new FormGroup({
+  firstName: new FormControl('', Validators.required),
+  lastName: new FormControl('', Validators.required),
+  email: new FormControl('', [Validators.required, Validators.email]),
+  phoneNumber: new FormControl('', [Validators.required, Validators.pattern(/^\d{10}$/)])
+});
+
+
+
+// Open Modal
+openEditModal(employee: any) {
+  this.selectedEmployee = employee;
+  this.editEmployeeForm.patchValue({
+    firstName: employee.firstName,
+    lastName: employee.lastName,
+    email: employee.user.email,
+    phoneNumber: employee.user.phoneNumber
+  });
+  this.showEditModal = true;
+}
+
+// Close Modal
+closeEditModal() {
+  this.showEditModal = false;
+  this.selectedEmployee = null;
+  this.editEmployeeForm.reset();
+}
+
+// Submit Form
+submitEditForm() {
+  if (this.editEmployeeForm.invalid) return;
+
+  // Update employee details from the form
+  this.selectedEmployee.user.email = this.editEmployeeForm.get('email')?.value;
+  this.selectedEmployee.user.phoneNumber = this.editEmployeeForm.get('phoneNumber')?.value;
+  this.selectedEmployee.firstName = this.editEmployeeForm.get('firstName')?.value;
+  this.selectedEmployee.lastName = this.editEmployeeForm.get('lastName')?.value;
+
+  console.log(this.selectedEmployee);
+  const user = this.selectedEmployee.user;
+
+  // Update User
+  this.userService.updateUser(user).subscribe({
+    next: () => {
+      console.log("User updated successfully");
+      this.updateEmployee();
+    },
+    error: (err) => {
+      console.log("Failed to update user", err);
+    }
+  });
+}
+
+// Update Employee
+updateEmployee() {
+  this.userService.updateEmployee(this.selectedEmployee).subscribe({
+    next: () => {
+      alert('Employee updated successfully!');
+      this.loadEmployees();
+      this.closeEditModal();
+    },
+    error: (err) => {
+      console.error('Error updating employee:', err);
+    }
+  });
+}
 }

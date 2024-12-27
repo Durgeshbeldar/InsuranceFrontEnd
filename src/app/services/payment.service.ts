@@ -41,7 +41,9 @@ export class PaymentService {
   updateWithdrawalRequest(data:any){
     return this.http.put(this.withDrawUrl, data);
   }
-
+  getAllTransactions(){
+    return this.http.get(this.transactionUrl);
+  }
   makePayment(dueAmount: any, customerName: any): Observable<any> {
     return new Observable((observer) => {
       this.razorpayLoaded.then(() => {

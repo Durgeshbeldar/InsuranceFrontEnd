@@ -21,6 +21,8 @@ import { CustomerClaimsComponent } from './customer-claims/customer-claims.compo
 import { FormsModule } from '@angular/forms';
 import { ManageAgentsComponent } from './manage-agents/manage-agents.component';
 import { ManageEmployeesComponent } from './manage-employees/manage-employees.component';
+import { SoldPoliciesComponent } from './sold-policies/sold-policies.component';
+import { AllTransactionsComponent } from './all-transactions/all-transactions.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,8 @@ import { ManageEmployeesComponent } from './manage-employees/manage-employees.co
     CustomerClaimsComponent,
     ManageAgentsComponent,
     ManageEmployeesComponent,
+    SoldPoliciesComponent,
+    AllTransactionsComponent,
 
   ],
   imports: [

@@ -18,8 +18,10 @@ import { VerifiedCustomersComponent } from './verified-customers/verified-custom
 import {MatDividerModule} from '@angular/material/divider';
 import {MatButtonModule} from '@angular/material/button';
 import { CustomerQueriesComponent } from './customer-queries/customer-queries.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule  as Form} from '@angular/forms';
 import { ClosedQueriesComponent } from './closed-queries/closed-queries.component';
+import { ReactiveFormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     EmployeeHeaderComponent,
@@ -44,7 +46,8 @@ import { ClosedQueriesComponent } from './closed-queries/closed-queries.componen
     MatButtonModule,
     MatFormFieldModule,
     MatDividerModule,
-    FormsModule
+    Form,
+    ReactiveFormsModule
   ]
 })
 export class EmployeeModule { }

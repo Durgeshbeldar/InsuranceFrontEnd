@@ -69,9 +69,11 @@
               </button>
               <button (click)="toggleClaimForm(policy)"
               class="claim-button" 
+              [disabled]="policy.totalPaidAmount < policy.premiumAmount"
               >
               Claim
             </button>
+            <button  class="view-button" (click)="openAddNomineeModal(policy)" [disabled]="!isNomineeExist(policy.policyNo)">Add Nominee</button>
             </td>
           </tr>
         </tbody>
@@ -106,6 +108,7 @@
         <li><strong>Applied Date:</strong> {{ selectedPolicy.appliedDate | date: 'dd-MM-yyyy' }}</li>
         <li><strong>Issue Date:</strong> {{ selectedPolicy.issueDate | date: 'dd-MM-yyyy' }}</li>
         <li><strong>Status:</strong> {{ selectedPolicy.status }}</li>
+        <li *ngIf="isNomineeExist(selectedPolicy.policyNo)"><strong>Nominee:</strong> {{ getNomineeName(selectedPolicy.policyNo) }}</li>
       </ul>
   
       <!-- Claim Button -->
@@ -176,5 +179,74 @@
         <button type="button" class="cancel-button" (click)="cancelClaim()">Cancel</button>
       </div>
     </form>
+  </div>
+</div>
+
+
+<!-- Add Nominee Modal -->
+<div *ngIf="showNomineeModal" class="modal-overlay">
+  <div class="modal">
+    <!-- Modal Header -->
+    <div class="modal-header">
+      <h2>Add Nominee</h2>
+      <button class="close-button" (click)="closeAddNomineeModal()">×</button>
+    </div>
+
+    <!-- Modal Body -->
+    <div class="modal-body">
+      <form [formGroup]="addNomineeForm" (ngSubmit)="submitNomineeForm()">
+        <div class="form-grid">
+          <!-- Nominee Name -->
+          <div class="form-group">
+            <label for="nomineeName">Nominee Name</label>
+            <input id="nomineeName" formControlName="nomineeName" type="text" placeholder="Enter Nominee Name" />
+            <div *ngIf="addNomineeForm.get('nomineeName')?.touched && addNomineeForm.get('nomineeName')?.invalid">
+              <span class="error-message" *ngIf="addNomineeForm.get('nomineeName')?.errors?.['required']">
+                Nominee Name is required.
+              </span>
+              <span class="error-message" *ngIf="addNomineeForm.get('nomineeName')?.errors?.['maxlength']">
+                Name cannot exceed 50 characters.
+              </span>
+            </div>
+          </div>
+
+          <!-- Relationship -->
+          <div class="form-group">
+            <label for="relationship">Relationship</label>
+            <select id="relationship" formControlName="relationship">
+              <option *ngFor="let option of relationships" [value]="option">{{ option }}</option>
+            </select>
+            <div *ngIf="addNomineeForm.get('relationship')?.touched && addNomineeForm.get('relationship')?.invalid">
+              <span class="error-message" *ngIf="addNomineeForm.get('relationship')?.errors?.['required']">
+                Relationship is required.
+              </span>
+            </div>
+          </div>
+
+          <!-- Age -->
+          <div class="form-group">
+            <label for="age">Age</label>
+            <input id="age" formControlName="age" type="number" placeholder="Enter Age" />
+            <div *ngIf="addNomineeForm.get('age')?.touched && addNomineeForm.get('age')?.invalid">
+              <span class="error-message" *ngIf="addNomineeForm.get('age')?.errors?.['required']">
+                Age is required.
+              </span>
+              <span class="error-message" *ngIf="addNomineeForm.get('age')?.errors?.['min']">
+                Age cannot be less than 0.
+              </span>
+              <span class="error-message" *ngIf="addNomineeForm.get('age')?.errors?.['max']">
+                Age cannot exceed 150.
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="modal-footer">
+          <button type="submit" [disabled]="addNomineeForm.invalid" class="save-button">Add Nominee</button>
+          <button type="button" class="cancel-button" (click)="closeAddNomineeModal()">Cancel</button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>

@@ -1,0 +1,83 @@
+<div class="transaction-card-container">
+    <!-- Header Card -->
+    <div class="transaction-card">
+      <h2>Transactions</h2>
+      <div class="transaction-card-icon">
+        <i class="fas fa-exchange-alt"></i> <!-- Transaction Icon -->
+      </div>
+    </div>
+  </div>
+  
+  <!-- Full Transaction Table Container -->
+  <div class="transaction-container">
+  
+    <!--  Table Controls (Search, Date Filter, Page Size) -->
+    <div class="table-controls">
+  
+      <!-- 🔍 Search Input -->
+      <div class="input-container">
+        <input type="text"      [(ngModel)]="searchText"  placeholder="🔍 Search Transactions..." (keyup)="applyFilters()" #searchInput />
+      </div>
+  
+      <!-- 📅 Filter by Date -->
+      <div class="date-container">
+        <input type="date" (change)="filterByDate($event)" class="search-input" #dateInput>
+        <i class="icon fas fa-calendar-alt" (click)="triggerDateInput()"></i>
+      </div>
+  
+      <!-- 📄 Page Size Selector -->
+      <div class="dropdown-container">
+        <select (change)="changePageSize($event)">
+          <option value="5">5</option>
+          <option value="10" selected>10</option>
+          <option value="20">20</option>
+        </select>
+        <i class="icon fas fa-chevron-down"></i>
+      </div>
+    </div>
+  
+    <!-- 📝 Table Wrapper -->
+    <div class="table-wrapper">
+      <table class="transaction-table">
+        <thead>
+          <tr>
+            <th>Sr No.</th>
+            <th>Transaction Type</th>
+            <th>Payment Method</th>
+            <th>Transaction Date</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let transaction of paginatedTransactions; let i = index">
+            <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+            <td>{{ transaction.transactionType }}</td>
+            <td>Debit Card</td>
+            <td>{{ transaction.transactionDate | date: 'dd-MM-yyyy' }}</td>
+            <td>₹{{ transaction.amount }}</td>
+            <td [ngClass]="{
+                'status-success': transaction.status === 'Successful',
+                'status-failed': transaction.status === 'Failed',
+                'status-pending': transaction.status === 'Pending'
+              }">{{ transaction.status }}
+            </td>
+            <td>{{ transaction.description == null ? 'N/A' : transaction.description }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <!-- 📜 Pagination Controls -->
+    <div class="pagination-container">
+      <button class="pagination-button" (click)="goToPreviousPage()" [disabled]="currentPage === 1">Previous</button>
+      <button class="page-number-button" *ngFor="let page of totalPagesArray" [ngClass]="{'active': page === currentPage}"
+        (click)="goToPage(page)">
+        {{ page }}
+      </button>
+      <button class="pagination-button" (click)="goToNextPage()">Next</button>
+    </div>
+  
+  </div>
+  

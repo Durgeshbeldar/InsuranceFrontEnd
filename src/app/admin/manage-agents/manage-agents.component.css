@@ -418,7 +418,6 @@
     padding: 10px 15px; /* Button padding */
     font-size: 0.9rem; /* Font size */
     font-weight: 600; /* Bold text */
-    text-transform: uppercase; /* Uppercase text */
     border-radius: 4px; /* Rounded corners */
     cursor: pointer; /* Pointer cursor */
     transition: all 0.3s ease; /* Smooth hover transition */
@@ -439,7 +438,6 @@
     padding: 10px 15px; /* Button padding */
     font-size: 0.9rem; /* Font size */
     font-weight: 600; /* Bold text */
-    text-transform: uppercase; /* Uppercase text */
     border-radius: 4px; /* Rounded corners */
     cursor: pointer; /* Pointer cursor */
     transition: all 0.3s ease; /* Smooth hover transition */
@@ -776,4 +774,226 @@
       transform: translateY(0);
     }
   }
+  
+
+  /* Edit Modal  */
+
+  .edit-button {
+    background-color: #0b0471;
+    color: #ffffff;
+    border: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .edit-button:hover {
+    background-color: #001a37;
+    transform: scale(1.05);
+    box-shadow: 0px 4px 10px rgba(0, 123, 255, 0.3);
+  }
+
+  /* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.389);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+/* Modal Container */
+.modal {
+  width: 50%;
+  background-color: #d4e4f0;
+  border-radius: 4px;
+  margin-left: 22%;
+  margin-top: 5%;
+  box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.2);
+  animation: slideIn 0.5s ease-in-out;
+  font-family: 'Poppins', sans-serif;
+  overflow: hidden;
+}
+
+/* Modal Header */
+.modal-header {
+  background-color: #100d4d;
+  padding: 15px 20px;
+  display: flex;
+  border-radius: 4px;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #eaeaea;
+}
+
+.modal-header h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ffffff !important;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.close-button {
+  font-size: 1.5rem;
+  color: #7b0101;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.close-button:hover {
+  color: #f50911;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Modal Body */
+.modal-body {
+  padding: 20px 30px;
+}
+
+/* Form Grid Layout */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+/* Form Group */
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #071234;
+  margin-bottom: 8px;
+}
+
+.form-group input {
+  padding: 13px 15px;
+  font-size: 0.95rem;
+  border: 2px solid #03152e;
+  border-radius: 4px;
+  background-color: #f8fafc;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+  border-color: #000000;
+  box-shadow: 0 4px 8px rgba(0, 38, 255, 0.3);
+  outline: none;
+}
+
+
+.form-group input.ng-invalid.ng-touched {
+  border-color: #af1100;
+  box-shadow: 0 4px 8px rgba(231, 76, 60, 0.2);
+}
+
+.form-group input.ng-invalid.ng-touched::placeholder {
+  color: #e74c3c;
+}
+
+/* Buttons in Footer */
+.modal-footer {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+}
+
+.save-button {
+  background-color: #12073f;
+  color: #ffffff;
+  padding: 12px 20px;
+  border-radius: 4px;
+  border: none;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
+}
+
+.save-button:hover {
+  background-color: #010422;
+  transform: scale(1.05);
+}
+
+.save-button:disabled {
+  background-color: #717198;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.cancel-button {
+  background-color: #e74c3c;
+  color: #ffffff;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+}
+
+.cancel-button:hover {
+  background-color: #c0392b;
+  transform: scale(1.05);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .modal {
+    width: 90%;
+  }
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.error-message {
+  font-size: 0.85rem;
+  color: #f41313;
+  font-weight: 500 !important;
+  margin-top: 6px;
+}
+
   
