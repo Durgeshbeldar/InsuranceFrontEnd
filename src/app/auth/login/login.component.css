@@ -107,13 +107,17 @@
   }
   
   .form-control {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+    width: 95%;
+    padding: 14px 10px;
+    border: 1px solid #000000;
+    border-radius: 4px;
     font-size: 1rem;
     outline: none;
     transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  .form-control:focus{
+    border-width: 2px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   }
   
   .form-control.is-invalid {
@@ -156,8 +160,8 @@
     background: #071072;
     color: #fff;
     border: none;
-    border-radius: 8px;
-    padding: 10px;
+    border-radius: 4px;
+    padding: 13px 10px;
     font-size: 1.1rem;
     font-weight: bold;
     cursor: pointer;
@@ -168,7 +172,7 @@
   .login-button:hover {
     background: #031724;
     transform: translateY(-2px);
-    box-shadow: 0px 4px 10px rgba(41, 128, 185, 0.4);
+    box-shadow: 0px 4px 10px rgba(18, 8, 97, 0.568);
   }
   
   .login-button:disabled {
@@ -221,7 +225,7 @@
     background: #e74d3c34;
     color: #ffffff;
     padding: 10px 20px;
-    border-radius: 8px;
+    border-radius: 4px;
     font-size: 0.9rem;
     font-weight: 700;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);

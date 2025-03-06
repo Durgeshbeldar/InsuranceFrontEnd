@@ -23,21 +23,10 @@ export class MyPoliciesComponent {
   constructor(private insuranceService: InsuranceService, private router: Router) { }
 
   ngOnInit(): void {
-    this.loadNominees();
     this.loadPoliciesByCustomerId();
     this.initializeForm();
   }
-  loadNominees(){
-    this.insuranceService.getNominees().subscribe({
-      next: (response:any)=>{
-        console.log('Nominees loaded');
-        this.nominees= response.data;
-      },
-      error: (error)=>{
-        console.log('Error loading nominees', error);
-      }
-    })
-  }
+
 
   loadPoliciesByCustomerId() {
     const customerId = localStorage.getItem('userId');
@@ -48,10 +37,7 @@ export class MyPoliciesComponent {
     });
   }
 
-  // isNomineeExist : boolean = false;
-  isNomineeExist(policyNo :any) : boolean {
-    return this.nominees.some(nominee=>nominee.policyNo === policyNo);
-  }
+  
 
   applyFilters() {
     const searchQuery = this.searchInput.nativeElement.value.toLowerCase();
@@ -118,11 +104,25 @@ export class MyPoliciesComponent {
   isClaimFormVisible: boolean = false;
   claimForm!: FormGroup;
 
-  getNomineeName(policyNo :any) : string {
-    let nominee = this.nominees.find(nominee => nominee.policyNo === policyNo);
-    return nominee.nomineeName;
+ 
+  
+  nominee:any = null;
+  getNominee(policyNo:any):any{
+    
+    this.insuranceService.getNomineeByPolicyNo(policyNo).subscribe({
+      next:(response:any)=>{
+        this.nominee = response.data;
+        console.log("Nominee Retrived");
+      },
+      error:(error)=>{
+        this.nominee = null;
+        console.log("Error while fetching nominee", error);
+      }
+    })
+    if(this.nominee === null)
+      return "Not Added"
+    return this.nominee.nomineeName;
   }
-
 
   initializeForm() {
     const customerName = this.getCustomerName();

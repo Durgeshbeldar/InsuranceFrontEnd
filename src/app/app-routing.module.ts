@@ -46,6 +46,7 @@ import { ManageEmployeesComponent } from './admin/manage-employees/manage-employ
 import { AuthGuard } from './guards/auth.guard';
 import { SoldPoliciesComponent } from './admin/sold-policies/sold-policies.component';
 import { AllTransactionsComponent } from './admin/all-transactions/all-transactions.component';
+import { SoldPoliciesAgentComponent } from './agent/sold-policies-agent/sold-policies-agent.component';
 
 const routes: Routes = [
   {
@@ -247,6 +248,12 @@ const routes: Routes = [
       {
         path: "add-customerbyagent",
         component: AgentAddCustomerComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ["Agent"] },
+      },
+      {
+        path: "manage-customers-policies",
+        component: SoldPoliciesAgentComponent,
         canActivate: [AuthGuard],
         data: { roles: ["Agent"] },
       },

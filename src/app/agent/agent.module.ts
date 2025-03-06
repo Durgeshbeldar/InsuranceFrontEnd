@@ -20,6 +20,7 @@ import { CustomerInstallmentComponent } from './customer-installment/customer-in
 import { TotalCommissionComponent } from './total-commission/total-commission.component';
 import { AgentTransactionComponent } from './agent-transaction/agent-transaction.component';
 import { MywithdrawRequestComponent } from './mywithdraw-request/mywithdraw-request.component';
+import { SoldPoliciesAgentComponent } from './sold-policies-agent/sold-policies-agent.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { MywithdrawRequestComponent } from './mywithdraw-request/mywithdraw-requ
     CustomerInstallmentComponent,
     TotalCommissionComponent,
     AgentTransactionComponent,
-    MywithdrawRequestComponent
+    MywithdrawRequestComponent,
+    SoldPoliciesAgentComponent
   ],
   imports: [
     CommonModule,

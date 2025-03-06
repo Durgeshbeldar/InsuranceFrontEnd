@@ -211,6 +211,7 @@ export class SalePolicyComponent {
     this.insuranceService.createPolicyAccount(payload).subscribe({
       next: (response : any) => {
         alert('Policy Account Created Successfully!');
+        this.policyForm.reset();
       },
       error: (err) => console.error('Error:', err),
     });

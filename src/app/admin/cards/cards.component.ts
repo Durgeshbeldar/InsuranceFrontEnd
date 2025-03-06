@@ -7,18 +7,18 @@ import { Component } from '@angular/core';
 })
 export class CardsComponent {
   finalValues = {
-    money: 53897,
-    users: 3200,
-    clients: 2503,
-    sales: 173000
+    sales:160000 ,
+    users: 52,
+    happyCustomers: 45,
+    claims: 173000
   };
 
    // Animated values bound to the HTML
    animatedValues = {
-    money: 0,
+    sales: 0,
     users: 0,
-    clients: 0,
-    sales: 0
+    happyCustomers: 0,
+    claims: 0
   };
 
   ngOnInit() {

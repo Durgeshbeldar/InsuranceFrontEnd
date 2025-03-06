@@ -37,6 +37,10 @@ export class InsuranceService {
   getNominees(){
     return this.http.get(this.nomineeUrl);
   }
+
+  getNomineeByPolicyNo(policyNo:any){
+    return this.http.get(this.nomineeUrl+"/Policy/"+policyNo);
+  }
   getAllClaims(){
     return this.http.get(this.claimUrl);
   }

@@ -73,7 +73,7 @@
               >
               Claim
             </button>
-            <button  class="view-button" (click)="openAddNomineeModal(policy)" [disabled]="!isNomineeExist(policy.policyNo)">Add Nominee</button>
+            <button  class="view-button" (click)="openAddNomineeModal(policy)">Add Nominee</button>
             </td>
           </tr>
         </tbody>
@@ -108,7 +108,7 @@
         <li><strong>Applied Date:</strong> {{ selectedPolicy.appliedDate | date: 'dd-MM-yyyy' }}</li>
         <li><strong>Issue Date:</strong> {{ selectedPolicy.issueDate | date: 'dd-MM-yyyy' }}</li>
         <li><strong>Status:</strong> {{ selectedPolicy.status }}</li>
-        <li *ngIf="isNomineeExist(selectedPolicy.policyNo)"><strong>Nominee:</strong> {{ getNomineeName(selectedPolicy.policyNo) }}</li>
+        <li><strong>Nominee:</strong> {{ getNominee(selectedPolicy.policyNo) }}</li>
       </ul>
   
       <!-- Claim Button -->
